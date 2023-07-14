@@ -1,0 +1,280 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: white;
+  margin-top: 10px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.5);
+}
+
+.post_info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.post_info > h4 {
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.post_info > h4:hover {
+  text-decoration: underline;
+}
+
+.post_info > small {
+  margin-left: 10px;
+}
+
+.post_body {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.post_body > p {
+  margin-bottom: 10px;
+}
+
+.avatar-details-post {
+  margin-left: 15px;
+}
+
+.answerCount {
+  text-align: end;
+  margin-top: 10px;
+}
+
+.answerCount > p {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.post_btnAnswer {
+  margin-left: auto;
+  cursor: pointer;
+  padding: 7px;
+  background-color: #222;
+  outline: none;
+  border: none;
+  color: rgb(211, 211, 211);
+  font-weight: 300;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.post_btnAnswer:hover {
+  color: #222;
+  background: lightgray;
+  transform: scale(1.3);
+  transition: 0.5s;
+  font-weight: bold;
+}
+
+.post_footer {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  border-top: solid rgb(135, 169, 253) 1px;
+  border-bottom: solid rgb(135, 169, 253) 1px;
+}
+
+.post_footer > .MuiSvgIcon-root {
+  color: gray;
+  margin-right: 40px;
+  cursor: pointer;
+}
+
+.post_footerAction > div {
+  display: flex;
+  justify-content: space-around;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 8px;
+}
+
+.post_footerAction {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  border-radius: 33px;
+}
+
+.post_footerAction > .MuiSvgIcon-root {
+  color: gray;
+  margin-right: 40px;
+  cursor: pointer;
+}
+
+.post_footerAction > div:hover {
+  color: rgb(0, 140, 255);
+  transform: scale(1.2);
+  transition: 0.5s;
+  background-color: lightgray;
+}
+
+.post_footerLeft {
+  margin-left: auto;
+}
+
+.post_footerLeft > .MuiSvgIcon-root {
+  color: gray;
+  cursor: pointer;
+  margin-left: 30px;
+}
+
+.post_footerLeft > .MuiSvgIcon-root:hover {
+  transform: scale(1.2);
+  transition: 0.5s;
+}
+
+
+.modal_question {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.modal_question > h1 {
+  color: #8f1f1b;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.modal_question > p {
+  color: gray;
+  font-size: small;
+}
+
+.modal_question > p > .name {
+  color: black;
+  font-weight: bold;
+}
+
+.modal_answer {
+  display: flex;
+  padding-top: 20px;
+  flex: 1;
+}
+
+.quill {
+  width: 100%;
+  height: 120px;
+}
+
+.custom-overlay {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.custom-modal {
+  background-color: white !important;
+  border: 1px solid lightgray !important;
+  border-radius: 5px !important;
+  width: 400px !important;
+  padding: 20px !important;
+  box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.5) !important;
+}
+
+.custom-closeButton {
+  color: gray !important;
+  outline: none !important;
+  cursor: pointer !important;
+  top: 10px !important;
+  right: 10px !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.cancel {
+  border: none;
+  margin-top: 10px;
+  outline: none;
+  color: gray;
+  font-weight: 500;
+  padding: 10px;
+  border-radius: 33px;
+  cursor: pointer;
+}
+
+.cancel:hover {
+  color: red;
+}
+
+.add {
+  border: none;
+  outline: none;
+  margin-top: 5px;
+  background-color: #222;
+  color: white;
+  font-weight: 700;
+  padding: 10px;
+  border-radius: 33px;
+  cursor: pointer;
+  width: 50%;
+}
+
+.add:hover {
+  background-color: #eee;
+  color: #222;
+}
+
+.post-answer-container {
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 8px;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.answered-avatar-details {
+  display: flex;
+  align-items: flex-start;
+}
+
+.post-answered {
+  margin-right: 10px;
+}
+
+.post-answered > .answered-avatar {
+  height: 32px;
+  width: 32px;
+}
+
+.post_answer {
+  margin-top: 5px;
+  float: left;
+}
+
+.post-info p {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.post-info span {
+  color: gray;
+  font-size: 12px;
+}
+
+.post-answer {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+
+@media only screen and (max-width: 730px) {
+  .post-answer-container {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+

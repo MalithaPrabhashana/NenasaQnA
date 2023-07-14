@@ -1,0 +1,29 @@
+.widget_contents {
+    display: flex;
+    cursor: pointer;
+  }
+  
+  .widget_content {
+    margin: 5px;
+    display: flex;
+    padding: 5px;
+    border-bottom: 1px solid lightgray;
+  }
+  
+  .widget_content > img {
+    height: 30px;
+    border-radius: 5px;
+  }
+  
+  .widget_contentTitle {
+    margin-left: 10px;
+  }
+  .widget_contentTitle > h5 {
+    color: #000;
+  }
+  
+  .widget_contentTitle > p {
+    color: #000;
+    font-size: small;
+  }
+  

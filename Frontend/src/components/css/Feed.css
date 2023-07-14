@@ -1,0 +1,8 @@
+.feed-main{
+    display: flex;
+    flex-direction: column;
+}
+
+.feed-main > div {
+    margin-bottom: 10px;
+}

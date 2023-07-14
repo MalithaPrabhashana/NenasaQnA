@@ -1,0 +1,295 @@
+.nHeader {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  position: sticky;
+  z-index: 1000;
+  top: 0px;
+  padding: 6px;
+}
+
+.nHeader-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.nHeader_logo {
+  position: absolute;
+  left: 40px;
+  align-items: center;
+}
+
+.nHeader_logo > img {
+  height: 40px !important;
+  object-fit: contain;
+}
+
+.nHeader_icons {
+  display: flex;
+  align-items: center;
+}
+
+.nHeader_icon {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.nHeader_icon:hover {
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+.nHeader_icon > .MuiSvgIcon-root {
+  color: gray;
+  font-size: xx-large;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.nHeader_icon:hover > .MuiSvgIcon-root {
+  color: #000;
+}
+
+.nHeader_input {
+  display: flex;
+  align-items: center;
+  border: 1px solid lightgray;
+  padding: 5px;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.nHeader_input > input {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: rgb(49, 49, 49);
+}
+
+.nHeader_input > .MuiSvgIcon-root {
+  color: gray;
+}
+
+.nav-avatar {
+  margin-right: 10px;
+  cursor:pointer !important;
+}
+
+.nHeader_Rem {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 20px;
+}
+
+.nHeader_Rem > .addQuestion {
+  color: white;
+  background: #007BFF;
+  text-transform: inherit;
+  border-radius: 5px;
+  margin-left: 10px !important;
+}
+
+.nHeader_Rem > .addQuestion:hover {
+  color: rgb(0, 0, 0);
+  background: #62a4ec;
+}
+
+.modal_title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  border-bottom: 1px solid rgba(187, 187, 187, 0.5);
+}
+
+.modal_title > h5 {
+  color: gray;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-right: 30px;
+}
+
+.modal_title > h5:hover {
+  color: #b92b27;
+}
+
+.modal_info {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.modal_info > p {
+  margin-left: 10px;
+  font-size: small;
+  color: gray;
+}
+
+.modal_info > .modal_scope {
+  display: flex;
+  align-items: center;
+  color: rgb(98, 98, 98);
+  padding: 5px;
+  margin-left: 10px;
+  background-color: rgb(230, 230, 230);
+  border-radius: 33px;
+  cursor: pointer;
+}
+
+.modal_Field {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  flex: 1;
+}
+
+.modal_Field > .modal_fieldLink {
+  color: gray;
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.modal_Field > .modal_fieldLink > input {
+  flex: 1;
+  border: none;
+  outline: none;
+  margin-left: 5px;
+}
+
+.logout {
+  background-color: #f87070;
+  color: #fff;
+}
+
+.modal_buttons {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.modal_buttons > .cancel {
+  margin-top: 10px;
+  border: none;
+  outline: none;
+  color: gray;
+  font-weight: 500;
+  padding: 10px;
+  border-radius: 33px;
+  cursor: pointer;
+}
+
+.modal_buttons > .cancel:hover {
+  color: red;
+}
+
+.modal_buttons > .add {
+  border: none;
+  outline: none;
+  margin-top: 10px;
+  background-color: #222;
+  color: white;
+  font-weight: 700;
+  padding: 10px;
+  border-radius: 33px;
+  cursor: pointer;
+  width: 50%;
+}
+
+.modal_buttons > .add:hover {
+  background-color: #eee;
+  color: #222;
+}
+
+.nav-btn {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.logout-btn {
+  background-color: #f15353;
+}
+
+#account-menu {
+  position: absolute !important;
+  top: 30px !important;
+}
+
+@media only screen and (max-width: 1240px) {
+  .nHeader-content {
+    flex-wrap: wrap;
+  }
+
+  .nHeader_icons {
+    margin-top: 10px;
+  }
+
+  .nHeader_Rem {
+    margin-top: 10px;
+  }
+
+  .nHeader_Rem > .MuiButton-root {
+    margin-left: 0;
+  }
+
+  .nav-btn {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    transition: 1s;
+    background-color: #F2F2F2;
+    transform: translateY(-200vh);
+    z-index: 1;
+  }
+
+  nav > .nav-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+  }  
+
+  .responsive_nav {
+    transform: none;
+  }
+
+  nav > .nav-menu-btn {
+    position: absolute;
+    left: 0;
+  }
+
+  .nHeader_logo {
+    position: absolute;
+    left: 80px;
+  }
+
+  .nHeader-content {
+    padding-bottom: 10px;
+    align-items: center;
+  }
+
+  .nHeader_Rem > .addQuestion {
+    font-size: 0.85rem;
+  }
+
+  .nav-avatar {
+    margin-right: 6px;
+  }
+}
