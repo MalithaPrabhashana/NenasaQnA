@@ -38,6 +38,7 @@ function Post() {
           Answer
         </button>
         
+        {/* Answer to a Question modal start */}
         <Modal
           open={isModalOpen}
           onClose={closeModal}
@@ -66,6 +67,7 @@ function Post() {
             </button>
           </div>
         </Modal>
+        {/* Answer to a Question modal end */}
       </div>
 
       <div className="post_footer">

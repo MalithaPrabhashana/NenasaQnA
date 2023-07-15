@@ -24,6 +24,7 @@
     "react-responsive-modal": "^6.4.2",
     "react-scripts": "5.0.1",
     "react-time-ago": "^7.2.1",
+    "styled-components": "^6.0.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -54,5 +55,8 @@
   "main": "index.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "react-router-dom": "^6.14.1"
+  }
 }

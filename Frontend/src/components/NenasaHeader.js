@@ -24,6 +24,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import axios from 'axios';
+import { useNavigate, Link } from "react-router-dom";
 
 
 function NenasaHeader() {
@@ -32,6 +33,7 @@ function NenasaHeader() {
   const [inputUrl, setInputUrl] = useState("");
   const [question, setQuestion] = useState("");
   const Close = <CloseIcon />;
+  const logoutNavigate = useNavigate();
 
 
   const handleSubmit  = async () => {
@@ -52,6 +54,10 @@ function NenasaHeader() {
         console.log(e);
       })
     }
+  }
+
+  const logOutHandle = () => {
+    logoutNavigate('/');
   }
 
   //Navigation bar toggle function
@@ -191,9 +197,10 @@ function NenasaHeader() {
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
 
-            <MenuItem onClick={handleClose}>
-              My account
-            </MenuItem>
+            <Link to="/editProfile">
+              <MenuItem>My account</MenuItem>
+            </Link>
+
             <Divider />
 
             <MenuItem onClick={handleClose}>
@@ -202,7 +209,7 @@ function NenasaHeader() {
               </ListItemIcon>
               Settings
             </MenuItem>
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={logOutHandle}>
               <ListItemIcon className="avatar-list-icon">
                 <Logout fontSize="small" />
               </ListItemIcon>
@@ -258,7 +265,7 @@ function NenasaHeader() {
                 margin: "5px 0",
                 border: "1px solid lightgray",
                 padding: "10px",
-                outline: "2px solid #000",
+                width: "100%"
               }}
               placeholder="Optional: include a link that gives context"
             />
