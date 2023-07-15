@@ -104,6 +104,8 @@
   align-items: center;
   margin-bottom: 5px;
   border-bottom: 1px solid rgba(187, 187, 187, 0.5);
+  justify-content: center;
+  padding-bottom: 10px;
 }
 
 .modal_title > h5 {
@@ -121,7 +123,7 @@
 .modal_info {
   display: flex;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .modal_info > p {
@@ -144,8 +146,9 @@
 .modal_Field {
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+  margin-top: 20px;
   flex: 1;
+  width: 30vw;
 }
 
 .modal_Field > .modal_fieldLink {
@@ -221,6 +224,58 @@
   top: 30px !important;
 }
 
+/* AddQuestionModal styles */
+.modal_title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.avatar {
+  margin-right: 5px;
+}
+
+.modal_scope p {
+  margin: 0;
+  margin-left: 5px;
+  font-size: 0.9rem;
+}
+
+.modal_Field input[type="text"] {
+  margin: 5px 0;
+  padding: 10px;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.modal_Field input[type="text"]::placeholder {
+  color: gray;
+}
+
+.modal_buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal_buttons button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.modal_buttons .cancel {
+  background-color: #e0e0e0;
+}
+
+.modal_buttons button:hover {
+  opacity: 0.8;
+}
+
+
+
 @media only screen and (max-width: 1240px) {
   .nHeader-content {
     flex-wrap: wrap;
@@ -291,5 +346,9 @@
 
   .nav-avatar {
     margin-right: 6px;
+  }
+
+  .modal_Field {
+    width: 60vw;
   }
 }

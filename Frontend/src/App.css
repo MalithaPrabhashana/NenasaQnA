@@ -1,13 +1,13 @@
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
-  margin-right: auto;
-  margin-left: auto;
+  align-items: center;
 }
 
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
+  
 }
 
 .btn:hover {
