@@ -5,10 +5,16 @@ const mongoose = require('../db');
 const pendingQuestionSchema = new mongoose.Schema({
   userId: {
     type: String,
-    required: true
+    required: true,
   },
   question: {
     type: String,
+  },
+  upVots: {
+    type: Number,default:0
+  },
+  downVots: {
+    type: Number,default:0
   },
 }, {
   timestamps: true

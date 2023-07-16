@@ -100,7 +100,7 @@ async function save(req, res) {
 
     } catch (err) {
         // console.error(err);
-       return  res.status(500).json({ error: 'An error occurred while entering queston' });
+        return res.status(500).json({ error: 'An error occurred while entering queston' });
     }
 }
 
@@ -142,13 +142,13 @@ function update(req, res) {
             if (!updatedQuestion) {
                 return res.status(404).json({ message: "Question not found" });
             }
-           return  res.status(200).json({
+            return res.status(200).json({
                 message: "Post updated successfully",
                 // post: updatedQuestion
             });
         })
         .catch(error => {
-           return res.status(500).json({
+            return res.status(500).json({
                 message: "Something went wrong while updating",
 
             });
@@ -166,7 +166,7 @@ function destroy(req, res) {
     models.pendingQuestion.deleteOne(
         { _id: req.params.id, userId: req.userData.userId })
         .then(deletedQuestion => {
-           
+
             if (deletedQuestion.deletedCount == 0) {
                 return res.status(404).json({ message: "Question not found" });
             }
@@ -182,6 +182,91 @@ function destroy(req, res) {
         });
 
 }
+
+
+
+
+
+function voting(data, res, req) {
+    console.log(data);
+    models.approvedQuestion.findOneAndUpdate(
+        { _id: req.body.id }, // Specify the user to update based on the _id
+        { $set: data },
+        { new: true }
+    )
+        .then(updatedQuestion => {
+            if (!updatedQuestion) {
+                return res.status(404).json({ message: "Question not found" });
+            }
+            return res.status(200).json({
+                message: "Vote added Successfully",
+            });
+        })
+        .catch(error => {
+            return res.status(500).json({
+                message: "Something went wrong while updating",
+
+            });
+        });
+}
+
+
+
+
+function upVote(req, res) {
+    models.approvedQuestion.find({ _id: req.body.id })
+        .then(question => {
+
+            if (question) {
+                voting({ upVots: question[0].upVots + 1 }, res, req);
+            }
+        })
+        .catch(error => {
+            return res.status(500).json({
+                message: "Something went wrong while getting data",
+
+            });
+        });
+
+}
+
+
+function downVote(req, res) {
+    models.approvedQuestion.find({ _id: req.body.id })
+        .then(question => {
+
+            if (question) {
+                voting({ downVots: question[0].downVots + 1 }, res, req);
+            }
+        })
+        .catch(error => {
+            return res.status(500).json({
+                message: "Something went wrong while getting data",
+
+            });
+        });
+}
+
+
+
+
+function filterQuestions(req, res) {
+    const searchTerm=req.body.search;
+    models.approvedQuestion.find({ question: { $regex: searchTerm, $options: 'i' } })
+        .then(questions => {
+            return res.status(201).json({
+                questions:questions
+
+            });
+        })
+        .catch(error => {
+            return res.status(500).json({
+                message: "Something went wrong while getting data",
+
+            });
+        })
+}
+
 
 
 
@@ -231,8 +316,9 @@ function approveQuestion(req, res) {
                     const newQuestion = new models.approvedQuestion(questionNew)
                     newQuestion.save()
                         .then(savedQuestion => {
-                           return  res.status(200).json({
-                                message: "Question approved"});
+                            return res.status(200).json({
+                                message: "Question approved"
+                            });
 
 
                         })
@@ -265,12 +351,12 @@ function approveQuestion(req, res) {
 
 
 
-function rejectQuestion(req,res){
+function rejectQuestion(req, res) {
     const questionId = req.body.id;
     models.pendingQuestion.deleteOne(
-        { _id: questionId})
+        { _id: questionId })
         .then(deletedQuestion => {
-          
+
             if (deletedQuestion.deletedCount == 0) {
                 return res.status(404).json({ message: "Question not found" });
             }
@@ -297,8 +383,11 @@ module.exports = {
     save: save,
     update: update,
     destroy: destroy,
+    upVote: upVote,
+    downVote: downVote,
+    filterQuestions: filterQuestions,
 
     getAllPendingQuestions: getAllPendingQuestions,
     approveQuestion: approveQuestion,
-    rejectQuestion:rejectQuestion
+    rejectQuestion: rejectQuestion
 }
