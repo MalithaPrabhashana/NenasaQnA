@@ -42,8 +42,13 @@
 }
 
 .avatar-details-post {
-  margin-left: 15px;
+  margin-left: 15px;    
 }
+
+.avatar-details-post > h4 {
+  margin: 2px;   
+}
+
 
 .answerCount {
   margin-top: 15px;
@@ -276,15 +281,17 @@
 .post-info p {
   font-weight: bold;
   font-size: 0.9rem;
+  margin: 0;
 }
 
 .post-info span {
   color: gray;
   font-size: 12px;
+  margin: 0;
 }
 
 .post-answer {
-  margin-top: 10px;
+  margin: 0;
   padding: 10px;
   border-radius: 5px;
 }
