@@ -16,7 +16,7 @@ function SidebarOptions({ select }) {
         return (
           sidebarOptions.map((sidebarOption, index) => {
             return (
-              <div key={"sidebar_"+toString(index+1)} className="sidebarOption" onClick={() => { select.sideBarNavigationSet(index + 1) }}>
+              <div key={"sidebar_"+(index+1)} className="sidebarOption" onClick={() => { select.sideBarNavigationSet(index + 1) }}>
                 <img
                   src={Img1}
                   // src="https://qphs.fs.quoracdn.net/main-thumb-t-930-100-cbbsbwijdhpyzlpipejvqpiijhhoaday.jpeg"
