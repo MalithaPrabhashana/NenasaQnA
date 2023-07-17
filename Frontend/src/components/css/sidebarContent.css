@@ -1,0 +1,25 @@
+
+.headingSidebar{
+  text-align: center;
+  margin-bottom: 30px;
+  /* background-color: rgb(217, 217, 218); */
+}
+
+
+
+.cardSidebar:hover{
+    box-shadow:0 3px 10px rgba(0, 0, 0, 0.377);
+    transform: scale(1.01);
+}
+
+
+
+/* 
+@keyframes scale-animation {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.01);
+    }
+  } */

@@ -8,6 +8,8 @@ import { Button } from "@material-ui/core";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import CloseIcon from "@material-ui/icons/Close";
 
+import Councelling from '../sidebarContent/councelling';
+
 function Nenasa() {
 
   const slideRef = useRef();
@@ -44,7 +46,7 @@ function Nenasa() {
           } else if (sideBarNavigation === 2) {
             return <div>Option 2 selected</div>;
           } else if (sideBarNavigation === 3) {
-            return <div>Option 3 selected</div>;
+            return <Councelling/>;
           } else if (sideBarNavigation === 4) {
             return <div>Option 4 selected</div>;
           } else {

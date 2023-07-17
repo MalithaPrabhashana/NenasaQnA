@@ -128,6 +128,29 @@ function getDetails(req,res){
         });
 }
 
+function getUsersByRole(req,res){
+   
+    models.User.find({ role: req.body.role })
+        .then(user => {
+          if(user){
+            return res.status(200).json({
+                user: user
+            });
+          }
+          return res.status(400).json({
+            message: "user not found"
+        }); 
+            
+        })
+        .catch(error => {
+            return res.status(500).json({
+                message: "Something went wrong while getting data",
+
+            });
+        });
+}
+
+
 
 
 // admin login
@@ -243,6 +266,7 @@ module.exports = {
     login: login,
     getDetails:getDetails,
     adminLogin, adminLogin,
+    getUsersByRole:getUsersByRole,
 
     // must remove
     addAdmin: addAdmin,
