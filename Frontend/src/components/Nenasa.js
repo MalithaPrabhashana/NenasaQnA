@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import NenasaHeader from './NenasaHeader';
 import Widget from './Widget';
 import Feed from './Feed';
@@ -7,8 +7,17 @@ import './css/Nenasa.css';
 import { Button } from "@material-ui/core";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import CloseIcon from "@material-ui/icons/Close";
+import { useNavigate } from 'react-router-dom';
 
 function Nenasa() {
+
+  const urlLoginRemove = useNavigate();
+
+  useEffect(() => {
+    if(!localStorage.getItem('token')) {
+      urlLoginRemove('/');
+    }
+  })
 
   const slideRef = useRef();
   const widgetRef = useRef();

@@ -1,10 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './EditProfilePage.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function EditProfile() {
 
+	const urlLoginRemove = useNavigate();
+
+	useEffect(() => {
+	  if(!localStorage.getItem('token')) {
+		urlLoginRemove('/');
+	  }
+	})
+  
   return (
     <div>
         <section class="py-5 my-5">

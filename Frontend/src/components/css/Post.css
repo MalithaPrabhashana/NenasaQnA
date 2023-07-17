@@ -46,8 +46,26 @@
 }
 
 .answerCount {
-  text-align: end;
-  margin-top: 10px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin-left: 18px;
+}
+
+.answerCount svg {
+  width: 16px;
+  height: 16px;
+}
+
+.answer-dropdown {
+  padding: 5px !important;
+}
+
+.answer-dropdown:hover {
+  cursor: pointer;
+  background-color: #e8dfdf !important;
+  padding: 5px !important;
 }
 
 .answerCount > p {
@@ -270,6 +288,17 @@
   padding: 10px;
   border-radius: 5px;
 }
+
+.rotate-arrow {
+  transition: transform 0.3s ease-in-out;
+  transform: rotate(90deg);
+}
+
+.reset-arrow {
+  transition: transform 0.3s ease-in-out;
+  transform: rotate(0);
+}
+
 
 @media only screen and (max-width: 1000px) {
 

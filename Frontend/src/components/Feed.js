@@ -1,55 +1,35 @@
-import React from 'react'
-import NenasaBox from './NenasaBox'
-import "./css/Feed.css"
-import Post from './Post.js'
+import React, { useEffect, useState } from 'react';
+// import NenasaBox from './NenasaBox';
+import "./css/Feed.css";
+import Post from './Post.js';
 import axios from 'axios';
 
-
 function Feed() {
-    // const storedToken = localStorage.getItem("token");
+  const [questions, setQuestions] = useState([]);
 
-    axios.get('http://localhost:3000/questions').then(response => {
-      const questionList = response.data;
-      
-      for (let i = 0; i < questionList.length; i++) {
-        console.log(questionList[i]);
-      }
-    })
-    .catch(error =>{
-      console.log(error);
-    })
-
+  useEffect(() => {
+    axios.get('http://localhost:3000/questions')
+      .then(response => {
+        const questionsData = response.data.questions;
+        setQuestions(questionsData);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div className='feed-main'>
-
-      <div>
-        <NenasaBox/>
-      </div>
-
-      <div>
-        <Post/>
-      </div>
-{/* 
-      <div>
-        <Post/>
-      </div>
-
-      <div>
-        <Post/>
-      </div>
-
-      <div>
-        <Post/>
-      </div>
-
-      <div>
-        <Post/>
+      {/* <div>
+        <NenasaBox />
       </div> */}
-
-      
+      <div>
+        {questions.map((question, index) => (
+          <Post key={index} questionProp={question['question']} />
+        ))}
+      </div>
     </div>
-  )
+  );
 }
 
-export default Feed
+export default Feed;
