@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import '../components/css/sidebarContent.css'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { ContactlessOutlined } from '@material-ui/icons';
+
 
 const Img = styled('img')({
     margin: 'auto',
@@ -22,9 +22,9 @@ const Img = styled('img')({
 
 
 
-function Councelling(props) {
+function Councelling({endUserSet}) {
     const [users, setUsers] = useState(null); // State to handle error
-    const [userImage, setUserImage] = useState(null);
+   
     useEffect(() => {
         axios.post('http://localhost:3000/user/get-users', { role: 3 }).then(response => {
             const responseStatus = response.status;
@@ -32,13 +32,6 @@ function Councelling(props) {
             if (responseStatus === 200 | responseStatus === 201) {
                
                 setUsers(response.data.user);
-                //     axios.get(' http://localhost:3000/get-uploads/'+response.data.user.image).then(response => {
-                //          console.log(response);
-                //         if (responseStatus === 200 | responseStatus === 201) {
-                //             // setUsers(response.data.user);
-                //         }
-                //     }).catch(error => {});
-                   
             }
         }).catch(error => { // Handle any errors
             // setUsers(false);
@@ -93,7 +86,7 @@ function Councelling(props) {
                                             <Typography variant="body2" gutterBottom>
                                                 Address : {user.address}
                                             </Typography>
-                                            <Button variant="contained" color="warning">
+                                            <Button onClick={()=>{endUserSet(user)}} variant="contained" color="warning">
                                                 Contact
                                             </Button>
                                         </Grid>

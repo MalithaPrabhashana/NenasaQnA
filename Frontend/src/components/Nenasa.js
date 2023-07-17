@@ -9,7 +9,8 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import CloseIcon from "@material-ui/icons/Close";
 import { useNavigate } from 'react-router-dom';
 
-import Councelling from '../sidebarContent/councelling';
+import Councelling from '../sidebarContent/Councelling';
+import ChatWindow from '../sidebarContent/ChatWindow';
 
 function Nenasa() {
 
@@ -31,7 +32,11 @@ function Nenasa() {
 
 
   const [sideBarNavigation, sideBarNavigationSet] = useState(0);
+  const [user, userSet] = useState({username:"student"});
+  const [endUser, endUserSet] = useState(false);
+  const [openchat, openchatSet] = useState(false);
 
+  
   return (
     <div className="nenasa">
       <NenasaHeader select={sideBarNavigationSet} className="nenasa-top-nav" />
@@ -39,7 +44,7 @@ function Nenasa() {
         {/* {sidebarVisible && <Sidebar />} */}
 
         <div ref={slideRef} className="side-bar">
-          <Sidebar select={{sideBarNavigation,sideBarNavigationSet}} />
+          <Sidebar select={{sideBarNavigation,sideBarNavigationSet, endUserSet}} />
         </div>
 
         <div className="side-btn side-menu-btn">
@@ -55,12 +60,14 @@ function Nenasa() {
           } else if (sideBarNavigation === 2) {
             return <div>Option 2 selected</div>;
           } else if (sideBarNavigation === 3) {
-            return <Councelling/>;
+           
+            return (endUser)? <ChatWindow user={user} endUser={endUser}  openchatSet={openchatSet} openchat={openchat}/>:<Councelling endUserSet={endUserSet}/>;
           } else if (sideBarNavigation === 4) {
             return <div>Option 4 selected</div>;
           } else {
             return (
               <Feed />
+           
            );
           }
         })()}
