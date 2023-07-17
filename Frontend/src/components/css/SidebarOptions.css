@@ -8,6 +8,7 @@
     padding: 10px;
     cursor: pointer;
     margin-top: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.377);
   }
   
   .sidebarOption:hover {

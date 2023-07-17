@@ -106,6 +106,28 @@ async function login(req, res) {
 }
 
 
+function getDetails(req,res){
+    const userid = req.userData.userId;
+    models.User.find({ _id: userid })
+        .then(user => {
+          if(user){
+            return res.status(200).json({
+                user: user
+            });
+          }
+          return res.status(400).json({
+            message: "user not found"
+        }); 
+            
+        })
+        .catch(error => {
+            return res.status(500).json({
+                message: "Something went wrong while getting data",
+
+            });
+        });
+}
+
 
 
 // admin login
@@ -219,6 +241,7 @@ async function addAdmin(req, res) {
 module.exports = {
     signUp: signUp,
     login: login,
+    getDetails:getDetails,
     adminLogin, adminLogin,
 
     // must remove

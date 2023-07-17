@@ -27,7 +27,7 @@ import axios from 'axios';
 import { useNavigate, Link } from "react-router-dom";
 
 
-function NenasaHeader() {
+function NenasaHeader(props) {
   // Add question modal variables
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputUrl, setInputUrl] = useState("");
@@ -94,7 +94,7 @@ function NenasaHeader() {
 
         {/* --------Navbar Main icons start---------- */}
         <nav className="nHeader_icons" ref={ navRef }>
-          <div className="nHeader_icon">
+          <div className="nHeader_icon" onClick={()=>{props.select(0)}}>
             <Tooltip title="Home">
                 <HomeIcon />
             </Tooltip>

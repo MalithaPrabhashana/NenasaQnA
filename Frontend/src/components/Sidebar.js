@@ -2,10 +2,10 @@ import React from 'react'
 import './css/Sidebar.css'
 import SidebarOptions from './SidebarOptions'
 
-function Sidebar() {
+function Sidebar(props) {
   return (
     <div className='sidebar'>
-        <SidebarOptions/>
+        <SidebarOptions select={props.select}/>
         </div>
   )
 }
