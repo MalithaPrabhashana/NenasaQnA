@@ -25,7 +25,7 @@ function Feed() {
       </div> */}
       <div>
         {questions.map((question, index) => (
-          <Post key={index} questionProp={question['question']} questionId={question['_id']} />
+          <Post key={index} questionProp={question['question']} questionId={question['_id']} createdTime={question['createdAt']} />
         ))}
       </div>
     </div>

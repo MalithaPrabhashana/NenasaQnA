@@ -51,7 +51,7 @@ function Post(props) {
                 <Avatar/>
                 <div className='avatar-details-post'>
                     <h4>Madushika Ranapana</h4>
-                    <small>2023‑07-13 17:45:30</small>
+                    <small>{ props.createdTime }</small>
                 </div>
             </div>
             <div className="post_body">

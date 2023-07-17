@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import HomeIcon from "@material-ui/icons/Home";
 import FeaturedPlayListOutlinedIcon from "@material-ui/icons/FeaturedPlayListOutlined";
@@ -32,6 +32,7 @@ function NenasaHeader(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputUrl, setInputUrl] = useState("");
   const [question, setQuestion] = useState("");
+  const [avatarImgLink, setAvatarImgLink] = useState("");
   const Close = <CloseIcon />;
   const logoutNavigate = useNavigate();
 
@@ -80,6 +81,27 @@ function NenasaHeader(props) {
     setAnchorEl(null);
   };
 
+  useEffect(() => {
+    const myDetailsUrl = 'http://localhost:3000/user/get-details';
+  
+    axios
+      .post(myDetailsUrl, {}, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          setAvatarImgLink(response.data.user[0]['image']);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  
+  
 
   return (
     <div className="nHeader">
@@ -158,7 +180,7 @@ function NenasaHeader(props) {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
               >
-                <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                <Avatar sx={{ width: 32, height: 32 }}><img src={"http://localhost:3000/get-uploads/"+avatarImgLink} style={{width: 40, height: 40}} /></Avatar>
               </IconButton>
             </Tooltip>
           </Box>

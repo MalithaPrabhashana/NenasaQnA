@@ -42,8 +42,13 @@
 }
 
 .avatar-details-post {
-  margin-left: 15px;
+  margin-left: 15px;    
 }
+
+.avatar-details-post > h4 {
+  margin: 2px;   
+}
+
 
 .answerCount {
   margin-top: 15px;
