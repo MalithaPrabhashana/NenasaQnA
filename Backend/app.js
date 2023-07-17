@@ -1,6 +1,6 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
-
 
 const userRoute = require('./routes/user');
 const questionRoute = require('./routes/questions');
@@ -10,6 +10,7 @@ const uploads=require('./routes/uploads');
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/get-uploads',express.static('uploads') );

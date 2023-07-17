@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 
 export default function EditProfile() {
+
   return (
     <div>
         <section class="py-5 my-5">
@@ -12,9 +13,9 @@ export default function EditProfile() {
 			<div class="bg-white shadow rounded-lg d-block d-sm-flex">
 				<div class="profile-tab-nav border-right">
 					<div class="p-4">
-						<div class="img-circle text-center mb-3">
+						{/* <div class="img-circle text-center mb-3">
 							<img src="img/user2.jpg" alt="Image" class="shadow" />
-						</div>
+						</div> */}
 						<h4 class="text-center">Kiran Acharya</h4>
 					</div>
 					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">

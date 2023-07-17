@@ -65,6 +65,14 @@ margin: 8px 0;
 width: 90%;
 `;
 
+export const Dropdown = styled.select`
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 90%;
+`;
+
 
 export const Button = styled.button`
    border-radius: 20px;
@@ -77,6 +85,7 @@ export const Button = styled.button`
    letter-spacing: 1px;
    text-transform: uppercase;
    transition: transform 80ms ease-in;
+   margin-top: 15px;
    &:active{
        transform: scale(0.95);
    }

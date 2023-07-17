@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import NenasaHeader from './NenasaHeader';
 import Widget from './Widget';
 import Feed from './Feed';
@@ -7,22 +7,29 @@ import './css/Nenasa.css';
 import { Button } from "@material-ui/core";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import CloseIcon from "@material-ui/icons/Close"; 
+import { useNavigate } from 'react-router-dom';
 
 function Nenasa() {
 
   const slideRef = useRef();
   const widgetRef = useRef();
+  const navigate = useNavigate();
 
   const showSlidebar = () => {
     slideRef.current.classList.toggle('responsive_slider');
     widgetRef.current.classList.toggle('responsive_slider');
   }
 
+  useEffect(() => {
+    if(!localStorage.getItem('token')) {
+      navigate('/');
+    }
+  })
+
   return (
     <div className="nenasa">
       <NenasaHeader className="nenasa-top-nav" />
       <div className="nenasa_contents">
-        {/* {sidebarVisible && <Sidebar />} */}
 
         <div  ref={ slideRef }className="side-bar">
           <Sidebar />

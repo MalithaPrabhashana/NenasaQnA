@@ -57,6 +57,8 @@ function NenasaHeader() {
   }
 
   const logOutHandle = () => {
+    localStorage.removeItem('token');
+    localStorage.clear();
     logoutNavigate('/');
   }
 
