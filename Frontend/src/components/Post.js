@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './css/Post.css';
 import {Avatar} from '@material-ui/core';
-import {ArrowUpwardOutlined, ArrowDownwardOutlined, ShareOutlined} from '@material-ui/icons';
+import {ShareOutlined} from '@material-ui/icons';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import {Modal} from 'react-responsive-modal';
@@ -20,6 +20,9 @@ function Post(props) {
     const [answerData, setanswerData] = useState([]);
     const [dateNTime, setdateNTime] = useState("");
     const [answersCount, setAnswersCount] = useState("");
+    const [questionPostedUser, setQuestionPostedUser] = useState("");
+    const [totalVotes, setTotalVotes] = useState("");
+
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -32,29 +35,53 @@ function Post(props) {
     useEffect(() => {
         const timestamp = props.createdTime;
         const dateTime = new Date(timestamp);
-
         const date = dateTime.toLocaleDateString(); // Get the date portion
         const time = dateTime.toLocaleTimeString(); // Get the time portion
-        
         setdateNTime(date + ' ' + time);
 
         const answerUrl = 'http://localhost:3000/reply/' + props.questionId;
 
-            axios.get(answerUrl, {
-                headers: {
-                    Authorization: 'Bearer ' + localStorage.getItem('token')
-                }
-            }).then((response) => {
-              if (response.status === 200 | response.status === 201) {
-                  setanswerData(response.data.replies);
+        axios.get(answerUrl, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token')
             }
-            }).catch((error) => {
-                console.log(error);
-            })
-        setAnswersCount(answerData.length.toString())
-    })
+        }).then((response) => {
+            if (response.status === 200 | response.status === 201) {
+                setanswerData(response.data.replies);
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+        
+        setAnswersCount(answerData.length.toString());
 
 
+        // Question posted user Details
+        const myDetailsUrl = 'http://localhost:3000/user/get-details-id';
+
+        axios.post(myDetailsUrl, {'id': props.userId}, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            if (response.status === 200 || response.status === 201) {
+                setQuestionPostedUser(response.data.user[0]['username']);
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+
+
+        if (props.totalVotes < 0){
+            setTotalVotes(0);
+        } else {
+            setTotalVotes(props.totalVotes);
+        }
+    }, [props.createdTime, props.questionId, props.userId, props.totalVotes, answerData.length]);
+
+
+    
     const loadReply = () => {
         setIsAnswersDropdownExpanded(!isAnswerDropdownExpanded);
 
@@ -66,9 +93,9 @@ function Post(props) {
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                 }
             }).then((response) => {
-              if (response.status === 200 | response.status === 201) {
-                  setanswerData(response.data.replies);
-            }
+                if (response.status === 200 | response.status === 201) {
+                    setanswerData(response.data.replies);
+                }
             }).catch((error) => {
                 console.log(error);
             })
@@ -80,8 +107,8 @@ function Post(props) {
             <div className="post_info">
                 <Avatar/>
                 <div className='avatar-details-post'>
-                    <h4>Madushika Ranapana</h4>
-                    <small>{ dateNTime }</small>
+                    <h4>{questionPostedUser}</h4>
+                    <small>{dateNTime}</small>
                 </div>
             </div>
             <div className="post_body">
@@ -119,7 +146,7 @@ function Post(props) {
                             Cancel
                         </button>
                         <button type="submit" className="add">
-                            Add Question
+                            Add the Answer
                         </button>
                     </div>
                 </Modal>
@@ -128,7 +155,8 @@ function Post(props) {
             <div className="post_footer">
                 <div className="post_footerAction">
                     <div className='voting'><ThumbUpIcon/></div>
-                    <div className='votes-count'>{props.totalVotes}</div>
+                    <div className='votes-count'>
+                        {totalVotes}</div>
                     <div className='voting'><ThumbDownIcon/></div>
                     {/* <div><RepeatOneOutlined /></div> */}
                     {/* <div><ChatBubbleOutline /></div> */} </div>
@@ -145,23 +173,29 @@ function Post(props) {
 
             <div className='answerCount'>
                 <button className='btn answer-dropdown'
-                    onClick={ loadReply }>
+                    onClick={loadReply}>
                     <ArrowForwardIosIcon className={
                         isAnswerDropdownExpanded ? 'rotate-arrow' : 'reset-arrow'
                     }/>
                 </button>
-                <p>{answersCount + ' Answers'}</p>
+                <p>{answersCount} 
+                   {answersCount === '1' ? ' Answer' : ' Answers'}
+                </p>
             </div>
 
 
             {
-            isAnswerDropdownExpanded && 
-            answerData.map((reply, index) => (
-                <PostAnswer key={ index } answerProp={ reply['reply'] } answerId={ reply['_id'] } />
-            ))      
-          } 
-        </div>
-        );
+            isAnswerDropdownExpanded && answerData.map((reply, index) => (
+                <PostAnswer key={index}
+                    answerProp={
+                        reply['reply']
+                    }
+                    answerId={
+                        reply['_id']
+                    }/>
+            ))
+        } </div>
+    );
 }
 
 export default Post;

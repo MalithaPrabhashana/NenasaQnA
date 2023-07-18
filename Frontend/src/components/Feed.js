@@ -6,13 +6,12 @@ import axios from 'axios';
 
 function Feed() {
   const [questions, setQuestions] = useState([]);
-
+  
   useEffect(() => {
     axios.get('http://localhost:3000/questions')
       .then(response => {
         const questionsData = response.data.questions;
         setQuestions(questionsData);
-
       })
       .catch(error => {
         console.log(error);
@@ -25,10 +24,18 @@ function Feed() {
         <NenasaBox />
       </div> */}
       <div>
-        {questions.map((question, index) => (
-          <Post key={index} questionProp={question['question']} questionId={question['_id']} 
-          createdTime={question['createdAt']} totalVotes={question['__v']} />
-        ))}
+          <div>
+            {questions.map((question, index) => (
+              <Post
+                key={index}
+                questionProp={question['question']}
+                questionId={question['_id']}
+                createdTime={question['createdAt']}
+                totalVotes={question['upVots'] - question['downVots']}
+                userId={question['userId']}
+              />
+            ))}
+      </div>
       </div>
     </div>
   );
