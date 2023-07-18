@@ -116,27 +116,27 @@ function NenasaHeader(props) {
 
         {/* --------Navbar Main icons start---------- */}
         <nav className="nHeader_icons" ref={ navRef }>
-          <div className="nHeader_icon" onClick={()=>{props.select(0)}}>
+          <div className="nHeader_icon" onClick={()=>{props.select(5)}}>
             <Tooltip title="Home">
                 <HomeIcon />
             </Tooltip>
 
           </div>
 
-          <div className="nHeader_icon">
+          {/* <div className="nHeader_icon">
             <Tooltip title="Following">
               <FeaturedPlayListOutlinedIcon />
             </Tooltip>
-          </div>
+          </div> */}
 
           <div className="nHeader_icon">
-            <Tooltip title="Answers">
+            <Tooltip title="My Questions">
               <AssignmentTurnedInOutlined />
             </Tooltip>
           </div>
 
-          <div className="nHeader_icon">
-            <Tooltip title="Groups">
+          <div className="nHeader_icon" onClick={()=>{props.select(7)}}>
+            <Tooltip title="My Chats"  >
               <PeopleAltOutlined />
             </Tooltip>
           </div>
