@@ -12,6 +12,9 @@ import { useNavigate } from 'react-router-dom';
 import Councelling from '../sidebarContent/Councelling';
 import ChatWindow from '../sidebarContent/ChatWindow';
 import Friends from '../navBarContent/Friends';
+import ModelPaperCards from '../sidebarContent/modelPaperCards';
+
+
 
 function Nenasa() {
 
@@ -76,7 +79,7 @@ function Nenasa() {
             return <div>Option 1 selected</div>;
 
           } else if (sideBarNavigation === 2) {
-            return <div>Option 2 selected</div>;
+            return <div className='feed'><ModelPaperCards/></div>
 
           } else if (sideBarNavigation === 3) {
             return (

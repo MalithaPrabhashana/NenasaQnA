@@ -12,7 +12,39 @@
     transform: scale(1.01);
 }
 
+.scaleUp1:hover{
+  box-shadow:0 3px 10px rgba(0, 0, 0, 0.377);
+  transform: scale(1.05);
+  background-color: #e65100;
+}
 
+
+.cardHover:hover {
+  background-color: #e65100;
+}
+
+
+.cardHover:hover .cardText{
+  color:white ;
+}
+
+.cardText{
+  color: black;
+  text-align: center;
+}
+
+
+
+/* .basicScale{
+  transition: scale(1) 1s ease;
+} */
+.basicScale:hover{
+  transform: scale(1.05);
+}
+
+.cardHover2:hover{
+  background-color: rgb(204, 204, 204);
+}
 
 /* 
 @keyframes scale-animation {

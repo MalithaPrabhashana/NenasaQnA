@@ -47,7 +47,7 @@ function Councelling({ currUser, endUserSet ,setChat}) {
             <h2>ASK FOR COUNSELLING</h2>
             <p>Select youe counsellor..</p>
         </div>
-            {users.map((user, insex) => {
+            {users.map((user, index) => {
                 return (
                     <Grid container spacing={2} key={user._id}>
 

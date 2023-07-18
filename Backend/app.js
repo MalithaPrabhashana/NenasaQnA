@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const userRoute = require('./routes/user');
 const questionRoute = require('./routes/questions');
 const replyRoute = require('./routes/reply');
+const paperRoute=require('./routes/paper');
+
 const uploads = require('./routes/uploads');
 const axios = require("axios");
 
@@ -18,7 +20,7 @@ app.use('/uploads', uploads);
 app.use("/user", userRoute);
 app.use("/questions", questionRoute);
 app.use("/reply", replyRoute);
-
+app.use("/papers", paperRoute);
 
 
 
