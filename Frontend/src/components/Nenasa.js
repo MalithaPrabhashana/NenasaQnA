@@ -11,13 +11,14 @@ import { useNavigate } from 'react-router-dom';
 
 import Councelling from '../sidebarContent/Councelling';
 import ChatWindow from '../sidebarContent/ChatWindow';
+import Friends from '../navBarContent/Friends';
 
 function Nenasa() {
 
   const urlLoginRemove = useNavigate();
 
   useEffect(() => {
-    if(!localStorage.getItem('token')) {
+    if (!localStorage.getItem('token')) {
       urlLoginRemove('/');
     }
   })
@@ -31,63 +32,96 @@ function Nenasa() {
   }
 
 
-  const [sideBarNavigation, sideBarNavigationSet] = useState(0);
+  const [sideBarNavigation, sideBarNavigationSet] = useState(5);
 
-  const [user, userSet] = useState({username:"student"});
+  //  must assing user details
+  const [user, userSet] = useState({ username: "student" });
 
   const [endUser, endUserSet] = useState(false);
   const [chat, setChat] = useState(null);
-  
 
-  
+
+
   return (
     <div className="nenasa">
       <NenasaHeader select={sideBarNavigationSet} className="nenasa-top-nav" />
       <div className="nenasa_contents">
         {/* {sidebarVisible && <Sidebar />} */}
 
-        <div ref={slideRef} className="side-bar">
-          <Sidebar select={{sideBarNavigation,sideBarNavigationSet, endUserSet}} />
-        </div>
+        {(() => {
+          if (sideBarNavigation !== 7) {
+            return (
+              <>
+                <div ref={slideRef} className="side-bar">
+                  <Sidebar select={{ sideBarNavigation, sideBarNavigationSet, endUserSet }} />
+                </div>
 
-        <div className="side-btn side-menu-btn">
-          <Button onClick={showSlidebar}>
-            <ArrowForwardIosIcon />
-          </Button>
-        </div>
+                <div className="side-btn side-menu-btn">
+                  <Button onClick={showSlidebar}>
+                    <ArrowForwardIosIcon />
+                  </Button>
+                </div>
 
-        <div className='feed'>
+              </>);
+          } else {
+            return null;
+          }
+        })()}
+
+
+
+
         {(() => {
           if (sideBarNavigation === 1) {
             return <div>Option 1 selected</div>;
+
           } else if (sideBarNavigation === 2) {
             return <div>Option 2 selected</div>;
+
           } else if (sideBarNavigation === 3) {
-
-            return (endUser)? <ChatWindow user={user} endUser={endUser} chat={chat} />:<Councelling currUser={user} setChat={setChat} endUserSet={endUserSet}/>;
-          } else if (sideBarNavigation === 4) {
-
-            return <div>Option 4 selected</div>;
-          } else {
             return (
-              <Feed />
-           
-           );
+              <div className='feed'>
+                {((endUser) ? <ChatWindow user={user} endUser={endUser} chat={chat} /> : <Councelling currUser={user} setChat={setChat} endUserSet={endUserSet} />)
+                }</div>
+            );
+
+          } else if (sideBarNavigation === 4) {
+            return <div>Option 4 selected</div>;
+
+          } else if (sideBarNavigation === 5) {
+            return (<div className='feed'><Feed /> </div>);
+
+          } else if (sideBarNavigation === 6) {
+            return (<div className='feed'><Feed /> </div>);
+
+          } else if (sideBarNavigation === 7) {
+            return (<div className='feed' style={{width:'90%'}}><Friends user={user} /></div>);
+
+          } else if (sideBarNavigation === 8) {
+            return (<div className='feed'><Feed /> </div>);
           }
         })()}
-        </div>
 
 
 
 
-        <div ref={widgetRef} className="widget-bar" >
-          <div className="side-btn side-close-btn">
-            <Button onClick={showSlidebar}>
-              <CloseIcon />
-            </Button>
-          </div>
-          <Widget />
-        </div>
+
+
+        {(() => {
+          if (sideBarNavigation !== 7) {
+            return (
+              <div ref={widgetRef} className="widget-bar" >
+                <div className="side-btn side-close-btn">
+                  <Button onClick={showSlidebar}>
+                    <CloseIcon />
+                  </Button>
+                </div>
+                <Widget />
+              </div>);
+          } else {
+            return null;
+          }
+        })()}
 
       </div>
     </div>

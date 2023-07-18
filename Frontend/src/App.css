@@ -45,3 +45,27 @@ button:focus {
 .ce-chat-title-container{
  padding: 0px !important;
 }
+
+.ce-chats-container{
+  padding: 5px !important;
+}
+
+
+.ce-chat-engine{
+   padding: 4px!important;
+   border-radius: 8px !important;
+   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.377) !important;
+   margin-bottom: 100px !important;
+}
+
+/* .ce-wrapper{
+  border-radius: 8px !important;
+} */
+
+.ce-chats-container>div{
+  margin: 4px !important;
+}
+.ce-chat-card{
+ box-shadow: 0 3px 10px rgba(0, 0, 0, 0.377) !important;
+ border-radius: 12px!important;
+}
