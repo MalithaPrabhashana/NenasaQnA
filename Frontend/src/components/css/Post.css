@@ -49,7 +49,6 @@
   margin: 2px;   
 }
 
-
 .answerCount {
   margin-top: 15px;
   display: flex;
@@ -300,8 +299,8 @@
 }
 
 .post_answer {
-  margin-top: 5px;
-  float: left;
+  background-color:transparent;
+
 }
 
 .post-info p {
@@ -337,7 +336,14 @@
   opacity: 0.5;
 }
 
+.nextReply {
+  display: flex;
+  width: 100%;
+}
 
+.reply {
+  width: 100% !important;
+}
 
 @media only screen and (max-width: 1000px) {
 

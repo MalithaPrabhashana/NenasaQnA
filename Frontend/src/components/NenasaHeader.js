@@ -25,6 +25,8 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import axios from 'axios';
 import { useNavigate, Link } from "react-router-dom";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 
 function NenasaHeader(props) {
@@ -35,25 +37,25 @@ function NenasaHeader(props) {
   const [avatarImgLink, setAvatarImgLink] = useState("");
   const Close = <CloseIcon />;
   const logoutNavigate = useNavigate();
+  const questionInput = useRef('');
 
 
+  // Add a question
   const handleSubmit  = async () => {
     if (question !== "" ) {
-      const config = {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-
-      const body = {
-        questionName: question,
-        questionUrl: inputUrl
-      }
-      await axios.post('/api/questions', body, config).then((res) => {
-        console.log(res.data);
-      }).catch((e) => {
-        console.log(e);
-      })
+      axios.post('http://localhost:3000/questions/', {'question': question}, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            if (response.status === 200 || response.status === 201) {
+              questionInput.current.value = '';
+              setIsModalOpen(false);
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
     }
   }
 
@@ -274,11 +276,18 @@ function NenasaHeader(props) {
           </div>
         </div>
         <div className="modal_Field">
+
+
+        {/* <ReactQuill
+        value={question}
+        placeholder="Start your question with 'What', 'How', 'Why', etc."
+      /> */}
           <Input
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             type="text"
             placeholder="Start your question with 'What', 'How', 'Why', etc. "
+            ref={questionInput}
           />
           <div style={{ display: "flex", flexDirection: "column" }}>
             <input

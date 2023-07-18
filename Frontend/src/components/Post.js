@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import './css/Post.css';
 import {Avatar} from '@material-ui/core';
 import {ShareOutlined} from '@material-ui/icons';
@@ -22,6 +22,9 @@ function Post(props) {
     const [answersCount, setAnswersCount] = useState("");
     const [questionPostedUser, setQuestionPostedUser] = useState("");
     const [totalVotes, setTotalVotes] = useState("");
+    const reversedAnswerData = [...answerData].reverse();
+    const levelOneAnswer = useRef();
+
 
 
     const openModal = () => {
@@ -132,6 +135,31 @@ function Post(props) {
         });
     }
 
+    const levelOneAnswerAdd = () => {
+        const levelOneMessage = levelOneAnswer.current.value;
+
+        if (levelOneAnswer !== ""){
+            axios.post('http://localhost:3000/reply/', 
+            {
+                'reply': levelOneMessage,
+                'parentId': props.questionId
+            }, 
+            {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                }
+            }).then((response) => {
+                if (response.status === 200 || response.status === 201) {
+                    setIsModalOpen(false);
+                    loadReply();
+                }
+            }).catch((error) => {
+                console.log(error);
+            });    
+        }
+    }
+
 
 
     return (
@@ -170,14 +198,14 @@ function Post(props) {
                         </p>
                     </div>
                     <div className="modal_answer">
-                        <ReactQuill placeholder="Enter your answer" className="quill"/>
+                        <ReactQuill ref={levelOneAnswer} placeholder="Enter your answer" className="quill"/>
                     </div>
                     <div className="modal_buttons">
                         <button className="cancel"
                             onClick={closeModal}>
                             Cancel
                         </button>
-                        <button type="submit" className="add">
+                        <button type="submit" className="add" onClick={levelOneAnswerAdd}>
                             Add the Answer
                         </button>
                     </div>
@@ -217,7 +245,7 @@ function Post(props) {
 
 
             {
-            isAnswerDropdownExpanded && answerData.map((reply, index) => (
+            isAnswerDropdownExpanded && reversedAnswerData.map((reply, index) => (
                 <PostAnswer key={index}
                     answerProp={
                         reply['reply']

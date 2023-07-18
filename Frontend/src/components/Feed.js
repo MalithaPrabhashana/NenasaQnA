@@ -25,7 +25,7 @@ function Feed() {
       </div> */}
       <div>
           <div>
-            {questions.map((question, index) => (
+            {questions.reverse().map((question, index) => (
               <Post
                 key={index}
                 questionProp={question['question']}
