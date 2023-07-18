@@ -4,6 +4,8 @@ import Nenasa from "./components/Nenasa";
 import LoginPage from "./login/LoginPage";
 import EditProfile from "./editProfile/EditProfilePage";
 
+import './App.css';
+
 function App() {
   // const storedToken = localStorage.getItem("token");
 
