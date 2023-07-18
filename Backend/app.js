@@ -57,7 +57,8 @@ app.post("/carete-chat", async (req, res) => {
             },
             { headers: { "Project-ID": "f6aff6c0-ca83-4900-abfb-df2dd6c44a93" ,"User-Name":username1,"User-Secret":username1} }
         );
-        return res.status(201).json({ message: "chat created successfully" });
+        return res.status(201).json({ message: "chat created successfully",data: r.data});
+        console.log(r.data);
     } catch (e) {
         return res.status(500).json({ meaasge: e });
     }

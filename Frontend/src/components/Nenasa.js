@@ -32,9 +32,12 @@ function Nenasa() {
 
 
   const [sideBarNavigation, sideBarNavigationSet] = useState(0);
+
   const [user, userSet] = useState({username:"student"});
+
   const [endUser, endUserSet] = useState(false);
-  const [openchat, openchatSet] = useState(false);
+  const [chat, setChat] = useState(null);
+  
 
   
   return (
@@ -60,9 +63,10 @@ function Nenasa() {
           } else if (sideBarNavigation === 2) {
             return <div>Option 2 selected</div>;
           } else if (sideBarNavigation === 3) {
-           
-            return (endUser)? <ChatWindow user={user} endUser={endUser}  openchatSet={openchatSet} openchat={openchat}/>:<Councelling endUserSet={endUserSet}/>;
+
+            return (endUser)? <ChatWindow user={user} endUser={endUser} chat={chat} />:<Councelling currUser={user} setChat={setChat} endUserSet={endUserSet}/>;
           } else if (sideBarNavigation === 4) {
+
             return <div>Option 4 selected</div>;
           } else {
             return (

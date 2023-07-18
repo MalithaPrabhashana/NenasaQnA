@@ -22,15 +22,15 @@ const Img = styled('img')({
 
 
 
-function Councelling({endUserSet}) {
+function Councelling({ currUser, endUserSet ,setChat}) {
     const [users, setUsers] = useState(null); // State to handle error
-   
+
     useEffect(() => {
         axios.post('http://localhost:3000/user/get-users', { role: 3 }).then(response => {
             const responseStatus = response.status;
 
             if (responseStatus === 200 | responseStatus === 201) {
-               
+
                 setUsers(response.data.user);
             }
         }).catch(error => { // Handle any errors
@@ -40,7 +40,7 @@ function Councelling({endUserSet}) {
     }, []);
 
 
-    
+
 
     if (users) {
         return (<><div className="headingSidebar">
@@ -74,7 +74,7 @@ function Councelling({endUserSet}) {
                             <Grid container spacing={2}>
                                 <Grid item>
                                     <ButtonBase sx={{ width: 250, height: 128 }}>
-                                        <Img alt="complex" src={'http://localhost:3000/get-uploads/'+user.image} />
+                                        <Img alt="complex" src={'http://localhost:3000/get-uploads/' + user.image} />
                                     </ButtonBase>
                                 </Grid>
                                 <Grid item xs={12} sm container>
@@ -86,7 +86,24 @@ function Councelling({endUserSet}) {
                                             <Typography variant="body2" gutterBottom>
                                                 Address : {user.address}
                                             </Typography>
-                                            <Button onClick={()=>{endUserSet(user)}} variant="contained" color="warning">
+                                            <Button onClick={() => {
+                                              
+                                                axios.post('http://localhost:3000/carete-chat', { username1: currUser.username, username2: user.username }).then(response => {
+                                                    const responseStatus = response.status;
+                                                    
+                                                    if (responseStatus === 200 | responseStatus === 201) {
+                                                        // console.log(response.data.data);
+                                                        endUserSet(user);
+                                                        setChat(response.data.data)
+                                                    } else{
+                                                        endUserSet(null);
+                                                    }
+                                                }).catch(error => { // Handle any errors
+                                                    endUserSet(null);
+
+                                                });
+
+                                            }} variant="contained" color="warning">
                                                 Contact
                                             </Button>
                                         </Grid>
