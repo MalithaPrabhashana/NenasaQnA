@@ -24,7 +24,7 @@ function ChatWindow({ user, endUser, chat }) {
                     {(() => {
 
                         if (chat) {
-                            return (<div style={{ height: '10vh' }}>
+                            return (<div style={{ height: '100vh' }}>
                                 <ChatEngineWrapper>
                                 <Socket
                                     projectID={'f6aff6c0-ca83-4900-abfb-df2dd6c44a93'}

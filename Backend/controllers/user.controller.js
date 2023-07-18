@@ -150,7 +150,26 @@ function getUsersByRole(req,res){
         });
 }
 
+function getDetailsByID(req,res){
+    models.User.find({ _id: req.body.id })
+    .then(user => {
+      if(user){
+        return res.status(200).json({
+            user: user
+        });
+      }
+      return res.status(400).json({
+        message: "user not found"
+    }); 
+        
+    })
+    .catch(error => {
+        return res.status(500).json({
+            message: "Something went wrong while getting data",
 
+        });
+    });
+}
 
 
 // admin login
@@ -267,6 +286,7 @@ module.exports = {
     getDetails:getDetails,
     adminLogin, adminLogin,
     getUsersByRole:getUsersByRole,
+    getDetailsByID:getDetailsByID,
 
     // must remove
     addAdmin: addAdmin,

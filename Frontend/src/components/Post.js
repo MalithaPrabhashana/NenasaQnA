@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './css/Post.css';
 import {Avatar} from '@material-ui/core';
 import {ArrowUpwardOutlined, ArrowDownwardOutlined, ShareOutlined} from '@material-ui/icons';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import {Modal} from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 import ReactQuill from 'react-quill';
@@ -16,6 +18,8 @@ function Post(props) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isAnswerDropdownExpanded, setIsAnswersDropdownExpanded] = useState(false);
     const [answerData, setanswerData] = useState([]);
+    const [dateNTime, setdateNTime] = useState("");
+    const [answersCount, setAnswersCount] = useState("");
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -24,6 +28,32 @@ function Post(props) {
     const closeModal = () => {
         setIsModalOpen(false);
     };
+
+    useEffect(() => {
+        const timestamp = props.createdTime;
+        const dateTime = new Date(timestamp);
+
+        const date = dateTime.toLocaleDateString(); // Get the date portion
+        const time = dateTime.toLocaleTimeString(); // Get the time portion
+        
+        setdateNTime(date + ' ' + time);
+
+        const answerUrl = 'http://localhost:3000/reply/' + props.questionId;
+
+            axios.get(answerUrl, {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                }
+            }).then((response) => {
+              if (response.status === 200 | response.status === 201) {
+                  setanswerData(response.data.replies);
+            }
+            }).catch((error) => {
+                console.log(error);
+            })
+        setAnswersCount(answerData.length.toString())
+    })
+
 
     const loadReply = () => {
         setIsAnswersDropdownExpanded(!isAnswerDropdownExpanded);
@@ -51,7 +81,7 @@ function Post(props) {
                 <Avatar/>
                 <div className='avatar-details-post'>
                     <h4>Madushika Ranapana</h4>
-                    <small>{ props.createdTime }</small>
+                    <small>{ dateNTime }</small>
                 </div>
             </div>
             <div className="post_body">
@@ -97,14 +127,15 @@ function Post(props) {
 
             <div className="post_footer">
                 <div className="post_footerAction">
-                    <div><ArrowUpwardOutlined/></div>
-                    <div><ArrowDownwardOutlined/></div>
-                    <div><ShareOutlined/></div>
+                    <div className='voting'><ThumbUpIcon/></div>
+                    <div className='votes-count'>{props.totalVotes}</div>
+                    <div className='voting'><ThumbDownIcon/></div>
                     {/* <div><RepeatOneOutlined /></div> */}
                     {/* <div><ChatBubbleOutline /></div> */} </div>
 
 
                 <div className="post_footerLeft">
+                    <div className='shareIcon'><ShareOutlined/></div>
                     <button onClick={openModal}
                         className="post_btnAnswer">
                         Answer
@@ -117,8 +148,9 @@ function Post(props) {
                     onClick={ loadReply }>
                     <ArrowForwardIosIcon className={
                         isAnswerDropdownExpanded ? 'rotate-arrow' : 'reset-arrow'
-                    }/></button>
-                <p>1 Answer</p>
+                    }/>
+                </button>
+                <p>{answersCount + ' Answers'}</p>
             </div>
 
 

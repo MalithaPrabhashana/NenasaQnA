@@ -12,6 +12,7 @@ function Feed() {
       .then(response => {
         const questionsData = response.data.questions;
         setQuestions(questionsData);
+
       })
       .catch(error => {
         console.log(error);
@@ -25,7 +26,8 @@ function Feed() {
       </div> */}
       <div>
         {questions.map((question, index) => (
-          <Post key={index} questionProp={question['question']} questionId={question['_id']} createdTime={question['createdAt']} />
+          <Post key={index} questionProp={question['question']} questionId={question['_id']} 
+          createdTime={question['createdAt']} totalVotes={question['__v']} />
         ))}
       </div>
     </div>
