@@ -236,7 +236,7 @@ function downVote(req, res) {
         .then(question => {
 
             if (question) {
-                voting({ downVots: (question[0].upVots>0)? question[0].upVots - 1 : 0 }, res, req);
+                voting({ downVots: (question[0].downVots>0)? question[0].downVots + 1 : 0 }, res, req);
             }
         })
         .catch(error => {
