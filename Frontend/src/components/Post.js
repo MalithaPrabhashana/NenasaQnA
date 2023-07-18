@@ -78,7 +78,7 @@ function Post(props) {
         } else {
             setTotalVotes(props.totalVotes);
         }
-    }, [props.createdTime, props.questionId, props.userId, props.totalVotes, answerData.length]);
+    }, [props.createdTime, props.questionId, props.userId, props.totalVotes, answerData.length, totalVotes]);
 
 
     
@@ -101,6 +101,38 @@ function Post(props) {
             })
         }
     }
+
+    const upVoteThumb = () => {
+        axios.post('http://localhost:3000/questions/upvote', {'id': props.questionId}, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            if (response.status === 200 || response.status === 201) {
+                console.log(response.data);
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
+    const downVoteThumb = () => {
+        axios.post('http://localhost:3000/questions/downvote', {'id': props.questionId}, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            if (response.status === 200 || response.status === 201) {
+                console.log(response.data);
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
+
 
     return (
         <div className="post">
@@ -154,10 +186,10 @@ function Post(props) {
 
             <div className="post_footer">
                 <div className="post_footerAction">
-                    <div className='voting'><ThumbUpIcon/></div>
+                    <div className='voting' onClick={upVoteThumb}><ThumbUpIcon/></div>
                     <div className='votes-count'>
                         {totalVotes}</div>
-                    <div className='voting'><ThumbDownIcon/></div>
+                    <div className={totalVotes === 0 ? 'disableThumbs' : ''} onClick={downVoteThumb}><ThumbDownIcon/></div>
                     {/* <div><RepeatOneOutlined /></div> */}
                     {/* <div><ChatBubbleOutline /></div> */} </div>
 

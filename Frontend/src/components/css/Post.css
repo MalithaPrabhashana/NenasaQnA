@@ -332,6 +332,12 @@
   transform: rotate(0);
 }
 
+.disableThumbs {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+
 
 @media only screen and (max-width: 1000px) {
 

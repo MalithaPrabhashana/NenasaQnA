@@ -16,7 +16,7 @@ function Feed() {
       .catch(error => {
         console.log(error);
       });
-  }, []);
+  }, [questions]);
 
   return (
     <div className='feed-main'>
