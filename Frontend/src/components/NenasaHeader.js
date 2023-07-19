@@ -25,8 +25,8 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import axios from 'axios';
 import { useNavigate, Link } from "react-router-dom";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+// import ReactQuill from 'react-quill';
+// import 'react-quill/dist/quill.snow.css';
 
 
 function NenasaHeader(props) {
@@ -131,7 +131,7 @@ function NenasaHeader(props) {
             </Tooltip>
           </div> */}
 
-          <div className="nHeader_icon">
+          <div className="nHeader_icon" onClick={()=>{props.select(6)}}>
             <Tooltip title="My Questions">
               <AssignmentTurnedInOutlined />
             </Tooltip>

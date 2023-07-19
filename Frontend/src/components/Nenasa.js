@@ -13,6 +13,7 @@ import Councelling from '../sidebarContent/Councelling';
 import ChatWindow from '../sidebarContent/ChatWindow';
 import Friends from '../navBarContent/Friends';
 import ModelPaperCards from '../sidebarContent/modelPaperCards';
+import MyQuestions from '../ViewmyQuestions/MyQuestions'
 
 
 
@@ -34,12 +35,10 @@ function Nenasa() {
     widgetRef.current.classList.toggle('responsive_slider');
   }
 
-
   const [sideBarNavigation, sideBarNavigationSet] = useState(5);
 
   //  must assing user details
   const [user, userSet] = useState({ username: "student" });
-
   const [endUser, endUserSet] = useState(false);
   const [chat, setChat] = useState(null);
 
@@ -95,17 +94,15 @@ function Nenasa() {
             return (<div className='feed'><Feed /> </div>);
 
           } else if (sideBarNavigation === 6) {
-            return (<div className='feed'><Feed /> </div>);
+            return (<div className='feed'><MyQuestions /> </div>);
 
           } else if (sideBarNavigation === 7) {
             return (<div className='feed' style={{width:'100%'}}><Friends user={user} /></div>);
 
           } else if (sideBarNavigation === 8) {
-            return (<div className='feed'><Feed /> </div>);
+            return (<div className='feed'><Feed /></div>);
           }
         })()}
-
-
 
 
 

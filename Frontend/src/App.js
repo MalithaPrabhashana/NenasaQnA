@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nenasa from "./components/Nenasa";
 import LoginPage from "./login/LoginPage";
 import EditProfile from "./editProfile/EditProfilePage";
-
+import MyQuestions from "./ViewmyQuestions/MyQuestions";
 import './App.css';
 
 function App() {
@@ -18,7 +18,6 @@ function App() {
           <Route path="/home" element={<Nenasa />} />
           <Route path="/editProfile" element={<EditProfile />} />
         </Routes>
-        Button
       </BrowserRouter>
     </div>
   );

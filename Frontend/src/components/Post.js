@@ -113,7 +113,7 @@ function Post(props) {
             }
         }).then((response) => {
             if (response.status === 200 || response.status === 201) {
-                console.log(response.data);
+                // console.log(response.data);
             }
         }).catch((error) => {
             console.log(error);
@@ -128,7 +128,7 @@ function Post(props) {
             }
         }).then((response) => {
             if (response.status === 200 || response.status === 201) {
-                console.log(response.data);
+                // console.log(response.data);
             }
         }).catch((error) => {
             console.log(error);
@@ -253,8 +253,8 @@ function Post(props) {
                     answerId={
                         reply['_id']
                     }/>
-            ))
-        } </div>
+            ))}
+            </div>
     );
 }
 
