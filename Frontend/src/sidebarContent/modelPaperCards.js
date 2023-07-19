@@ -21,6 +21,7 @@ const ModelPaperCards = () => {
     // console.log(selectedSubject);
     return (
         <>
+          
             {(() => {
                 if (selectedSubject === "1") {
                     return (<>
@@ -28,7 +29,7 @@ const ModelPaperCards = () => {
                             <h2>MODEL PAPER DOWNLOAD</h2>
                             <p>Select youe subject..</p>
                         </div>
-
+                        <hr/>
                         {/* 
                         <Toolbar>
                             <Button className="basicScale" variant="contained" onClick={() => { selectedSubjectSet("") }}>
@@ -69,6 +70,7 @@ const ModelPaperCards = () => {
                         <div className="headingSidebar">
                             <h2>{selectedSubject.toUpperCase()}</h2>
                         </div>
+                        <hr/>
                         <Toolbar>
                             <Button style={{ marginBottom: '10px' }} className="basicScale" variant="contained" onClick={() => { selectedSubjectSet("1") }}>
                                 <ArrowBack />Back

@@ -98,7 +98,7 @@ function Nenasa() {
             return (<div className='feed'><Feed /> </div>);
 
           } else if (sideBarNavigation === 7) {
-            return (<div className='feed' style={{width:'90%'}}><Friends user={user} /></div>);
+            return (<div className='feed' style={{width:'100%'}}><Friends user={user} /></div>);
 
           } else if (sideBarNavigation === 8) {
             return (<div className='feed'><Feed /> </div>);
