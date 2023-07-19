@@ -1,0 +1,52 @@
+.my-profile {
+    margin-top: 20px;
+  }
+  
+  .profile-card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .avatar-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 20px auto;
+    display: block;
+  }
+  
+  .card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .profile-card-text {
+    margin-bottom: 10px;
+  }
+  
+  .profile-card {
+    height: auto;
+  }
+
+  .name {
+    text-align: center;
+  }
+
+  .avatar-name {
+    font-size: 1.5rem !important;
+  }
+
+  .profile-card-header {
+    text-align: center;
+    padding: 20px;
+    font-weight: bold;
+  }
+
+  .profile-card-text {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 1.2rem;
+ 
+
+  }

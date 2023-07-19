@@ -14,6 +14,7 @@ import ChatWindow from '../sidebarContent/ChatWindow';
 import Friends from '../navBarContent/Friends';
 import ModelPaperCards from '../sidebarContent/modelPaperCards';
 import MyQuestions from '../ViewmyQuestions/MyQuestions'
+import MyProfile from '../MyProfile/MyProfile'
 
 
 
@@ -101,6 +102,9 @@ function Nenasa() {
 
           } else if (sideBarNavigation === 8) {
             return (<div className='feed'><Feed /></div>);
+          } 
+            else if (sideBarNavigation === 9) {
+            return (<div className='feed' ><MyProfile /></div>);
           }
         })()}
 

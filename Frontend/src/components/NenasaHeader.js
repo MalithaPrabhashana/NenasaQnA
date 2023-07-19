@@ -223,9 +223,9 @@ function NenasaHeader(props) {
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
 
-            <Link to="/editProfile">
-              <MenuItem>My account</MenuItem>
-            </Link>
+            {/* <Link to="/editProfile" > */}
+              <MenuItem onClick={()=>{props.select(9)}}>My account</MenuItem>
+            {/* </Link> */}
 
             <Divider />
 

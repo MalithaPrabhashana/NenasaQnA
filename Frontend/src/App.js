@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nenasa from "./components/Nenasa";
 import LoginPage from "./login/LoginPage";
 import EditProfile from "./editProfile/EditProfilePage";
-import MyQuestions from "./ViewmyQuestions/MyQuestions";
 import './App.css';
+import MyProfile from "./MyProfile/MyProfile";
 
 function App() {
   // const storedToken = localStorage.getItem("token");
@@ -17,6 +17,7 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/home" element={<Nenasa />} />
           <Route path="/editProfile" element={<EditProfile />} />
+          <Route path="/myProfile" element={<MyProfile />} />
         </Routes>
       </BrowserRouter>
     </div>
