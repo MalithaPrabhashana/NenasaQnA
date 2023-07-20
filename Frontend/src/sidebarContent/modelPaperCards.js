@@ -1,10 +1,7 @@
 import React, { useState ,useEffect} from 'react';
 import { Grid, Card, CardContent, Typography, Paper, Toolbar } from '@mui/material';
 import Button from '@mui/material/Button';
-<<<<<<< Updated upstream
 // import SendIcon from '@mui/icons-material/Send';
-=======
->>>>>>> Stashed changes
 import { ArrowBack } from '@material-ui/icons';
 import '../components/css/sidebarContent.css'
 

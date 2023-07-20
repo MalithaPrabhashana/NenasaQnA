@@ -13,13 +13,10 @@ import Councelling from '../sidebarContent/Councelling';
 import ChatWindow from '../sidebarContent/ChatWindow';
 import Friends from '../navBarContent/Friends';
 import ModelPaperCards from '../sidebarContent/modelPaperCards';
-<<<<<<< Updated upstream
 import MyQuestions from '../ViewmyQuestions/MyQuestions'
 import MyProfile from '../MyProfile/MyProfile'
-
-=======
+import axios from 'axios';
 import PaperMarkingCards from '../sidebarContent/paperMarkingCards';
->>>>>>> Stashed changes
 
 
 function Nenasa() {
@@ -29,8 +26,24 @@ function Nenasa() {
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       urlLoginRemove('/');
+    }else{
+      
+        axios.get('http://localhost:3000/user/get-details', {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token')
+            }
+        }).then((response) => {
+            if (response.status === 200 || response.status === 201) {
+                console.log(response);
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+
     }
   })
+
+
 
   const slideRef = useRef();
   const widgetRef = useRef();
