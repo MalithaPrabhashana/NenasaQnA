@@ -15,9 +15,9 @@ import Friends from '../navBarContent/Friends';
 import ModelPaperCards from '../sidebarContent/modelPaperCards';
 import MyQuestions from '../ViewmyQuestions/MyQuestions'
 import MyProfile from '../MyProfile/MyProfile'
-import axios from 'axios';
-import PaperMarkingCards from '../sidebarContent/paperMarkingCards';
 
+import PaperMarkingCards from '../sidebarContent/paperMarkingCards';
+import axios from 'axios'
 
 function Nenasa() {
 
@@ -26,23 +26,8 @@ function Nenasa() {
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       urlLoginRemove('/');
-    }else{
-      
-        axios.get('http://localhost:3000/user/get-details', {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('token')
-            }
-        }).then((response) => {
-            if (response.status === 200 || response.status === 201) {
-                console.log(response);
-            }
-        }).catch((error) => {
-            console.log(error);
-        })
-
     }
   })
-
 
 
   const slideRef = useRef();
@@ -56,11 +41,25 @@ function Nenasa() {
   const [sideBarNavigation, sideBarNavigationSet] = useState(5);
 
   //  must assing user details
-  const [user, userSet] = useState({ username: "student" });
+  const [user, userSet] = useState();
   const [endUser, endUserSet] = useState(false);
   const [chat, setChat] = useState(null);
 
 
+  useEffect(() => {
+    axios.post('http://localhost:3000/user//get-details',{} ,{
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token')
+            }
+        }).then((response) => {
+            if (response.status === 200 || response.status === 201) {
+              userSet(response.data.user[0]);
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+  },[])
+  //  console.log(user);
 
   return (
     <div className="nenasa">
