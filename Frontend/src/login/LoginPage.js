@@ -37,6 +37,7 @@ function LoginPage() { // Login and Signup toggle
                 email: loginEmail,
                 password: loginPassword
             }
+            
 
             axios.post('http://localhost:3000/user/login', loginFormData).then(response => {
                 const responseStatus = response.status;
@@ -212,7 +213,7 @@ function LoginPage() { // Login and Signup toggle
                             }
                             placeholder='Password'/>
                         <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
-                        <Components.Button>Sign in</Components.Button>
+                        <Components.Button>Log in</Components.Button>
                     </Components.Form>
                 </Components.SignInContainer>
 

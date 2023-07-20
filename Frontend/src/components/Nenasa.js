@@ -18,6 +18,7 @@ import MyProfile from '../MyProfile/MyProfile'
 
 import PaperMarkingCards from '../sidebarContent/paperMarkingCards';
 import axios from 'axios'
+import VerifyQuestions from '../ViewmyQuestions/VerifyQuestions';
 
 function Nenasa() {
 
@@ -110,8 +111,14 @@ function Nenasa() {
           } else if (sideBarNavigation === 5) {
             return (<div className='feed'><Feed /> </div>);
 
+
           } else if (sideBarNavigation === 6) {
-            return (<div className='feed'><MyQuestions /> </div>);
+            if (localStorage.getItem('role') === '0') {
+                return (<div className='feed'><MyQuestions /> </div>); 
+            } else if (localStorage.getItem('role') === '1' || localStorage.getItem('role') === '2') {
+              return (<div className='feed'><VerifyQuestions />  </div>);
+            }
+
 
           } else if (sideBarNavigation === 7) {
             return (<div className='feed' style={{width:'100%'}}><Friends user={user} /></div>);

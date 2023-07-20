@@ -1,8 +1,17 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import { Avatar } from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import axios from 'axios';
 import'./css/PostAnswer.css';
+
+
+const dateTimeFunc = (createdDate) => {
+    const timestamp = createdDate;
+    const dateTime = new Date(timestamp);
+    const date = dateTime.toLocaleDateString(); // Get the date portion
+    const time = dateTime.toLocaleTimeString(); // Get the time portion
+    return(date + ' at ' + time);
+}
 
 
 
@@ -10,20 +19,43 @@ export default function PostAnswer(props) {
 
   const [isAnswerDropdownExpanded, setIsAnswersDropdownExpanded] = useState(false);
   const [answerData, setanswerData] = useState([]);
+  const [answerUserData, setanswerUserData] = useState("");
   const [isgoingToReply, setIsgoingToReply] = useState(false);
   const replyValue = useRef('');
   const reversedAnswerData = [...answerData].reverse();
 
 // ...
 
-{
-  isAnswerDropdownExpanded && 
-  reversedAnswerData.map((reply, index) => (
-    <PostAnswer key={index} answerProp={reply['reply']} answerId={reply['_id']} parentId={props.answerId} className="reply" />
-  ))
-}
+// {
+//   isAnswerDropdownExpanded && 
+//   reversedAnswerData.map((reply, index) => (
+//     <PostAnswer key={index} answerProp={reply['reply']} answerId={reply['_id']} parentId={props.answerId} className="reply" />
+//   ))
+// }
 
 //   const parentId = props.parentId;
+
+
+useEffect(() => {
+    // Get Answer user details
+    axios.post('http://localhost:3000/user/get-details-id', {
+      "id": props.answeredUserId
+    }, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    }).then((response) => {
+      if (response.status === 200 | response.status === 201) {
+        // console.log(response.data.user[0]);
+        setanswerUserData(response.data.user[0]['username']);
+        // console.log(response.data.user[0]['username']);
+
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
+  }, [props.answeredUserId]);
+  
 
 
   const loadReply = () => {
@@ -39,7 +71,7 @@ export default function PostAnswer(props) {
         }).then((response) => {
           if (response.status === 200 | response.status === 201) {
               setanswerData(response.data.replies);
-        }
+                    }
         }).catch((error) => {
             console.log(error);
         })
@@ -86,8 +118,11 @@ export default function PostAnswer(props) {
                         <Avatar className='answered-avatar' />
                     </div>
                     <div className="post-info">
-                        <p>Malitha Prabhashana</p>
-                        <span>2023-07-15 10:20:40</span>
+                    {/* {answerUserData && (
+                        <h6 className='repliedUser'>{answerUserData['username']}</h6>
+                    )} */}
+                        <h6 className='repliedUser'>{answerUserData}</h6>
+                        <span className='repliedDate'>{ dateTimeFunc(props.replyDate) }</span>
                     </div>
     
               </div>
@@ -116,7 +151,7 @@ export default function PostAnswer(props) {
                 {
                 isAnswerDropdownExpanded && 
                 reversedAnswerData.map((reply, index) => (
-                    <PostAnswer key={ index } answerProp={ reply['reply'] } answerId={ reply['_id'] } className="reply"/>
+                    <PostAnswer key={ index } answerProp={ reply['reply'] } answerId={ reply['_id'] } answeredUserId={reply['userId']} replyDate={reply['updatedAt']} className="reply"/>
                 ))      
             } 
           </div>

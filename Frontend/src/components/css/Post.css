@@ -303,18 +303,6 @@
 
 }
 
-.post-info p {
-  font-weight: bold;
-  font-size: 0.9rem;
-  margin: 0;
-}
-
-.post-info span {
-  color: gray;
-  font-size: 12px;
-  margin: 0;
-}
-
 .post-answer {
   margin: 0;
   padding: 10px;

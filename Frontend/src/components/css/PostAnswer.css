@@ -11,3 +11,11 @@
     font-size: 0.8rem !important;
     margin-right: 10px;
 }
+
+.repliedDate {
+    margin-top: 0 !important;
+}
+
+.repliedUser {
+    margin-top: 0 !important;
+}

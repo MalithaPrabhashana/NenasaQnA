@@ -252,7 +252,16 @@ function Post(props) {
                     }
                     answerId={
                         reply['_id']
-                    }/>
+                    }
+
+                    answeredUserId = {
+                        reply['userId']
+                    }
+
+                    replyDate = {
+                        reply['updatedAt']
+                    }
+                    />
             ))}
             </div>
     );
