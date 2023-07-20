@@ -13,9 +13,13 @@ import Councelling from '../sidebarContent/Councelling';
 import ChatWindow from '../sidebarContent/ChatWindow';
 import Friends from '../navBarContent/Friends';
 import ModelPaperCards from '../sidebarContent/modelPaperCards';
+<<<<<<< Updated upstream
 import MyQuestions from '../ViewmyQuestions/MyQuestions'
 import MyProfile from '../MyProfile/MyProfile'
 
+=======
+import PaperMarkingCards from '../sidebarContent/paperMarkingCards';
+>>>>>>> Stashed changes
 
 
 function Nenasa() {
@@ -76,7 +80,7 @@ function Nenasa() {
 
         {(() => {
           if (sideBarNavigation === 1) {
-            return <div>Option 1 selected</div>;
+            return <div className='feed'><PaperMarkingCards/></div>
 
           } else if (sideBarNavigation === 2) {
             return <div className='feed'><ModelPaperCards/></div>

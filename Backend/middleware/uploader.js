@@ -19,6 +19,18 @@ const fileFilter = (req, file, cb) => {
     
 }
 
+
+const pdfFilter = (req, file, cb) => {
+    if (file.mimetype === 'application/pdf') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+};
+
+
+
+
 const upload = multer({
     storage: storage,
     limits: {
@@ -27,6 +39,16 @@ const upload = multer({
     fileFilter:fileFilter
 });
 
+
+const pdfUpload = multer({
+    storage: storage,
+    limits: {
+        fileSize:1024*1024*30
+    },
+    fileFilter:pdfFilter
+});
+
 module.exports = {
-    upload: upload
+    upload: upload,
+    pdfUpload: pdfUpload
 }

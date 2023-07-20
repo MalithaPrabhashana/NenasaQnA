@@ -6,7 +6,7 @@ const userRoute = require('./routes/user');
 const questionRoute = require('./routes/questions');
 const replyRoute = require('./routes/reply');
 const paperRoute=require('./routes/paper');
-
+const paperMarkingRoute=require('./routes/paperMarkingRoute');
 const uploads = require('./routes/uploads');
 const axios = require("axios");
 
@@ -21,7 +21,7 @@ app.use("/user", userRoute);
 app.use("/questions", questionRoute);
 app.use("/reply", replyRoute);
 app.use("/papers", paperRoute);
-
+app.use("/paper-marking", paperMarkingRoute);
 
 
 

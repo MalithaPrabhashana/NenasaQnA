@@ -1,10 +1,6 @@
 import React, { useState ,useEffect} from 'react';
 import { Grid, Card, CardContent, Typography, Paper, Toolbar } from '@mui/material';
 import Button from '@mui/material/Button';
-<<<<<<< Updated upstream
-// import SendIcon from '@mui/icons-material/Send';
-=======
->>>>>>> Stashed changes
 import { ArrowBack } from '@material-ui/icons';
 import '../components/css/sidebarContent.css'
 
@@ -14,7 +10,7 @@ import { Link } from '@material-ui/core';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import axios from 'axios';
 
-const ModelPaperCards = () => {
+const PaperMarkingCards = () => {
 
     const [selectedSubject, selectedSubjectSet] = useState("1");
 
@@ -181,4 +177,4 @@ const handleDownload = (url, fileName ) => {
       });
   };
 
-export default ModelPaperCards;
+export default PaperMarkingCards;
