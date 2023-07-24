@@ -6,6 +6,7 @@
   z-index: 1000;
   top: 0px;
   padding: 6px;
+  padding-bottom: 15px;
 }
 
 .nHeader-content {
@@ -37,12 +38,8 @@
   padding: 15px;
   cursor: pointer;
   margin-left: 20px;
+  padding-bottom: 5px;
 }
-
-/* .nHeader_icon:hover {
-  background-color: #eee;
-  border-radius: 5px;
-} */
 
 .nHeader_icon > .MuiSvgIcon-root {
   color: gray;
@@ -275,6 +272,12 @@
   opacity: 0.8;
 }
 
+.active {
+  border-bottom: 2px solid #1960EA;
+  font-weight: bold;
+  color: #1960EA;
+}
+
 
 
 @media only screen and (max-width: 1240px) {
@@ -351,6 +354,10 @@
 
   .modal_Field {
     width: 60vw;
+  }
+
+  .nHeader {
+    padding-bottom: 6px;
   }
   
   

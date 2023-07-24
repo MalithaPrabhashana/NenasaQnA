@@ -3,12 +3,10 @@ import { useRef } from "react";
 import HomeIcon from "@material-ui/icons/Home";
 // import FeaturedPlayListOutlinedIcon from "@material-ui/icons/FeaturedPlayListOutlined";
 import {
-  AssignmentTurnedInOutlined,
-  NotificationsOutlined,
   PeopleAltOutlined,
-  Search,
   ExpandMore
 } from "@material-ui/icons";
+
 import CloseIcon from "@material-ui/icons/Close";
 import MenuIcon from '@material-ui/icons/Menu';
 import { Avatar, Button, Input, Menu, MenuItem } from "@material-ui/core";
@@ -26,6 +24,8 @@ import Logout from '@mui/icons-material/Logout';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { Nav, Form } from "react-bootstrap";
+import { Button as BootstrapButton } from 'react-bootstrap';
+
 // import ReactQuill from 'react-quill';
 // import 'react-quill/dist/quill.snow.css';
 
@@ -39,6 +39,15 @@ function NenasaHeader(props) {
   const Close = <CloseIcon />;
   const logoutNavigate = useNavigate();
   const questionInput = useRef('');
+  const [activeNavItem, setActiveNavItem] = useState(5);
+
+
+  const handleNavItemClick = (navItem) => {
+    props.select(navItem);
+    setActiveNavItem(navItem);
+    showNavbar();
+  };
+
 
 
   // Add a question
@@ -77,7 +86,7 @@ function NenasaHeader(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
@@ -120,54 +129,46 @@ function NenasaHeader(props) {
 
 
         {/* --------Navbar Main icons start---------- */}
-        <nav className="nHeader_icons" ref={ navRef }>
-
-          <div className="nHeader_icon" onClick={()=>{
-            props.select(5);
-            showNavbar();
-            }}>
-              <Nav.Link>Home</Nav.Link>
-            {/* <Tooltip title="Home">
-                <HomeIcon />
-            </Tooltip> */}
+        <nav className="nHeader_icons" ref={navRef}>
+          <div
+            className={`nHeader_icon ${activeNavItem === 5 ? 'active' : ''}`}
+            onClick={() => handleNavItemClick(5)}
+          >
+            <Nav.Link>Home</Nav.Link>
           </div>
 
-          <div className="nHeader_icon" onClick={()=>{props.select(6); showNavbar()}}>
+          <div
+            className={`nHeader_icon ${activeNavItem === 6 ? 'active' : ''}`}
+            onClick={() => handleNavItemClick(6)}
+          >
             <Nav.Link>My Questions</Nav.Link>
-            {/* <Tooltip title="My Questions">
-              <AssignmentTurnedInOutlined />
-            </Tooltip> */}
           </div>
 
-          <div className="nHeader_icon" onClick={()=>{props.select(7); showNavbar()}}>
+          <div
+            className={`nHeader_icon ${activeNavItem === 7 ? 'active' : ''}`}
+            onClick={() => handleNavItemClick(7)}
+          >
             <Nav.Link>Chat</Nav.Link>
-            {/* <Tooltip title="My Chats"  >
-              <PeopleAltOutlined />
-            </Tooltip> */}
           </div>
 
-          <div className="nHeader_icon" onClick={ showNavbar }>
+          <div className={`nHeader_icon ${activeNavItem === 8 ? 'active' : ''}`} onClick={() => showNavbar()}>
             <Nav.Link>Notifications</Nav.Link>
-            {/* <Tooltip title="Notifications">
-              <NotificationsOutlined />
-            </Tooltip> */}
           </div>
 
-          <Button onClick={ showNavbar } className="nav-btn nav-close-btn">
+          <Button onClick={showNavbar} className="nav-btn nav-close-btn">
             <CloseIcon />
           </Button>
 
-          
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-1"
-                aria-label="Search"
-              />
-              <Button>Search</Button>
-            </Form>
+          <Form className="d-flex">
+            <Form.Control
+              type="search"
+              placeholder="Search"
+              className="me-1 mt-2"
+              aria-label="Search"
+            />
+          <BootstrapButton className="mt-2" variant="outline-primary">Search</BootstrapButton>
 
+          </Form>
         </nav>
       {/* --------Navbar Main icons end---------- */}
 
