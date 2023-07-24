@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import HomeIcon from "@material-ui/icons/Home";
-import FeaturedPlayListOutlinedIcon from "@material-ui/icons/FeaturedPlayListOutlined";
+// import FeaturedPlayListOutlinedIcon from "@material-ui/icons/FeaturedPlayListOutlined";
 import {
   AssignmentTurnedInOutlined,
   NotificationsOutlined,
@@ -24,7 +24,8 @@ import Tooltip from '@mui/material/Tooltip';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import axios from 'axios';
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Nav, Form } from "react-bootstrap";
 // import ReactQuill from 'react-quill';
 // import 'react-quill/dist/quill.snow.css';
 
@@ -82,6 +83,7 @@ function NenasaHeader(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  
 
   useEffect(() => {
     const myDetailsUrl = 'http://localhost:3000/user/get-details';
@@ -119,35 +121,36 @@ function NenasaHeader(props) {
 
         {/* --------Navbar Main icons start---------- */}
         <nav className="nHeader_icons" ref={ navRef }>
-          <div className="nHeader_icon" onClick={()=>{props.select(5)}}>
-            <Tooltip title="Home">
+
+          <div className="nHeader_icon" onClick={()=>{
+            props.select(5);
+            showNavbar();
+            }}>
+              <Nav.Link>Home</Nav.Link>
+            {/* <Tooltip title="Home">
                 <HomeIcon />
-            </Tooltip>
-
+            </Tooltip> */}
           </div>
 
-          {/* <div className="nHeader_icon">
-            <Tooltip title="Following">
-              <FeaturedPlayListOutlinedIcon />
-            </Tooltip>
-          </div> */}
-
-          <div className="nHeader_icon" onClick={()=>{props.select(6)}}>
-            <Tooltip title="My Questions">
+          <div className="nHeader_icon" onClick={()=>{props.select(6); showNavbar()}}>
+            <Nav.Link>My Questions</Nav.Link>
+            {/* <Tooltip title="My Questions">
               <AssignmentTurnedInOutlined />
-            </Tooltip>
+            </Tooltip> */}
           </div>
 
-          <div className="nHeader_icon" onClick={()=>{props.select(7)}}>
-            <Tooltip title="My Chats"  >
+          <div className="nHeader_icon" onClick={()=>{props.select(7); showNavbar()}}>
+            <Nav.Link>Chat</Nav.Link>
+            {/* <Tooltip title="My Chats"  >
               <PeopleAltOutlined />
-            </Tooltip>
+            </Tooltip> */}
           </div>
 
-          <div className="nHeader_icon">
-            <Tooltip title="Notifications">
+          <div className="nHeader_icon" onClick={ showNavbar }>
+            <Nav.Link>Notifications</Nav.Link>
+            {/* <Tooltip title="Notifications">
               <NotificationsOutlined />
-            </Tooltip>
+            </Tooltip> */}
           </div>
 
           <Button onClick={ showNavbar } className="nav-btn nav-close-btn">
@@ -155,10 +158,16 @@ function NenasaHeader(props) {
           </Button>
 
           
-          <div className="nHeader_input">
-            <Search />
-            <input type="text" placeholder="Search questions" />
-          </div>
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="me-1"
+                aria-label="Search"
+              />
+              <Button>Search</Button>
+            </Form>
+
         </nav>
       {/* --------Navbar Main icons end---------- */}
 
@@ -183,7 +192,7 @@ function NenasaHeader(props) {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
               >
-                <Avatar sx={{ width: 32, height: 32 }}><img src={"http://localhost:3000/get-uploads/"+avatarImgLink} style={{width: 40, height: 40}} /></Avatar>
+                <Avatar sx={{ width: 32, height: 32 }}><img alt="Avatar" src={"http://localhost:3000/get-uploads/"+avatarImgLink} style={{width: 40, height: 40}} /></Avatar>
               </IconButton>
             </Tooltip>
           </Box>
@@ -245,7 +254,7 @@ function NenasaHeader(props) {
           </Menu>
       {/* --------Avatar Icon and menu list ending---------- */}    
 
-          <Button onClick={() => setIsModalOpen(true)} className="addQuestion">Add Question</Button>
+          <Button onClick={() => setIsModalOpen(true)} className="addQuestion">Ask a Question</Button>
         </div>
       </div>
 
@@ -265,7 +274,7 @@ function NenasaHeader(props) {
         }}
       >
         <div className="modal_title">
-          <h5>Add Question</h5>
+          <h5>Ask a Question</h5>
           <h5>Share Link</h5>
         </div>
         <div className="modal_info">

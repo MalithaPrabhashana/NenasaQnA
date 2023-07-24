@@ -34,14 +34,15 @@
 }
 
 .nHeader_icon {
-  padding: 5px;
+  padding: 15px;
   cursor: pointer;
+  margin-left: 20px;
 }
 
-.nHeader_icon:hover {
+/* .nHeader_icon:hover {
   background-color: #eee;
   border-radius: 5px;
-}
+} */
 
 .nHeader_icon > .MuiSvgIcon-root {
   color: gray;
@@ -351,4 +352,6 @@
   .modal_Field {
     width: 60vw;
   }
+  
+  
 }

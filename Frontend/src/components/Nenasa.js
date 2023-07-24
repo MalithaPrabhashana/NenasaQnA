@@ -20,6 +20,7 @@ import PaperMarkingCards from '../sidebarContent/paperMarkingCards';
 import axios from 'axios'
 import VerifyQuestions from '../ViewmyQuestions/VerifyQuestions';
 
+
 function Nenasa() {
 
   const urlLoginRemove = useNavigate();
@@ -60,8 +61,8 @@ function Nenasa() {
             console.log(error);
         });
   },[])
-  //  console.log(user);
 
+  
   return (
     <div className="nenasa">
       <NenasaHeader select={sideBarNavigationSet} className="nenasa-top-nav" />
@@ -72,7 +73,7 @@ function Nenasa() {
           if (sideBarNavigation !== 7) {
             return (
               <>
-                <div ref={slideRef} className="side-bar">
+                <div ref={slideRef} className="side-bar" onClick={showSlidebar} >
                   <Sidebar select={{ sideBarNavigation, sideBarNavigationSet, endUserSet }} />
                 </div>
 
