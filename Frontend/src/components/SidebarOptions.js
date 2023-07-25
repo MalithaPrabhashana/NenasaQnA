@@ -2,12 +2,14 @@ import { Add } from '@material-ui/icons';
 import React from 'react'
 import "./css/SidebarOptions.css"
 
-import Img1 from './img/subject-icon.jpg';
+// import Img1 from './img/subject-icon.jpg';
 
 function SidebarOptions({ select }) {
 
 
   const sidebarOptions = ['Online Paper Writing', 'Past Papers Repository', 'Ask for Councelling', 'Education']
+  const sidebar_icons = ['fas fa-pen', 'fa-solid fa-book-open', '', '']
+
 
 
   return (
@@ -17,23 +19,20 @@ function SidebarOptions({ select }) {
           sidebarOptions.map((sidebarOption, index) => {
             return (
               <div key={"sidebar_"+(index+1)} className="sidebarOption" onClick={() => { select.sideBarNavigationSet(index + 1);select.endUserSet(false) }}>
-                <img
+                {/* <img
                   src={Img1}
-                  // src="https://qphs.fs.quoracdn.net/main-thumb-t-930-100-cbbsbwijdhpyzlpipejvqpiijhhoaday.jpeg"
+                  src="https://qphs.fs.quoracdn.net/main-thumb-t-930-100-cbbsbwijdhpyzlpipejvqpiijhhoaday.jpeg"
                   alt=""
-                />
-                <p>{sidebarOption}</p>
+                /> */}
+
+                <i class={sidebar_icons[index]}></i>
+                <h6>{sidebarOption}</h6>
               </div>);
 
           })
         );
       })()}
 
-
-      <div className="sidebarOption">
-        <Add />
-        <p className="text">Discover Spaces</p>
-      </div>
     </div>
   );
 }

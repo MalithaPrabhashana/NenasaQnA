@@ -1,7 +1,7 @@
 .nHeader {
   display: flex;
   align-items: center;
-  background-color: #fff;
+  background-color: #f3f2f2;
   position: sticky;
   z-index: 1000;
   top: 0px;

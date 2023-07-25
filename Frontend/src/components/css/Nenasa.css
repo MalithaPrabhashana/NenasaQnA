@@ -9,11 +9,10 @@
   .nenasa_contents {
     display: flex;
     justify-content: center;
-    padding-top: 10px;
-    background-color: rgba(0, 0, 0, 0.05);
+    /* background-color: rgba(0, 0, 0, 0.05); */
     width: 100%;
-    margin-right: auto;
-    margin-left: auto;
+    margin-left: 0 !important;
+    background-color: #fff;
   }
   
  .side-btn {
@@ -22,22 +21,29 @@
   }
 
   .side-bar {
-    position: sticky;
-    top: 0;
-    width: 15%;
-    margin-right: 30px;
+    position: absolute;
+    left: 20px;
+    width: 20%;
+    margin-right: 0;
+    height: 100%;
+    background-color: #fff;
   }
 
   .feed {
-    width: 50%;
+    width: 55%;
     justify-content: center;
     height: 87vh;
     overflow-y: scroll;
+    padding-top: 20px;
+    padding-right: 30px;
+    background-color: #fff;
+    padding-top: 0;
   }
 
   .widget-bar {
     width: 20%;
-    margin-left: 30px;
+    position: absolute;
+    right: 20px;
   } 
 
   .side-menu-btn {

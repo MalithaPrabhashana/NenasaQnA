@@ -118,11 +118,8 @@ useEffect(() => {
                         <Avatar className='answered-avatar' />
                     </div>
                     <div className="post-info">
-                    {/* {answerUserData && (
-                        <h6 className='repliedUser'>{answerUserData['username']}</h6>
-                    )} */}
-                        <h6 className='repliedUser'>{answerUserData}</h6>
-                        <span className='repliedDate'>{ dateTimeFunc(props.replyDate) }</span>
+                        <h6 className='repliedUser'>{ answerUserData }</h6>
+                        <div className='repliedDate'>{ dateTimeFunc(props.replyDate) }</div>
                     </div>
     
               </div>

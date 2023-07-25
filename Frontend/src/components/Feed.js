@@ -23,10 +23,10 @@ function Feed() {
       {/* <div>
         <NenasaBox />
       </div> */}
-      <div>
+
           <div>
             {questions.reverse().map((question, index) => (
-              <Post
+              <Post className="post"
                 key={index}
                 questionProp={question['question']}
                 questionId={question['_id']}
@@ -37,7 +37,7 @@ function Feed() {
             ))}
       </div>
       </div>
-    </div>
+
   );
 }
 

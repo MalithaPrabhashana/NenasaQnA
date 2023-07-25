@@ -67,7 +67,6 @@ function Nenasa() {
     <div className="nenasa">
       <NenasaHeader select={sideBarNavigationSet} className="nenasa-top-nav" />
       <div className="nenasa_contents">
-        {/* {sidebarVisible && <Sidebar />} */}
 
         {(() => {
           if (sideBarNavigation !== 7) {

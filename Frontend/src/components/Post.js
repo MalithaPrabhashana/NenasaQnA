@@ -1,16 +1,18 @@
 import React, {useEffect, useState, useRef} from 'react';
 import './css/Post.css';
 import {Avatar} from '@material-ui/core';
-import {ShareOutlined} from '@material-ui/icons';
+// import {ShareOutlined} from '@material-ui/icons';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import {Modal} from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+// import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import PostAnswer from './PostAnswer';
 import axios from 'axios';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import {Button as BootstrapButton} from 'react-bootstrap';
 // ChatBubbleOutline, MoreHorizOutlined, RepeatOneOutlined
 
 
@@ -26,7 +28,6 @@ function Post(props) {
     const levelOneAnswer = useRef();
 
 
-
     const openModal = () => {
         setIsModalOpen(true);
     };
@@ -40,7 +41,7 @@ function Post(props) {
         const dateTime = new Date(timestamp);
         const date = dateTime.toLocaleDateString(); // Get the date portion
         const time = dateTime.toLocaleTimeString(); // Get the time portion
-        setdateNTime(date + ' ' + time);
+        setdateNTime(date + '\n' + time);
 
         const answerUrl = 'http://localhost:3000/reply/' + props.questionId;
 
@@ -55,14 +56,16 @@ function Post(props) {
         }).catch((error) => {
             console.log(error);
         })
-        
+
         setAnswersCount(answerData.length.toString());
 
 
         // Question posted user Details
         const myDetailsUrl = 'http://localhost:3000/user/get-details-id';
 
-        axios.post(myDetailsUrl, {'id': props.userId}, {
+        axios.post(myDetailsUrl, {
+            'id': props.userId
+        }, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('token'),
                 'Content-Type': 'application/json'
@@ -76,15 +79,21 @@ function Post(props) {
         });
 
 
-        if (props.totalVotes < 0){
+        if (props.totalVotes < 0) {
             setTotalVotes(0);
         } else {
             setTotalVotes(props.totalVotes);
         }
-    }, [props.createdTime, props.questionId, props.userId, props.totalVotes, answerData.length, totalVotes]);
+    }, [
+        props.createdTime,
+        props.questionId,
+        props.userId,
+        props.totalVotes,
+        answerData.length,
+        totalVotes
+    ]);
 
 
-    
     const loadReply = () => {
         setIsAnswersDropdownExpanded(!isAnswerDropdownExpanded);
 
@@ -106,14 +115,15 @@ function Post(props) {
     }
 
     const upVoteThumb = () => {
-        axios.post('http://localhost:3000/questions/upvote', {'id': props.questionId}, {
+        axios.post('http://localhost:3000/questions/upvote', {
+            'id': props.questionId
+        }, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('token'),
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
-            if (response.status === 200 || response.status === 201) {
-                // console.log(response.data);
+            if (response.status === 200 || response.status === 201) { // console.log(response.data);
             }
         }).catch((error) => {
             console.log(error);
@@ -121,14 +131,15 @@ function Post(props) {
     }
 
     const downVoteThumb = () => {
-        axios.post('http://localhost:3000/questions/downvote', {'id': props.questionId}, {
+        axios.post('http://localhost:3000/questions/downvote', {
+            'id': props.questionId
+        }, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('token'),
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
-            if (response.status === 200 || response.status === 201) {
-                // console.log(response.data);
+            if (response.status === 200 || response.status === 201) { // console.log(response.data);
             }
         }).catch((error) => {
             console.log(error);
@@ -138,13 +149,11 @@ function Post(props) {
     const levelOneAnswerAdd = () => {
         const levelOneMessage = levelOneAnswer.current.value;
 
-        if (levelOneAnswer !== ""){
-            axios.post('http://localhost:3000/reply/', 
-            {
+        if (levelOneAnswer !== "") {
+            axios.post('http://localhost:3000/reply/', {
                 'reply': levelOneMessage,
                 'parentId': props.questionId
-            }, 
-            {
+            }, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token'),
                     'Content-Type': 'application/json'
@@ -156,22 +165,22 @@ function Post(props) {
                 }
             }).catch((error) => {
                 console.log(error);
-            });    
+            });
         }
     }
-
 
 
     return (
         <div className="post">
             <div className="post_info">
-                <Avatar/>
+                <div className='question_avatar_div'><Avatar className='question_avatar' /></div>
                 <div className='avatar-details-post'>
                     <h4>{questionPostedUser}</h4>
-                    <small>{dateNTime}</small>
+                    <p className='postedDateTime'>{dateNTime}</p>
                 </div>
             </div>
             <div className="post_body">
+                <h5>This is the Header</h5>
                 <p> {
                     props.questionProp
                 } </p>
@@ -198,14 +207,17 @@ function Post(props) {
                         </p>
                     </div>
                     <div className="modal_answer">
-                        <ReactQuill ref={levelOneAnswer} placeholder="Enter your answer" className="quill"/>
+                        <ReactQuill ref={levelOneAnswer}
+                            placeholder="Enter your answer"
+                            className="quill"/>
                     </div>
                     <div className="modal_buttons">
                         <button className="cancel"
                             onClick={closeModal}>
                             Cancel
                         </button>
-                        <button type="submit" className="add" onClick={levelOneAnswerAdd}>
+                        <button type="submit" className="add"
+                            onClick={levelOneAnswerAdd}>
                             Add the Answer
                         </button>
                     </div>
@@ -214,16 +226,30 @@ function Post(props) {
 
             <div className="post_footer">
                 <div className="post_footerAction">
-                    <div className='voting' onClick={upVoteThumb}><ThumbUpIcon/></div>
+                    <div className='voting'
+                        onClick={upVoteThumb}><ThumbUpIcon className='icon'/></div>
                     <div className='votes-count'>
                         {totalVotes}</div>
-                    <div className={totalVotes === 0 ? 'disableThumbs' : ''} onClick={downVoteThumb}><ThumbDownIcon/></div>
-                    {/* <div><RepeatOneOutlined /></div> */}
-                    {/* <div><ChatBubbleOutline /></div> */} </div>
+                    <div className={`
+                            totalVotes === 0 ? 'disableThumbs' : '' voting
+                        `}
+                        onClick={downVoteThumb}><ThumbDownIcon className='icon'/></div>
+                    {/* <div><ChatBubbleOutline /></div> */} 
+                </div>
+
+                    <div>
+                        <BootstrapButton variant='outline-dark' onClick={loadReply} className='answerCountBtn'>
+                            <QuestionAnswerIcon className='icon' />
+                                {" " + answersCount}
+                                    {
+                                    answersCount === '1' ? ' Answer' : ' Answers'
+                                }
+                        </BootstrapButton>
+                    </div>
 
 
                 <div className="post_footerLeft">
-                    <div className='shareIcon'><ShareOutlined/></div>
+                    {/* <div className='shareIcon'><ShareOutlined/></div>    */}
                     <button onClick={openModal}
                         className="post_btnAnswer">
                         Answer
@@ -231,7 +257,7 @@ function Post(props) {
                     {/* <MoreHorizOutlined /> */} </div>
             </div>
 
-            <div className='answerCount'>
+            {/* <div className='answerCount'>
                 <button className='btn answer-dropdown'
                     onClick={loadReply}>
                     <ArrowForwardIosIcon className={
@@ -241,7 +267,7 @@ function Post(props) {
                 <p>{answersCount} 
                    {answersCount === '1' ? ' Answer' : ' Answers'}
                 </p>
-            </div>
+            </div> */}
 
 
             {
@@ -254,16 +280,15 @@ function Post(props) {
                         reply['_id']
                     }
 
-                    answeredUserId = {
+                    answeredUserId={
                         reply['userId']
                     }
 
-                    replyDate = {
+                    replyDate={
                         reply['updatedAt']
-                    }
-                    />
-            ))}
-            </div>
+                    }/>
+            ))
+        } </div>
     );
 }
 
