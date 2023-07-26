@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
-import HomeIcon from "@material-ui/icons/Home";
 // import FeaturedPlayListOutlinedIcon from "@material-ui/icons/FeaturedPlayListOutlined";
 import {
   PeopleAltOutlined,
@@ -40,6 +39,8 @@ function NenasaHeader(props) {
   const logoutNavigate = useNavigate();
   const questionInput = useRef('');
   const [activeNavItem, setActiveNavItem] = useState(5);
+  const [searchQuestionsList, setSearchQuestionsList] = useState("");
+  const [gotsearchQuestionsList, setGotSearchQuestionsList] = useState([]);
 
 
   const handleNavItemClick = (navItem) => {
@@ -92,6 +93,39 @@ function NenasaHeader(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+
+
+    // Search questions
+    const searchQuestions = (event) => {
+      event.preventDefault(); // Prevent the default form submission behavior
+
+      if (searchQuestionsList !== "" ) {
+        axios.post('http://localhost:3000/questions/filter', {search: searchQuestionsList}, {
+              headers: {
+                  Authorization: 'Bearer ' + localStorage.getItem('token'),
+                  'Content-Type': 'application/json'
+              }
+          }).then((response) => {
+              if (response.status === 200 || response.status === 201) {
+                setGotSearchQuestionsList(response.data.questions);
+              }
+          }).catch((error) => {
+              console.log(error);
+          });
+
+    }};
+
+
+    useEffect(() => {
+      props.getFilteredQuestionData(gotsearchQuestionsList);
+    }, [gotsearchQuestionsList])
+
+    
+    useEffect(() => {
+      props.searchedKeyword(searchQuestionsList);
+    }, [searchQuestionsList])
+
   
 
   useEffect(() => {
@@ -159,16 +193,19 @@ function NenasaHeader(props) {
             <CloseIcon />
           </Button>
 
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-1 mt-2"
-              aria-label="Search"
-            />
-          <BootstrapButton className="mt-2" variant="outline-primary">Search</BootstrapButton>
-
-          </Form>
+          <Form className="d-flex" onSubmit={searchQuestions}>
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="me-1 mt-2"
+                aria-label="Search"
+                onChange={(e) => setSearchQuestionsList(e.target.value)}
+                // value={searchQuestionsList}
+              />
+              <BootstrapButton className="mt-2" variant="outline-primary" type="submit" onClick={()=>{props.select(10)}}>
+                Search
+              </BootstrapButton>
+            </Form>
         </nav>
       {/* --------Navbar Main icons end---------- */}
 
@@ -293,6 +330,7 @@ function NenasaHeader(props) {
         value={question}
         placeholder="Start your question with 'What', 'How', 'Why', etc."
       /> */}
+
           <Input
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
@@ -300,6 +338,7 @@ function NenasaHeader(props) {
             placeholder="Start your question with 'What', 'How', 'Why', etc. "
             ref={questionInput}
           />
+
           <div style={{ display: "flex", flexDirection: "column" }}>
             <input
               type="text"
@@ -313,6 +352,7 @@ function NenasaHeader(props) {
               }}
               placeholder="Optional: include a link that gives context"
             />
+
             {inputUrl !== "" && (
               <img
                 style={{

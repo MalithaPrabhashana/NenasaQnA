@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Alert } from 'react-bootstrap';
+import './MyQuestions.css';
 import axios from 'axios';
 
 
@@ -86,8 +87,10 @@ const deleteNow = (Idvalue) => {
               <Card.Header as="h6">Sent { dateTimeFunc(question['updatedAt']) }</Card.Header>
               <Card.Body>
                 <Card.Text>{ question['question'] }</Card.Text>
-                <button className='btn btn-success' onClick={() => verifyNow(question['_id'])}>Verify</button>
-                <button className='btn btn-danger' onClick={() => deleteNow(question['_id'])}>Delete</button>
+                <div className='VerifyControl'>
+                  <button className='btn btn-success' onClick={() => verifyNow(question['_id'])}>Verify</button>
+                  <button className='btn btn-danger' onClick={() => deleteNow(question['_id'])}>Delete</button>
+                </div>
               </Card.Body>
             </Card>
           </div>

@@ -19,6 +19,7 @@ import MyProfile from '../MyProfile/MyProfile'
 import PaperMarkingCards from '../sidebarContent/paperMarkingCards';
 import axios from 'axios'
 import VerifyQuestions from '../ViewmyQuestions/VerifyQuestions';
+import SearchQuestions from '../searchQuestions/SearchQuestions';
 
 
 function Nenasa() {
@@ -41,15 +42,18 @@ function Nenasa() {
   }
 
   const [sideBarNavigation, sideBarNavigationSet] = useState(5);
+  const [gotQuestionsData, gotQuestionsDataSet] = useState([]);
+  const [gotSearchedKeyword, gotSearchedKeywordSet] = useState("");
 
-  //  must assing user details
+
+  // Must assing user details
   const [user, userSet] = useState();
   const [endUser, endUserSet] = useState(false);
   const [chat, setChat] = useState(null);
 
 
   useEffect(() => {
-    axios.post('http://localhost:3000/user//get-details',{} ,{
+    axios.post('http://localhost:3000/user/get-details',{} ,{
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('token')
             }
@@ -62,10 +66,17 @@ function Nenasa() {
         });
   },[])
 
+  const questionData = (data) => {
+    gotQuestionsDataSet(data);
+  }
+
+  const keyword = (data) => {
+    gotSearchedKeywordSet(data);
+  }
   
   return (
     <div className="nenasa">
-      <NenasaHeader select={sideBarNavigationSet} className="nenasa-top-nav" />
+      <NenasaHeader select={sideBarNavigationSet} className="nenasa-top-nav" getFilteredQuestionData={questionData} searchedKeyword={keyword} />
       <div className="nenasa_contents">
 
         {(() => {
@@ -128,6 +139,9 @@ function Nenasa() {
           } 
             else if (sideBarNavigation === 9) {
             return (<div className='feed' ><MyProfile /></div>);
+          } 
+            else if (sideBarNavigation === 10) {
+              return (<div className='feed'><SearchQuestions filterQuestionsPasstoSearchQ={gotQuestionsData} showSearchedKeyword={gotSearchedKeyword} /></div>);
           }
         })()}
 

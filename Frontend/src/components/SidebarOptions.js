@@ -1,4 +1,3 @@
-import { Add } from '@material-ui/icons';
 import React from 'react'
 import "./css/SidebarOptions.css"
 
@@ -8,7 +7,7 @@ function SidebarOptions({ select }) {
 
 
   const sidebarOptions = ['Online Paper Writing', 'Past Papers Repository', 'Ask for Councelling', 'Education']
-  const sidebar_icons = ['fas fa-pen', 'fa-solid fa-book-open', '', '']
+  const sidebar_icons = ['fa fa-edit', 'fa fa-book', 'fa fa-comments', 'fa fa-graduation-cap']
 
 
 
@@ -25,7 +24,7 @@ function SidebarOptions({ select }) {
                   alt=""
                 /> */}
 
-                <i class={sidebar_icons[index]}></i>
+                <i className={sidebar_icons[index]}></i>
                 <h6>{sidebarOption}</h6>
               </div>);
 

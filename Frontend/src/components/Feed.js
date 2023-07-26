@@ -4,9 +4,10 @@ import "./css/Feed.css";
 import Post from './Post.js';
 import axios from 'axios';
 
-function Feed() {
+function Feed(props) {
   const [questions, setQuestions] = useState([]);
-  
+
+
   useEffect(() => {
     axios.get('http://localhost:3000/questions')
       .then(response => {
@@ -17,6 +18,9 @@ function Feed() {
         console.log(error);
       });
   }, [questions]);
+
+
+
 
   return (
     <div className='feed-main'>
