@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Components from './LoginStyles';
 import './LoginPage.css';
 import {useNavigate} from "react-router-dom";
@@ -52,8 +52,8 @@ function LoginPage() { // Login and Signup toggle
         }
     }
 
-    // Sign Up data submit to backend
-    const handleSignupSubmit = (event) => {
+
+    const handleSignupSubmit = async (event) => {
         event.preventDefault();
 
         if (createdName !== "" && createdEmail !== "" && createdPassword !== "" && createdRole !== "" | createdAddress !== "" | createdImg !== "") {
@@ -64,10 +64,12 @@ function LoginPage() { // Login and Signup toggle
                 password: createdPassword,
                 role: createdRole,
                 address: createdAddress,
-                url: createdImg,
+                image: createdImg,
                 phone: createdTele,
                 subjects: createdSubject
             }
+
+            // console.log(signInFormData);
 
             axios.post('http://localhost:3000/user/sign-up', signInFormData).then(response => {
                 const responseStatusReg = response.status;
@@ -82,8 +84,7 @@ function LoginPage() { // Login and Signup toggle
 
                     axios.post('http://localhost:3000/user/login', registeredUser).then(response => {
                         const responseStatusLog = response.status;
-                        console.log(response.data);
-
+                        // console.log(response.data);
 
                         if (responseStatusLog === 200 | responseStatusLog === 201) {
                             navigate('/home');

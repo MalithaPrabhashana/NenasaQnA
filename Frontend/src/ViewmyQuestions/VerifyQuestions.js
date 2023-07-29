@@ -77,7 +77,7 @@ const deleteNow = (Idvalue) => {
   return (
     <div className="my-questions">
       <div className="section-buttons">
-        <button>Questions to Verify</button>
+        <button>Questions to be Verified</button>
       </div>
 
       <div className="approved-questions">

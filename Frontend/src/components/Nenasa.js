@@ -74,6 +74,11 @@ function Nenasa() {
     gotSearchedKeywordSet(data);
   }
   
+
+  useEffect(() => {
+    console.log(gotSearchedKeyword);
+  },[gotSearchedKeyword])
+
   return (
     <div className="nenasa">
       <NenasaHeader select={sideBarNavigationSet} className="nenasa-top-nav" getFilteredQuestionData={questionData} searchedKeyword={keyword} />

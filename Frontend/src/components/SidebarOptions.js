@@ -18,12 +18,6 @@ function SidebarOptions({ select }) {
           sidebarOptions.map((sidebarOption, index) => {
             return (
               <div key={"sidebar_"+(index+1)} className="sidebarOption" onClick={() => { select.sideBarNavigationSet(index + 1);select.endUserSet(false) }}>
-                {/* <img
-                  src={Img1}
-                  src="https://qphs.fs.quoracdn.net/main-thumb-t-930-100-cbbsbwijdhpyzlpipejvqpiijhhoaday.jpeg"
-                  alt=""
-                /> */}
-
                 <i className={sidebar_icons[index]}></i>
                 <h6>{sidebarOption}</h6>
               </div>);

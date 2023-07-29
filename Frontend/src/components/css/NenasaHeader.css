@@ -82,6 +82,7 @@
   align-items: center;
   position: absolute;
   right: 20px;
+  margin-top: 10px !important;
 }
 
 .nHeader_Rem > .addQuestion {

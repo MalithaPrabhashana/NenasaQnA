@@ -21,7 +21,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Nav, Form } from "react-bootstrap";
 import { Button as BootstrapButton } from 'react-bootstrap';
 
@@ -37,6 +37,7 @@ function NenasaHeader(props) {
   const [avatarImgLink, setAvatarImgLink] = useState("");
   const Close = <CloseIcon />;
   const logoutNavigate = useNavigate();
+  const homeNavigate = useNavigate();
   const questionInput = useRef('');
   const [activeNavItem, setActiveNavItem] = useState(5);
   const [searchQuestionsList, setSearchQuestionsList] = useState("");
@@ -99,7 +100,11 @@ function NenasaHeader(props) {
     // Search questions
     const searchQuestions = (event) => {
       event.preventDefault(); // Prevent the default form submission behavior
+      setSearchQuestionsList(event.target.elements.searchInput.value);
+    };
 
+
+    useEffect(() => {
       if (searchQuestionsList !== "" ) {
         axios.post('http://localhost:3000/questions/filter', {search: searchQuestionsList}, {
               headers: {
@@ -113,8 +118,8 @@ function NenasaHeader(props) {
           }).catch((error) => {
               console.log(error);
           });
-
-    }};
+    }
+    }, [searchQuestionsList])
 
 
     useEffect(() => {
@@ -126,7 +131,8 @@ function NenasaHeader(props) {
       props.searchedKeyword(searchQuestionsList);
     }, [searchQuestionsList])
 
-  
+
+
 
   useEffect(() => {
     const myDetailsUrl = 'http://localhost:3000/user/get-details';
@@ -149,8 +155,8 @@ function NenasaHeader(props) {
       });
   }, []);
   
-  
 
+  
   return (
     <div className="nHeader">
       <div className="nHeader-content">
@@ -199,8 +205,8 @@ function NenasaHeader(props) {
                 placeholder="Search"
                 className="me-1 mt-2"
                 aria-label="Search"
-                onChange={(e) => setSearchQuestionsList(e.target.value)}
-                // value={searchQuestionsList}
+                id="searchInput"
+                onChange={(e) => e.target.value === "" ? handleNavItemClick(5) : ""}
               />
               <BootstrapButton className="mt-2" variant="outline-primary" type="submit" onClick={()=>{props.select(10)}}>
                 Search
@@ -220,7 +226,7 @@ function NenasaHeader(props) {
         <div className="nHeader_Rem">
 
       {/* --------Avatar Icon and menu list starting---------- */}          
-            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
             <Tooltip title="Account settings">
               <IconButton
                 onClick={handleClick}
@@ -230,10 +236,11 @@ function NenasaHeader(props) {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
               >
-                <Avatar sx={{ width: 32, height: 32 }}><img alt="Avatar" src={"http://localhost:3000/get-uploads/"+avatarImgLink} style={{width: 40, height: 40}} /></Avatar>
+                <Avatar className="avatar" sx={{ width: 32, height: 32 }}><img alt="Avatar" src={"http://localhost:3000/get-uploads/" + avatarImgLink} style={{width: 40, height: 40}} /></Avatar>
               </IconButton>
             </Tooltip>
           </Box>
+
           <Menu
             anchorEl={anchorEl}
             id="account-menu"

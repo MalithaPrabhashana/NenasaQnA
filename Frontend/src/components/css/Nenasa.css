@@ -36,7 +36,7 @@
     overflow-y: scroll;
     padding-top: 20px;
     padding-right: 30px;
-    background-color: #fff;
+    background-color: #ffffff;
   }
 
   .widget-bar {
@@ -78,7 +78,8 @@
       justify-content: center;
       gap: 1rem;
       transition: 0.5s ease-out;
-      background-color: rgb(143, 140, 140);
+      background-color: rgba(0, 0, 0, 0.85); /* Dark background with an alpha value of 0.7 for transparency */
+      color: white;
       transform: translateX(-100%);
       z-index: 1;
       border: solid #fff 1px;
@@ -95,10 +96,11 @@
       justify-content: center;
       gap: 1rem;
       transition: 0.5s ease-out;
-      background-color: rgb(143, 140, 140);
+      background-color: rgba(0, 0, 0, 0.5);
       transform: translateX(100%);
       z-index: 1;
       border: solid #fff 1px;
+      background-color: rgba(0, 0, 0, 0.85); /* Dark background with an alpha value of 0.7 for transparency */
     }
 
     .feed {

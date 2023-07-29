@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
   }
+
   .sidebarOption {
     display: flex;
     padding: 10px;
@@ -37,5 +38,12 @@
     color: #000 ;
     font-weight: 400;
     font-size: 13px;
+  }
+  
+
+  @media only screen and (max-width: 1240px) {
+    .sidebarOptions {
+      margin-left: 15px !important;
+    }    
   }
   

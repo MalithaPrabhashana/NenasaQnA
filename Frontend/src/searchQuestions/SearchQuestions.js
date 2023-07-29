@@ -10,7 +10,6 @@ function SearchQuestions(props) {
 
     useEffect(() => {
         setQuestions(props.filterQuestionsPasstoSearchQ);
-
     }, [props.filterQuestionsPasstoSearchQ, questions]);
 
 

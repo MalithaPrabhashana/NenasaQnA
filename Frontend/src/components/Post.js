@@ -1,19 +1,17 @@
 import React, {useEffect, useState, useRef} from 'react';
 import './css/Post.css';
 import {Avatar} from '@material-ui/core';
-// import {ShareOutlined} from '@material-ui/icons';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import {Modal} from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-// import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import PostAnswer from './PostAnswer';
 import axios from 'axios';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import {Button as BootstrapButton} from 'react-bootstrap';
-// ChatBubbleOutline, MoreHorizOutlined, RepeatOneOutlined
+
 
 
 function Post(props) {
@@ -26,6 +24,7 @@ function Post(props) {
     const [totalVotes, setTotalVotes] = useState("");
     const reversedAnswerData = [...answerData].reverse();
     const levelOneAnswer = useRef();
+    const [avatarImgLinkGot, setavatarImgLinkGot] = useState("");
 
 
     const openModal = () => {
@@ -41,7 +40,7 @@ function Post(props) {
         const dateTime = new Date(timestamp);
         const date = dateTime.toLocaleDateString(); // Get the date portion
         const time = dateTime.toLocaleTimeString(); // Get the time portion
-        setdateNTime(date + '\n' + time);
+        setdateNTime(date + ' at ' + time);
 
         const answerUrl = 'http://localhost:3000/reply/' + props.questionId;
 
@@ -73,6 +72,7 @@ function Post(props) {
         }).then((response) => {
             if (response.status === 200 || response.status === 201) {
                 setQuestionPostedUser(response.data.user[0]['username']);
+                setavatarImgLinkGot(response.data.user[0]['image']);
             }
         }).catch((error) => {
             console.log(error);
@@ -173,7 +173,11 @@ function Post(props) {
     return (
         <div className="post">
             <div className="post_info">
-                <div className='question_avatar_div'><Avatar className='question_avatar' /></div>
+                <div className='question_avatar_div'>
+                    <Avatar className='question_avatar'>
+                        <img alt="Avatar" src={"http://localhost:3000/get-uploads/" + avatarImgLinkGot} style={{width: 40, height: 40}} />
+                    </Avatar>
+                </div>
                 <div className='avatar-details-post'>
                     <h4>{questionPostedUser}</h4>
                     <p className='postedDateTime'>{dateNTime}</p>
