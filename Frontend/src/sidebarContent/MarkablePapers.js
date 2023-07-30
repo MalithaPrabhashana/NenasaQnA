@@ -46,9 +46,12 @@ const MarkablePapers = ({ selectedSubject, selectedTeacher }) => {
                                 <div className='row p-2 px-4  wrapperDiv' key={'paper_marking_' + index} >
                                     <div className="col col-12 col-md-3">{index + 1}.&nbsp;&nbsp; {paper.paperName}</div>
                                     <div className="col col-12 col-md-1">
-                                        <Link  >
-                                            <GetAppIcon onClick={() => handleDownload("http://localhost:3000/get-uploads/" + paper.link, paper.paperName)} style={{ cursor: 'pointer', marginLeft: '10px', marginRight: '10px' }} />
-                                        </Link>
+                                        {(paper.hasOwnProperty('userUpload')) ?
+                                            <Link  >
+                                                <GetAppIcon onClick={() => handleDownload("http://localhost:3000/get-uploads/" + paper.link, paper.paperName + ".pdf")} style={{ cursor: 'pointer', marginLeft: '10px', marginRight: '10px' }} />
+                                            </Link> : null
+                                        }
+
 
                                     </div>
                                     <div className="col col-12 col-md-6">
@@ -63,7 +66,7 @@ const MarkablePapers = ({ selectedSubject, selectedTeacher }) => {
 
                                                             accept="pdf/*"
                                                             style={{ width: '70%' }} />
-                                                        <button onClick={() => { HandlePdfUpload() }} className='btn btn-sm btn-warning' style={{ maxWidth: '100px', marginLeft: '12px' }}>Upload</button>
+                                                        <button onClick={() => { HandlePdfUpload(paper._id,isChangedSet) }} className='btn btn-sm btn-warning' style={{ maxWidth: '100px', marginLeft: '12px' }}>Upload</button>
 
                                                         <label style={{ color: 'green', fontWeight: 'bold', fontSize: '18px', marginLeft: '15px' }} >
                                                             {((paper.userUpload == null) ? "" : "Marks " + paper.marks)}
@@ -122,7 +125,7 @@ export default MarkablePapers;
 
 
 
-const HandlePdfUpload = () => {
+const HandlePdfUpload = (paperId,isChangedSet) => {
 
     // const [createdPdf, setcreatedPdf] = useState('');
 
@@ -137,10 +140,19 @@ const HandlePdfUpload = () => {
             }
         })
         .then((response) => {
-            // if (response.status === 200 | response.status === 201) {
-            //     // setcreatedPdf(response.data['url']);
-            //     console.log(response.data['url'])
-            // }
+            axios.post('http://localhost:3000/paper-marking/update-upload',
+                { link: response.data.url, paperId: paperId },
+                {
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                }
+            ).then(response => {
+                const responseStatus = response.status;
+                if (responseStatus === 200 | responseStatus === 201) {
+                     console.log("ok");
+                }
+            })
         })
         .catch((error) => {
             console.error(error);
@@ -150,7 +162,7 @@ const HandlePdfUpload = () => {
 
 const handleDownload = (url, fileName) => {
     console.log(fileName);
-    console.log("url:1 "+url);
+    console.log("url:1 " + url);
     fetch(url)
         .then(response => response.blob())
         .then(blob => {

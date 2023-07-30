@@ -123,7 +123,26 @@ function markDownloaded(req, res) {
 
 
 function markUploaded(req, res) {
+    const data=req.body;
+    models.PaperMarking.findOneAndUpdate(
+        { _id: data.paperId}, // Specify the user to update based on the _id
+        { $set: {userUpload:data.link} },
+        { new: true }
+    )
+        .then(updatedQuestion => {
+            if (!updatedQuestion) {
+                return res.status(404).json({ message: "Question not found" });
+            }
+            return res.status(200).json({
+                message: "updated successfully",
+            });
+        })
+        .catch(error => {
+            return res.status(500).json({
+                message: "Something went wrong while updating",
 
+            });
+        });
 }
 
 

@@ -10,7 +10,7 @@ router.post('/paper-upload',checkAuth.checkAuth,paperMarkingController.paperUplo
 router.get('/teachers/:subject',paperMarkingController.getTeachers);
 router.post('/papers',checkAuth.checkAuth,paperMarkingController.getPapers);    //user
 router.post('/make-open',checkAuth.checkAuth,paperMarkingController.makeOpen);    //user
-
+router.post('/update-upload',checkAuth.checkAuth,paperMarkingController.markUploaded);  
 
 // router.get('/papers/:id',paperMarkingController.getPapers);
 router.post('/downloaded',paperMarkingController.markDownloaded);
