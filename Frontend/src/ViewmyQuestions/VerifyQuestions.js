@@ -86,7 +86,9 @@ const deleteNow = (Idvalue) => {
             <Card>
               <Card.Header as="h6">Sent { dateTimeFunc(question['updatedAt']) }</Card.Header>
               <Card.Body>
-                <Card.Text>{ question['question'] }</Card.Text>
+                <Card.Text>
+                  <p dangerouslySetInnerHTML={{ __html: question['question'] }}></p>
+                </Card.Text>
                 <div className='VerifyControl'>
                   <button className='btn btn-success' onClick={() => verifyNow(question['_id'])}>Verify</button>
                   <button className='btn btn-danger' onClick={() => deleteNow(question['_id'])}>Delete</button>

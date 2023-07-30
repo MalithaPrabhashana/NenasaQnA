@@ -185,9 +185,7 @@ function Post(props) {
             </div>
             <div className="post_body">
                 <h5>This is the Header</h5>
-                <p> {
-                    props.questionProp
-                } </p>
+                <p dangerouslySetInnerHTML={{ __html: props.questionProp }}></p>
 
 
                 {/* Answer to a Question modal start */}
@@ -210,6 +208,7 @@ function Post(props) {
                             <span className="name">timestamp</span>
                         </p>
                     </div>
+                    
                     <div className="modal_answer">
                         <ReactQuill ref={levelOneAnswer}
                             placeholder="Enter your answer"

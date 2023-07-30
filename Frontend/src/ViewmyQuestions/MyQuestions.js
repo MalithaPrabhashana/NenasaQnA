@@ -91,7 +91,7 @@ function MyQuestions() {
                                 }</Card.Header>
                                 <Card.Body>
                                     <Card.Text> {
-                                        question['question']
+                                        <p dangerouslySetInnerHTML={{ __html: question['question'] }}></p>
                                     } </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -122,7 +122,7 @@ function MyQuestions() {
                                 }</Card.Header>
                                 <Card.Body>
                                     <Card.Text> {
-                                        question['question']
+                                        <p dangerouslySetInnerHTML={{ __html: question['question'] }}></p>
                                     } </Card.Text>
                                 </Card.Body>
                             </Card>
