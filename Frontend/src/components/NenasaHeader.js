@@ -24,9 +24,8 @@ import axios from 'axios';
 import { Navigate, useNavigate } from "react-router-dom";
 import { Nav, Form } from "react-bootstrap";
 import { Button as BootstrapButton } from 'react-bootstrap';
-
-// import ReactQuill from 'react-quill';
-// import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 
 function NenasaHeader(props) {
@@ -156,7 +155,7 @@ function NenasaHeader(props) {
   }, []);
   
 
-  
+
   return (
     <div className="nHeader">
       <div className="nHeader-content">
@@ -320,7 +319,7 @@ function NenasaHeader(props) {
       >
         <div className="modal_title">
           <h5>Ask a Question</h5>
-          <h5>Share Link</h5>
+          {/* <h5>Share Link</h5> */}
         </div>
         <div className="modal_info">
           <Avatar className="avatar" />
@@ -333,18 +332,24 @@ function NenasaHeader(props) {
         <div className="modal_Field">
 
 
-        {/* <ReactQuill
-        value={question}
-        placeholder="Start your question with 'What', 'How', 'Why', etc."
-      /> */}
-
+        <ReactQuill
+            value={question}
+            placeholder="Start your question with 'What', 'How', 'Why', etc."
+            onChange={(content, delta, source, editor) => {
+                // Update the state with the new value from ReactQuill
+                setQuestion(content);
+            }}
+            ref={questionInput}
+        />
+      
+{/* 
           <Input
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             type="text"
             placeholder="Start your question with 'What', 'How', 'Why', etc. "
             ref={questionInput}
-          />
+          /> */}
 
           <div style={{ display: "flex", flexDirection: "column" }}>
             <input

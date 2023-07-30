@@ -28,12 +28,13 @@ app.use("/paper-marking", paperMarkingRoute);
 
 app.post("/authenticate", async (req, res) => {
     const { username } = req.body;
+
     // Get or create user on Chat Engine!
     try {
         const r = await axios.put(
             "https://api.chatengine.io/users/",
             { username: username, secret: username, first_name: username },
-            { headers: { "Private-Key": "6b4e6970-4a3d-4fbf-bb53-856c31d974ca" } }
+            { headers: { "Private-Key": "e5e1eed1-0ee4-4558-a842-b50a35d6fa0e" } }
         );
         return res.status(201).json({ message: "user created successfully" });
     } catch (e) {
@@ -57,7 +58,7 @@ app.post("/carete-chat", async (req, res) => {
                 "is_direct_chat": true,
                 "title": username1+"/"+username2,
             },
-            { headers: { "Project-ID": "f6aff6c0-ca83-4900-abfb-df2dd6c44a93" ,"User-Name":username1,"User-Secret":username1} }
+            { headers: { "Project-ID": "ce9de02d-24a9-446d-8a5e-45d915ff70da" ,"User-Name":username1,"User-Secret":username1} }
         );
         return res.status(201).json({ message: "chat created successfully",data: r.data});
         console.log(r.data);

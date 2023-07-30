@@ -23,6 +23,8 @@ export default function PostAnswer(props) {
   const [isgoingToReply, setIsgoingToReply] = useState(false);
   const replyValue = useRef('');
   const reversedAnswerData = [...answerData].reverse();
+  const [avatarImgLinkGot, setavatarImgLinkGot] = useState("");
+
 
 // ...
 
@@ -46,10 +48,8 @@ useEffect(() => {
       }
     }).then((response) => {
       if (response.status === 200 | response.status === 201) {
-        // console.log(response.data.user[0]);
         setanswerUserData(response.data.user[0]['username']);
-        // console.log(response.data.user[0]['username']);
-
+        setavatarImgLinkGot(response.data.user[0]['image']);
       }
     }).catch((error) => {
       console.log(error);
@@ -115,7 +115,9 @@ useEffect(() => {
             <div className="post-answer-container">
                 <div className='answered-avatar-details'>
                     <div className="post-answered">
-                        <Avatar className='answered-avatar' />
+                        <Avatar className='answered-avatar'>
+                            <img alt="Avatar" src={"http://localhost:3000/get-uploads/" + avatarImgLinkGot} style={{width: 40, height: 40}} />
+                        </Avatar>
                     </div>
                     <div className="post-info">
                         <h6 className='repliedUser'>{ answerUserData }</h6>

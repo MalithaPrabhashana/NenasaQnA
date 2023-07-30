@@ -224,9 +224,10 @@
 }
 
 .modal_question > h1 {
-  color: #8f1f1b;
-  font-weight: 600;
+  color: #007BFF;
   margin-bottom: 10px;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .modal_question > p {
@@ -243,12 +244,12 @@
   display: flex;
   padding-top: 20px;
   flex: 1;
-  height: 36vh;
+  height: 30vh !important;
 }
 
 .quill {
   width: 100%;
-  height: 28vh;
+  height: 80% !important;
 }
 
 .custom-overlay {
