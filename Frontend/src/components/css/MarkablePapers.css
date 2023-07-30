@@ -1,0 +1,18 @@
+.wrapperDiv{
+  margin-right: 0px;
+  font-size: 15px;
+}
+.wrapperDiv:hover {
+    background-color: rgba(185, 185, 185, 0.541);
+    /* color: white; */
+}
+
+/* .wrapperDiv:hover .paperName>{
+    color: white;
+    
+} */
+
+.mainWrapper{
+    border-radius: 3px;
+    border:1px solid rgba(0, 0, 0, 0.212)
+}

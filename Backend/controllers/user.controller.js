@@ -216,7 +216,21 @@ async function adminLogin(req, res) {
 
 
 
+function getDetailsBulk(req,res){
+    const { id } = req.body;
+    models.User.find({ _id: { $in: id } })
+  .then((users) => {
+    return res.status(200).json({
+        users: users,
+    });
+  })
+  .catch((error) => {
+    return res.status(401).json({
+        error: "User not found",
+    });
+  });
 
+}
 
 
 
@@ -287,6 +301,7 @@ module.exports = {
     adminLogin, adminLogin,
     getUsersByRole:getUsersByRole,
     getDetailsByID:getDetailsByID,
+    getDetailsBulk:getDetailsBulk,
 
     // must remove
     addAdmin: addAdmin,

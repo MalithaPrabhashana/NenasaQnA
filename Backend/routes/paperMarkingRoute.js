@@ -7,8 +7,12 @@ const router = express.Router();
 
 router.post('/paper-upload',checkAuth.checkAuth,paperMarkingController.paperUpload);
 
-router.get('/teachers',paperMarkingController.getTeachers);
-router.get('/papers/:id',paperMarkingController.getPapers);
+router.get('/teachers/:subject',paperMarkingController.getTeachers);
+router.post('/papers',checkAuth.checkAuth,paperMarkingController.getPapers);    //user
+router.post('/make-open',checkAuth.checkAuth,paperMarkingController.makeOpen);    //user
+
+
+// router.get('/papers/:id',paperMarkingController.getPapers);
 router.post('/downloaded',paperMarkingController.markDownloaded);
 router.post('/uploaded',paperMarkingController.markUploaded);
 

@@ -23,6 +23,7 @@
     "react-chat-engine": "^1.11.28",
     "react-chat-engine-pretty": "^0.1.8",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-icons": "^4.10.1",
     "react-quill": "^2.0.0",
     "react-responsive-modal": "^6.4.2",
