@@ -158,7 +158,7 @@ function Nenasa() {
             return (
               <div ref={widgetRef} className="widget-bar" >
                 <div className="side-btn side-close-btn">
-                  <Button onClick={showSlidebar}>
+                  <Button onClick={showSlidebar} className='widget-bar-close'>
                     <CloseIcon />
                   </Button>
                 </div>

@@ -3,6 +3,7 @@ import * as Components from './LoginStyles';
 import './LoginPage.css';
 import {useNavigate} from "react-router-dom";
 import axios from 'axios';
+import Alert from 'react-bootstrap/Alert';
 
 
 function LoginPage() { // Login and Signup toggle
@@ -22,6 +23,8 @@ function LoginPage() { // Login and Signup toggle
     const [createdImg, setcreatedImg] = useState('');
     const [createdTele, setCreatedTele] = useState('');
     const [createdSubject, setcreatedSubject] = useState('');
+    const [loginErrorMsg, setLoginErrorMsg] = useState('');
+    const [isErrorHappen, setIsErrorHappen] = useState(false);
 
 
     // Navigating state
@@ -47,10 +50,28 @@ function LoginPage() { // Login and Signup toggle
                     localStorage.setItem('token', response.data['token']);
                 }
             }).catch(error => { // Handle any errors
-                console.error('Error:', error);
+                if (error.response) {
+                    setLoginErrorMsg(error.response.data.error + '. Try Again');
+                    setIsErrorHappen(true);
+
+                if (error.response.status === 401) {
+                    setLoginErrorMsg('Unauthorized access. Please check your credentials or login again.');
+                    setIsErrorHappen(true);
+                }    
+
+                } else if (error.request) {
+                    setLoginErrorMsg('No response received:');
+                    setIsErrorHappen(true);
+                } else {
+                    console.error('Error:', error.message);
+                }
             });
         }
     }
+
+    // useEffect(() => {
+    //     setIsErrorHappen(true);
+    // }, [loginErrorMsg])
 
 
     const handleSignupSubmit = async (event) => {
@@ -69,17 +90,21 @@ function LoginPage() { // Login and Signup toggle
                 subjects: createdSubject
             }
 
-            // console.log(signInFormData);
-
             axios.post('http://localhost:3000/user/sign-up', signInFormData).then(response => {
-                const responseStatusReg = response.status;
 
-                console.log(response.data);
+                const responseStatusReg = response.status;
 
                 if (responseStatusReg === 200 | responseStatusReg === 201) {
                     const registeredUser = {
                         email: createdEmail,
                         password: createdPassword
+                    }
+
+                    try {
+                        const response = axios.post('/authenticate', { username: createdImg });
+                        console.log(response.data); // This will contain the response data from the backend
+                    } catch (error) {
+                        console.error('Error:', error);
                     }
 
                     axios.post('http://localhost:3000/user/login', registeredUser).then(response => {
@@ -204,6 +229,7 @@ function LoginPage() { // Login and Signup toggle
                 <Components.SignInContainer signinIn={signIn}>
                     <Components.Form onSubmit={handleLoginSubmit}>
                         <Components.Title>Log In</Components.Title>
+                        {(isErrorHappen && <Alert variant="danger" className="loginErrorAlert">{loginErrorMsg}</Alert>)}
                         <Components.Input type='email' placeholder='Email'
                             onChange={
                                 e => setLoginEmail(e.target.value)

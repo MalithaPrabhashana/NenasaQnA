@@ -202,7 +202,7 @@ function Post(props) {
                         }
                 }>
                     <div className="modal_question">
-                        <h1>This test Question</h1>
+                        <h1>Enter your Answer Here</h1>
                         <p>
                             asked by
                             <span className="name">User Name</span>
