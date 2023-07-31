@@ -16,6 +16,9 @@ const pendingQuestionSchema = new mongoose.Schema({
   subjectName:{
     type: String,
   },
+  questionTitle:{
+    type: String,
+  },
   upVots: {
     type: Number,default:0
   },

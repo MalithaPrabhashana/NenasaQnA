@@ -14,10 +14,12 @@ const dateTimeFunc = (createdDate) => {
 
 
 
-export default function VerifyQuestions() {
+export default function VerifyQuestions(props) {
   const [verifyQuestionsList, setVerifyQuestionsList] = useState(false);
   const [deleteQuestionsList, setDeleteQuestionsList] = useState(false);
   const [pendingQuestionsList, setPendingQuestionsList] = useState([]);
+  const [inputUrl, setInpusetInputUrltUrl] = useState("");
+
 
   
   const verifyNow = (Idvalue) => {
@@ -35,7 +37,7 @@ export default function VerifyQuestions() {
     }).catch((error) => {
         console.log(error);
     });
-}
+} 
 
 
 const deleteNow = (Idvalue) => {
@@ -65,7 +67,7 @@ const deleteNow = (Idvalue) => {
         }
     }).then((response) => {
         if (response.status === 200 || response.status === 201) {
-            setPendingQuestionsList(response.data.questions);
+            setPendingQuestionsList(response.data.questions.reverse());
         }
     }).catch((error) => {
         console.log(error);
@@ -88,6 +90,25 @@ const deleteNow = (Idvalue) => {
               <Card.Body>
                 <Card.Text>
                   <p dangerouslySetInnerHTML={{ __html: question['question'] }}></p>
+                  <div style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              height: "15vh",
+                          }}
+                          >
+                          {question['imgLink'] === "" ? null : (
+                              <img
+                              style={{
+                                  height: "100%",
+                                  objectFit: "contain",
+                              }}
+                              src={question['imgLink']}
+                              alt="Question Image"
+                              />
+                          )}
+                  </div>
+
                 </Card.Text>
                 <div className='VerifyControl'>
                   <button className='btn btn-success' onClick={() => verifyNow(question['_id'])}>Verify</button>
@@ -97,7 +118,7 @@ const deleteNow = (Idvalue) => {
             </Card>
           </div>
         ))}
-        {pendingQuestionsList.length === 0 && <Alert key="info">No approved questions</Alert>}
+        {pendingQuestionsList.length === 0 && <Alert key="info">No questions to verified</Alert>}
       </div>
     </div>
   );

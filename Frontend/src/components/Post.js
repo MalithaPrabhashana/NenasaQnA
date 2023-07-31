@@ -184,7 +184,8 @@ function Post(props) {
                 </div>
             </div>
             <div className="post_body">
-                <h5>This is the Header</h5>
+                {props.questionTitleProp === "" ? "" : (<h5>{props.questionTitleProp}</h5>)}
+                
                 <p dangerouslySetInnerHTML={{ __html: props.questionProp }}></p>
                 {props.questionImgLink === "" ? "" : (<img
                 style={{
@@ -232,7 +233,8 @@ function Post(props) {
                         </button>
                     </div>
                 </Modal>
-                {/* Answer to a Question modal end */} </div>
+            </div>
+            
 
             <div className="post_footer">
                 <div className="post_footerAction">
@@ -244,7 +246,6 @@ function Post(props) {
                             totalVotes === 0 ? 'disableThumbs' : '' voting
                         `}
                         onClick={downVoteThumb}><ThumbDownIcon className='icon'/></div>
-                    {/* <div><ChatBubbleOutline /></div> */} 
                 </div>
 
                     <div>
@@ -259,25 +260,12 @@ function Post(props) {
 
 
                 <div className="post_footerLeft">
-                    {/* <div className='shareIcon'><ShareOutlined/></div>    */}
-                    <button onClick={openModal}
-                        className="post_btnAnswer">
-                        Answer
-                    </button>
-                    {/* <MoreHorizOutlined /> */} </div>
+                        <button onClick={openModal}
+                            className="post_btnAnswer">
+                            Answer
+                        </button>
+                    </div>
             </div>
-
-            {/* <div className='answerCount'>
-                <button className='btn answer-dropdown'
-                    onClick={loadReply}>
-                    <ArrowForwardIosIcon className={
-                        isAnswerDropdownExpanded ? 'rotate-arrow' : 'reset-arrow'
-                    }/>
-                </button>
-                <p>{answersCount} 
-                   {answersCount === '1' ? ' Answer' : ' Answers'}
-                </p>
-            </div> */}
 
 
             {

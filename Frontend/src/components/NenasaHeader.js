@@ -42,6 +42,7 @@ function NenasaHeader(props) {
   const [searchQuestionsList, setSearchQuestionsList] = useState("");
   const [gotsearchQuestionsList, setGotSearchQuestionsList] = useState([]);
   const [questionSubject, setQuestionSubject] = useState("");
+  const [questionTitle, setQuestionTitle] = useState("");
 
   
 
@@ -59,7 +60,8 @@ function NenasaHeader(props) {
       axios.post('http://localhost:3000/questions/', {
         'question': question,
         'imgLink': inputUrl,
-        'subjectName': questionSubject
+        'subjectName': questionSubject,
+        'questionTitle': questionTitle
       }, {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -352,7 +354,8 @@ function NenasaHeader(props) {
             height: "auto",
           },
         }}
-      >
+      > 
+
         <div className="modal_title">
           <h5 className="model-question-title">Ask a Question</h5>
           {/* <h5>Share Link</h5> */}
@@ -361,67 +364,78 @@ function NenasaHeader(props) {
 
         </div>
         <div className="modal_Field">
-
-
-        <div className="modal-question">
-          <ReactQuill className="modal-quill"
-              value={question}
-              placeholder="Start your question with 'What', 'How', 'Why', etc."
-              onChange={(content, delta, source, editor) => {
-                  // Update the state with the new value from ReactQuill
-                  setQuestion(content);
-              }}
-              ref={questionInput}
-          />
-        </div>
-      
-
-          <div style={{ display: "flex", flexDirection: "column" }} className="imageLinkQuestion">
-            
-            <TextField id="outlined-basic" 
-              label="Image Link" 
-              variant="outlined" 
-              type="text"
-              value={inputUrl}
-              onChange={(e) => setInputUrl(e.target.value)} 
-              style={{
-                marginTop: "8px",
-                marginBottom: "5px"
-               }}
-              placeholder="Optional: include a link that gives context"
-            />
-            
-
-            {inputUrl !== "" && (
-              <img
+          <TextField id="outlined-basic" 
+                label="Title" 
+                variant="outlined"
+                type="text"
+                value={questionTitle}
+                onChange={(e) => setQuestionTitle(e.target.value)} 
                 style={{
-                  height: "30vh",
-                  objectFit: "contain",
+                  marginBottom: "10px"
                 }}
-                src={inputUrl}
-                alt="displayimage"
+                placeholder="Enter the question title Here"
               />
-            )}
-          </div>
 
-          <div>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Related Subject</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  // value={age}
-                  label="Related Subject"
-                  onChange={(e) => {
-                    setQuestionSubject(e.target.value);
+          <div className="modal-question">
+            <ReactQuill className="modal-quill"
+                value={question}
+                placeholder="Start your question with 'What', 'How', 'Why', etc."
+                onChange={(content, delta, source, editor) => {
+                    // Update the state with the new value from ReactQuill
+                    setQuestion(content);
+                }}
+                ref={questionInput}
+            />
+          </div>
+        
+
+            <div style={{ display: "flex", flexDirection: "column" }} className="imageLinkQuestion">
+              
+              <TextField id="outlined-basic" 
+                label="Image Link" 
+                variant="outlined" 
+                type="text"
+                value={inputUrl}
+                onChange={(e) => setInputUrl(e.target.value)} 
+                style={{
+                  marginTop: "8px",
+                  marginBottom: "5px"
+                }}
+                placeholder="Optional: include a link that gives context"
+              />
+              
+
+              {inputUrl !== "" && (
+                <img
+                  style={{
+                    height: "25vh",
+                    objectFit: "contain",
                   }}
-                >
-                  <MenuItem value="Combined Mathematics">Combined Mathematics</MenuItem>
-                  <MenuItem value="Biology">Biology</MenuItem>
-                  <MenuItem value="Physics">Physics</MenuItem>
-                  <MenuItem value="Chemistry">Chemistry</MenuItem>
-                </Select>
-            </FormControl>
+                  src={inputUrl}
+                  alt="displayimage"
+                />
+              )}
+            </div>
+
+            <div>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Related Subject</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    // value={age}
+                    label="Related Subject"
+                    onChange={(e) => {
+                      setQuestionSubject(e.target.value);
+                    }}
+                  >
+                    <MenuItem value="Combined Mathematics">Combined Mathematics</MenuItem>
+                    <MenuItem value="Biology">Biology</MenuItem>
+                    <MenuItem value="Physics">Physics</MenuItem>
+                    <MenuItem value="Chemistry">Chemistry</MenuItem>
+                  </Select>
+              </FormControl>
+             
           </div>
 
         </div>

@@ -76,6 +76,7 @@ async function save(req, res) {
         userId: req.userData.userId,
         imgLink: req.body.imgLink,
         subjectName: req.body.subjectName,
+        questionTitle: req.body.questionTitle
     }
 
     const schema = {
@@ -316,8 +317,8 @@ function approveQuestion(req, res) {
                         question: questions.question,
                         userId: questions.userId,
                         imgLink : questions.imgLink,
-                        subjectName : questions.subjectName
-
+                        subjectName : questions.subjectName,
+                        questionTitle: questions.questionTitle
                     }
                     
                     const newQuestion = new models.approvedQuestion(questionNew)

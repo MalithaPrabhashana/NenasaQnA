@@ -32,6 +32,7 @@ function Feed(props) {
             {questions.reverse().map((question, index) => (
               <Post className="post"
               key={index}
+              questionTitleProp={question['questionTitle']}
               questionProp={question['question']}
               questionId={question['_id']}
               createdTime={question['createdAt']}

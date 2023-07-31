@@ -14,7 +14,7 @@ const dateTimeFunc = (createdDate) => {
 }
 
 
-function MyQuestions() {
+function MyQuestions(props) {
     const [activeSection, setActiveSection] = useState('approved');
     const [approvedQuestionsList, setApprovedQuestionsList] = useState([]);
     const [pendingQuestionsList, setPendingQuestionsList] = useState([]);
@@ -41,7 +41,7 @@ function MyQuestions() {
             }
         }).then((response) => {
             if (response.status === 200 || response.status === 201) {
-                setApprovedQuestionsList(response.data.questions);
+                setApprovedQuestionsList(response.data.questions.reverse());
             }
         }).catch((error) => {
             console.log(error);
@@ -54,7 +54,7 @@ function MyQuestions() {
             }
         }).then((response) => {
             if (response.status === 200 || response.status === 201) {
-                setPendingQuestionsList(response.data.questions);
+                setPendingQuestionsList(response.data.questions.reverse());
             }
         }).catch((error) => {
             console.log(error);
@@ -90,9 +90,29 @@ function MyQuestions() {
                                     dateTimeFunc(question['updatedAt'])
                                 }</Card.Header>
                                 <Card.Body>
-                                    <Card.Text> {
+                                    <Card.Text>
+                                        <h5>{question['subjectName']}</h5>
                                         <p dangerouslySetInnerHTML={{ __html: question['question'] }}></p>
-                                    } </Card.Text>
+                                        <div style={{
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                height: "20vh",
+                                            }}
+                                            >
+                                            {question['imgLink'] === "" ? null : (
+                                                <img
+                                                style={{
+                                                    height: "100%",
+                                                    objectFit: "contain",
+                                                }}
+                                                src={question['imgLink']}
+                                                alt="Question Image"
+                                                />
+                                            )}
+                                            </div>
+
+                                     </Card.Text>
                                 </Card.Body>
                             </Card>
                         </div>
@@ -121,9 +141,28 @@ function MyQuestions() {
                                     dateTimeFunc(question['updatedAt'])
                                 }</Card.Header>
                                 <Card.Body>
-                                    <Card.Text> {
+                                    <Card.Text>
+                                        <h5>{question['subjectName']}</h5>
                                         <p dangerouslySetInnerHTML={{ __html: question['question'] }}></p>
-                                    } </Card.Text>
+                                        <div style={{
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                height: "20vh",
+                                            }}
+                                            >
+                                            {question['imgLink'] === "" ? null : (
+                                                <img
+                                                style={{
+                                                    height: "100%",
+                                                    objectFit: "contain",
+                                                }}
+                                                src={question['imgLink']}
+                                                alt="Question Image"
+                                                />
+                                            )}
+                                            </div>
+                                     </Card.Text>
                                 </Card.Body>
                             </Card>
                         </div>
