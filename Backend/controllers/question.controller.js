@@ -7,7 +7,12 @@ const models = require('../models/questionMod');
 function getAllQuestions(req, res) {
     const subjectName = req.params.subject;
     const caseInsensitiveSubject = new RegExp(`^${subjectName}$`, 'i');
-    models.approvedQuestion.find({subjectName:caseInsensitiveSubject})
+
+    const search={};
+    if (subjectName!="all"){
+        search.subjectName=caseInsensitiveSubject;
+    }
+    models.approvedQuestion.find(search)
         .then(questions => {
 
             return res.status(200).json({
