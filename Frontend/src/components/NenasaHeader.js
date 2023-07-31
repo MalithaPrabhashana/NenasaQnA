@@ -429,10 +429,11 @@ function NenasaHeader(props) {
                       setQuestionSubject(e.target.value);
                     }}
                   >
-                    <MenuItem value="Combined Mathematics">Combined Mathematics</MenuItem>
-                    <MenuItem value="Biology">Biology</MenuItem>
-                    <MenuItem value="Physics">Physics</MenuItem>
-                    <MenuItem value="Chemistry">Chemistry</MenuItem>
+                    <MenuItem value="maths">Combined Mathematics</MenuItem>
+                    <MenuItem value="biology">Biology</MenuItem>
+                    <MenuItem value="physics">Physics</MenuItem>
+                    <MenuItem value="chemistry">Chemistry</MenuItem>
+                    <MenuItem value="ict">ICT</MenuItem>
                   </Select>
               </FormControl>
              
