@@ -76,8 +76,8 @@ export const Dropdown = styled.select`
 
 export const Button = styled.button`
    border-radius: 20px;
-   border: 1px solid #ff4b2b;
-   background-color: #ff4b2b;
+   border: 1px solid #007BFF;
+   background-color: #007BFF;
    color: #ffffff;
    font-size: 12px;
    font-weight: bold;
@@ -119,8 +119,8 @@ ${props =>
 
 export const Overlay = styled.div`
 background: #ff416c;
-background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-background: linear-gradient(to right, #ff4b2b, #ff416c);
+background: -webkit-linear-gradient(to right, #5F8CED, #417BFF);
+background: linear-gradient(to right, #5F8CED, #417BFF);
 background-repeat: no-repeat;
 background-size: cover;
 background-position: 0 0;

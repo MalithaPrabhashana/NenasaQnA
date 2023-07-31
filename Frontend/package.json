@@ -30,6 +30,7 @@
     "react-scripts": "5.0.1",
     "react-time-ago": "^7.2.1",
     "styled-components": "^6.0.4",
+    "sweetalert": "^2.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -318,29 +318,31 @@ function NenasaHeader(props) {
         }}
       >
         <div className="modal_title">
-          <h5>Ask a Question</h5>
+          <h5 className="model-question-title">Ask a Question</h5>
           {/* <h5>Share Link</h5> */}
         </div>
         <div className="modal_info">
-          <Avatar className="avatar" />
+          {/* <Avatar className="avatar" />
           <div className="modal_scope">
             <PeopleAltOutlined />
             <p>Public</p>
             <ExpandMore />
-          </div>
+          </div> */}
         </div>
         <div className="modal_Field">
 
 
-        <ReactQuill
-            value={question}
-            placeholder="Start your question with 'What', 'How', 'Why', etc."
-            onChange={(content, delta, source, editor) => {
-                // Update the state with the new value from ReactQuill
-                setQuestion(content);
-            }}
-            ref={questionInput}
-        />
+        <div className="modal-question">
+          <ReactQuill
+              value={question}
+              placeholder="Start your question with 'What', 'How', 'Why', etc."
+              onChange={(content, delta, source, editor) => {
+                  // Update the state with the new value from ReactQuill
+                  setQuestion(content);
+              }}
+              ref={questionInput}
+          />
+        </div>
       
 {/* 
           <Input
@@ -351,7 +353,7 @@ function NenasaHeader(props) {
             ref={questionInput}
           /> */}
 
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", flexDirection: "column" }} className="imageLinkQuestion">
             <input
               type="text"
               value={inputUrl}
@@ -376,6 +378,7 @@ function NenasaHeader(props) {
               />
             )}
           </div>
+
         </div>
         <div className="modal_buttons">
           <button className="cancel" onClick={() => setIsModalOpen(false)}>

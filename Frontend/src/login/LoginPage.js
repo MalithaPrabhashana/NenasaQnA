@@ -4,6 +4,7 @@ import './LoginPage.css';
 import {useNavigate} from "react-router-dom";
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
+import swal from 'sweetalert';
 
 
 function LoginPage() { // Login and Signup toggle
@@ -48,6 +49,10 @@ function LoginPage() { // Login and Signup toggle
                 if (responseStatus === 200 | responseStatus === 201) {
                     navigate('/home');
                     localStorage.setItem('token', response.data['token']);
+                    swal({
+                        title: "You have successfully logged in!",
+                        icon: "success",
+                      });
                 }
             }).catch(error => { // Handle any errors
                 if (error.response) {

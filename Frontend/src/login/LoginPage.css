@@ -31,3 +31,7 @@ Input {
   padding: 6px;
   font-size: 1rem;
 }
+
+.swal-title {
+  font-size: 1.4rem !important;
+}
