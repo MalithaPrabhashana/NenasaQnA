@@ -40,6 +40,9 @@
     font-size: 13px;
   }
   
+  .roleIdentificationCard {
+    margin: 5px !important;
+  }
 
   @media only screen and (max-width: 1240px) {
     .sidebarOptions {

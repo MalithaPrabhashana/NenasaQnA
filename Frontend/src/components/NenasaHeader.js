@@ -155,6 +155,7 @@ function NenasaHeader(props) {
         if (response.status === 200 || response.status === 201) {
           setAvatarImgLink(response.data.user[0]['image']);
           localStorage.setItem('role', response.data.user[0]['role']);
+          localStorage.setItem('username', response.data.user[0]['username']);
         }
       })
       .catch((error) => {
