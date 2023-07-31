@@ -5,7 +5,9 @@ const models = require('../models/questionMod');
 
 
 function getAllQuestions(req, res) {
-    models.approvedQuestion.find()
+    const subjectName = req.params.subject;
+    const caseInsensitiveSubject = new RegExp(`^${subjectName}$`, 'i');
+    models.approvedQuestion.find({subjectName:caseInsensitiveSubject})
         .then(questions => {
 
             return res.status(200).json({
@@ -277,7 +279,9 @@ function filterQuestions(req, res) {
 
 // by admin
 function getAllPendingQuestions(req, res) {
-    models.pendingQuestion.find()
+    const subjectName = req.params.subject;
+    const caseInsensitiveSubject = new RegExp(`^${subjectName}$`, 'i');
+    models.pendingQuestion.find({subjectName:caseInsensitiveSubject})
         .then(questions => {
 
             return res.status(200).json({
