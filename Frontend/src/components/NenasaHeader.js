@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
-// import FeaturedPlayListOutlinedIcon from "@material-ui/icons/FeaturedPlayListOutlined";
-import {
-  PeopleAltOutlined,
-  ExpandMore
-} from "@material-ui/icons";
 
 import CloseIcon from "@material-ui/icons/Close";
 import MenuIcon from '@material-ui/icons/Menu';
@@ -26,6 +21,11 @@ import { Nav, Form } from "react-bootstrap";
 import { Button as BootstrapButton } from 'react-bootstrap';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select'
+import TextField from '@mui/material/TextField'
+
 
 
 function NenasaHeader(props) {
@@ -41,7 +41,9 @@ function NenasaHeader(props) {
   const [activeNavItem, setActiveNavItem] = useState(5);
   const [searchQuestionsList, setSearchQuestionsList] = useState("");
   const [gotsearchQuestionsList, setGotSearchQuestionsList] = useState([]);
+  const [questionSubject, setQuestionSubject] = useState("");
 
+  
 
   const handleNavItemClick = (navItem) => {
     props.select(navItem);
@@ -54,7 +56,11 @@ function NenasaHeader(props) {
   // Add a question
   const handleSubmit = async () => {
     if (question !== "") {
-      axios.post('http://localhost:3000/questions/', { 'question': question }, {
+      axios.post('http://localhost:3000/questions/', {
+        'question': question,
+        'imgLink': inputUrl,
+        'subjectName': questionSubject
+      }, {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token'),
           'Content-Type': 'application/json'
@@ -352,61 +358,70 @@ function NenasaHeader(props) {
           {/* <h5>Share Link</h5> */}
         </div>
         <div className="modal_info">
-          {/* <Avatar className="avatar" />
-          <div className="modal_scope">
-            <PeopleAltOutlined />
-            <p>Public</p>
-            <ExpandMore />
-          </div> */}
+
         </div>
         <div className="modal_Field">
 
 
-          <div className="modal-question">
-            <ReactQuill
+        <div className="modal-question">
+          <ReactQuill className="modal-quill"
               value={question}
               placeholder="Start your question with 'What', 'How', 'Why', etc."
               onChange={(content, delta, source, editor) => {
-                // Update the state with the new value from ReactQuill
-                setQuestion(content);
+                  // Update the state with the new value from ReactQuill
+                  setQuestion(content);
               }}
               ref={questionInput}
-            />
-          </div>
-
-          {/* 
-          <Input
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            type="text"
-            placeholder="Start your question with 'What', 'How', 'Why', etc. "
-            ref={questionInput}
-          /> */}
+          />
+        </div>
+      
 
           <div style={{ display: "flex", flexDirection: "column" }} className="imageLinkQuestion">
-            <input
+            
+            <TextField id="outlined-basic" 
+              label="Image Link" 
+              variant="outlined" 
               type="text"
               value={inputUrl}
-              onChange={(e) => setInputUrl(e.target.value)}
+              onChange={(e) => setInputUrl(e.target.value)} 
               style={{
-                margin: "5px 0",
-                border: "1px solid lightgray",
-                padding: "10px",
-                width: "100%"
-              }}
+                marginTop: "8px",
+                marginBottom: "5px"
+               }}
               placeholder="Optional: include a link that gives context"
             />
+            
 
             {inputUrl !== "" && (
               <img
                 style={{
-                  height: "40vh",
+                  height: "30vh",
                   objectFit: "contain",
                 }}
                 src={inputUrl}
                 alt="displayimage"
               />
             )}
+          </div>
+
+          <div>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Related Subject</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  // value={age}
+                  label="Related Subject"
+                  onChange={(e) => {
+                    setQuestionSubject(e.target.value);
+                  }}
+                >
+                  <MenuItem value="Combined Mathematics">Combined Mathematics</MenuItem>
+                  <MenuItem value="Biology">Biology</MenuItem>
+                  <MenuItem value="Physics">Physics</MenuItem>
+                  <MenuItem value="Chemistry">Chemistry</MenuItem>
+                </Select>
+            </FormControl>
           </div>
 
         </div>

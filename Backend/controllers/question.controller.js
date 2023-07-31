@@ -73,7 +73,9 @@ function getApprovedQuestions(req, res) {
 async function save(req, res) {
     const question = {
         question: req.body.question,
-        userId: req.userData.userId
+        userId: req.userData.userId,
+        imgLink: req.body.imgLink,
+        subjectName: req.body.subjectName,
     }
 
     const schema = {
@@ -312,8 +314,12 @@ function approveQuestion(req, res) {
 
                     const questionNew = {
                         question: questions.question,
-                        userId: questions.userId
+                        userId: questions.userId,
+                        imgLink : questions.imgLink,
+                        subjectName : questions.subjectName
+
                     }
+                    
                     const newQuestion = new models.approvedQuestion(questionNew)
                     newQuestion.save()
                         .then(savedQuestion => {

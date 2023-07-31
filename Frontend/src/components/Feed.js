@@ -31,13 +31,15 @@ function Feed(props) {
           <div>
             {questions.reverse().map((question, index) => (
               <Post className="post"
-                key={index}
-                questionProp={question['question']}
-                questionId={question['_id']}
-                createdTime={question['createdAt']}
-                totalVotes={question['upVots'] - question['downVots']}
-                userId={question['userId']}
-              />
+              key={index}
+              questionProp={question['question']}
+              questionId={question['_id']}
+              createdTime={question['createdAt']}
+              totalVotes={question['upVots'] - question['downVots']}
+              userId={question['userId']}
+              questionImgLink={question['imgLink']}
+              questionSubject={question['subjectName']}
+            />
             ))}
       </div>
       </div>

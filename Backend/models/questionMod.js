@@ -10,6 +10,12 @@ const pendingQuestionSchema = new mongoose.Schema({
   question: {
     type: String,
   },
+  imgLink: {
+    type: String,
+  },
+  subjectName:{
+    type: String,
+  },
   upVots: {
     type: Number,default:0
   },

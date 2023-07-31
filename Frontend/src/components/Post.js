@@ -186,6 +186,13 @@ function Post(props) {
             <div className="post_body">
                 <h5>This is the Header</h5>
                 <p dangerouslySetInnerHTML={{ __html: props.questionProp }}></p>
+                {props.questionImgLink === "" ? "" : (<img
+                style={{
+                  height: "25vh",
+                  objectFit: "contain",
+                }}
+                src={props.questionImgLink}
+              />)}
 
 
                 {/* Answer to a Question modal start */}
