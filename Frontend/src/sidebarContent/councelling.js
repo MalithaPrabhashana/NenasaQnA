@@ -87,6 +87,8 @@ function Councelling({ currUser, endUserSet ,setChat}) {
                                                 Address : {user.address}
                                             </Typography>
                                             <Button onClick={() => {
+                                                axios.post('http://localhost:3000/authenticate', { username: currUser.username,role:'3' });
+                                                axios.post('http://localhost:3000/authenticate', { username:  user.username ,role:'3' });
                                               
                                                 axios.post('http://localhost:3000/carete-chat', { username1: currUser.username, username2: user.username }).then(response => {
                                                     const responseStatus = response.status;

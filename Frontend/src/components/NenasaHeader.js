@@ -52,21 +52,21 @@ function NenasaHeader(props) {
 
 
   // Add a question
-  const handleSubmit  = async () => {
-    if (question !== "" ) {
-      axios.post('http://localhost:3000/questions/', {'question': question}, {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('token'),
-                'Content-Type': 'application/json'
-            }
-        }).then((response) => {
-            if (response.status === 200 || response.status === 201) {
-              questionInput.current.value = '';
-              setIsModalOpen(false);
-            }
-        }).catch((error) => {
-            console.log(error);
-        });
+  const handleSubmit = async () => {
+    if (question !== "") {
+      axios.post('http://localhost:3000/questions/', { 'question': question }, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        }
+      }).then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          questionInput.current.value = '';
+          setIsModalOpen(false);
+        }
+      }).catch((error) => {
+        console.log(error);
+      });
     }
   }
 
@@ -87,7 +87,7 @@ function NenasaHeader(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
-  setAnchorEl(event.currentTarget);
+    setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
@@ -96,46 +96,46 @@ function NenasaHeader(props) {
 
 
 
-    // Search questions
-    const searchQuestions = (event) => {
-      event.preventDefault(); // Prevent the default form submission behavior
-      setSearchQuestionsList(event.target.elements.searchInput.value);
-    };
+  // Search questions
+  const searchQuestions = (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+    setSearchQuestionsList(event.target.elements.searchInput.value);
+  };
 
 
-    useEffect(() => {
-      if (searchQuestionsList !== "" ) {
-        axios.post('http://localhost:3000/questions/filter', {search: searchQuestionsList}, {
-              headers: {
-                  Authorization: 'Bearer ' + localStorage.getItem('token'),
-                  'Content-Type': 'application/json'
-              }
-          }).then((response) => {
-              if (response.status === 200 || response.status === 201) {
-                setGotSearchQuestionsList(response.data.questions);
-              }
-          }).catch((error) => {
-              console.log(error);
-          });
+  useEffect(() => {
+    if (searchQuestionsList !== "") {
+      axios.post('http://localhost:3000/questions/filter', { search: searchQuestionsList }, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        }
+      }).then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          setGotSearchQuestionsList(response.data.questions);
+        }
+      }).catch((error) => {
+        console.log(error);
+      });
     }
-    }, [searchQuestionsList])
+  }, [searchQuestionsList])
 
 
-    useEffect(() => {
-      props.getFilteredQuestionData(gotsearchQuestionsList);
-    }, [gotsearchQuestionsList])
+  useEffect(() => {
+    props.getFilteredQuestionData(gotsearchQuestionsList);
+  }, [gotsearchQuestionsList])
 
-    
-    useEffect(() => {
-      props.searchedKeyword(searchQuestionsList);
-    }, [searchQuestionsList])
+
+  useEffect(() => {
+    props.searchedKeyword(searchQuestionsList);
+  }, [searchQuestionsList])
 
 
 
 
   useEffect(() => {
     const myDetailsUrl = 'http://localhost:3000/user/get-details';
-  
+
     axios
       .post(myDetailsUrl, {}, {
         headers: {
@@ -153,7 +153,7 @@ function NenasaHeader(props) {
         console.log(error);
       });
   }, []);
-  
+
 
 
   return (
@@ -179,16 +179,46 @@ function NenasaHeader(props) {
           <div
             className={`nHeader_icon ${activeNavItem === 6 ? 'active' : ''}`}
             onClick={() => handleNavItemClick(6)}
-          >
-            <Nav.Link>My Questions</Nav.Link>
+          >{
+            (() => {
+              if (localStorage.getItem('role') && localStorage.getItem('role') === '0') {
+                return (
+                  <Nav.Link>My Questions</Nav.Link>
+                );
+              } else if (localStorage.getItem('role') && localStorage.getItem('role') === '1')  { return (
+                <Nav.Link>Verified Questions</Nav.Link>
+              );
+            }else {
+              return null;
+            }
+            })()
+          }
+            
           </div>
+          {
+            (() => {
+              if (localStorage.getItem('role') && localStorage.getItem('role') === '0') {
+                return (
+                  <div
+                    className={`nHeader_icon ${activeNavItem === 7 ? 'active' : ''}`}
+                    onClick={() => handleNavItemClick(7)}
+                  >
+                    <Nav.Link>Chat</Nav.Link>
+                  </div>
+                );
+              } else if(localStorage.getItem('role') && localStorage.getItem('role') === '3') {
+                return (
+                  <div
+                    className={`nHeader_icon ${activeNavItem === 7 ? 'active' : ''}`}
+                    onClick={() => handleNavItemClick(7)}
+                  >
+                    <Nav.Link>Clients</Nav.Link>
+                  </div>
+                );
+              }
+            })()
+          }
 
-          <div
-            className={`nHeader_icon ${activeNavItem === 7 ? 'active' : ''}`}
-            onClick={() => handleNavItemClick(7)}
-          >
-            <Nav.Link>Chat</Nav.Link>
-          </div>
 
           <div className={`nHeader_icon ${activeNavItem === 8 ? 'active' : ''}`} onClick={() => showNavbar()}>
             <Nav.Link>Notifications</Nav.Link>
@@ -199,32 +229,32 @@ function NenasaHeader(props) {
           </Button>
 
           <Form className="d-flex" onSubmit={searchQuestions}>
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-1 mt-2"
-                aria-label="Search"
-                id="searchInput"
-                onChange={(e) => e.target.value === "" ? handleNavItemClick(5) : ""}
-              />
-              <BootstrapButton className="mt-2" variant="outline-primary" type="submit" onClick={()=>{props.select(10)}}>
-                Search
-              </BootstrapButton>
-            </Form>
+            <Form.Control
+              type="search"
+              placeholder="Search"
+              className="me-1 mt-2"
+              aria-label="Search"
+              id="searchInput"
+              onChange={(e) => e.target.value === "" ? handleNavItemClick(5) : ""}
+            />
+            <BootstrapButton className="mt-2" variant="outline-primary" type="submit" onClick={() => { props.select(10) }}>
+              Search
+            </BootstrapButton>
+          </Form>
         </nav>
-      {/* --------Navbar Main icons end---------- */}
+        {/* --------Navbar Main icons end---------- */}
 
 
 
         <div>
-          <Button onClick={ showNavbar } className="nav-btn nav-menu-btn">
+          <Button onClick={showNavbar} className="nav-btn nav-menu-btn">
             <MenuIcon />
           </Button>
         </div>
 
         <div className="nHeader_Rem">
 
-      {/* --------Avatar Icon and menu list starting---------- */}          
+          {/* --------Avatar Icon and menu list starting---------- */}
           <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
             <Tooltip title="Account settings">
               <IconButton
@@ -235,7 +265,7 @@ function NenasaHeader(props) {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
               >
-                <Avatar className="avatar" sx={{ width: 32, height: 32 }}><img alt="Avatar" src={"http://localhost:3000/get-uploads/" + avatarImgLink} style={{width: 40, height: 40}} /></Avatar>
+                <Avatar className="avatar" sx={{ width: 32, height: 32 }}><img alt="Avatar" src={"http://localhost:3000/get-uploads/" + avatarImgLink} style={{ width: 40, height: 40 }} /></Avatar>
               </IconButton>
             </Tooltip>
           </Box>
@@ -278,7 +308,7 @@ function NenasaHeader(props) {
           >
 
             {/* <Link to="/editProfile" > */}
-              <MenuItem onClick={()=>{props.select(9)}}>My account</MenuItem>
+            <MenuItem onClick={() => { props.select(9) }}>My account</MenuItem>
             {/* </Link> */}
 
             <Divider />
@@ -296,7 +326,7 @@ function NenasaHeader(props) {
               Logout
             </MenuItem>
           </Menu>
-      {/* --------Avatar Icon and menu list ending---------- */}    
+          {/* --------Avatar Icon and menu list ending---------- */}
 
           <Button onClick={() => setIsModalOpen(true)} className="addQuestion">Ask a Question</Button>
         </div>
@@ -332,19 +362,19 @@ function NenasaHeader(props) {
         <div className="modal_Field">
 
 
-        <div className="modal-question">
-          <ReactQuill
+          <div className="modal-question">
+            <ReactQuill
               value={question}
               placeholder="Start your question with 'What', 'How', 'Why', etc."
               onChange={(content, delta, source, editor) => {
-                  // Update the state with the new value from ReactQuill
-                  setQuestion(content);
+                // Update the state with the new value from ReactQuill
+                setQuestion(content);
               }}
               ref={questionInput}
-          />
-        </div>
-      
-{/* 
+            />
+          </div>
+
+          {/* 
           <Input
             value={question}
             onChange={(e) => setQuestion(e.target.value)}

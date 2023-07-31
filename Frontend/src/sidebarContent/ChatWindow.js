@@ -25,7 +25,7 @@ function ChatWindow({ user, endUser, chat }) {
                         return (<div style={{ height:'70vh',width:'100%', backgroundColor: 'white' ,borderRadius:'8px',position:'sticky',bottom:'0px'}}>
                             <ChatEngineWrapper >
                                 <Socket
-                                    projectID={'ce9de02d-24a9-446d-8a5e-45d915ff70da'}
+                                    projectID={'2a6ad684-5b78-4e11-846b-954ea2943433'}
                                     userName={user.username}
                                     userSecret={user.username}
                                 />

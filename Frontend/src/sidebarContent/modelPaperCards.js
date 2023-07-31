@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from '@material-ui/core';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 const ModelPaperCards = () => {
 
@@ -143,7 +144,13 @@ const DownloadSection = ({ selectedSubject }) => {
                 <Grid style={{ padding: '5px 20px' }} container spacing={2}>
                     {papers.map((paper, index) => (
                       
-                        <Grid style={{cursor: 'pointer'}}  onClick={()=>handleDownload("http://localhost:3000/get-uploads/"+paper.link,paper.name)} item xs={12} key={index} className={classes.pdfItem+" cardHover2"} >
+                        <Grid style={{cursor: 'pointer'}}  onClick={()=>{
+                            handleDownload("http://localhost:3000/get-uploads/"+paper.link,paper.name);
+                            swal({
+                                title: "Downloaded Successfully",
+                                icon: "success",
+                              });
+                        }} item xs={12} key={index} className={classes.pdfItem+" cardHover2"} >
                             <Link  className={classes.pdfLink}>
                                 <Typography style={{cursor: 'pointer'}} variant="body1">{paper.name}</Typography>
                                 <GetAppIcon style={{cursor: 'pointer'}}className={classes.downloadIcon} />

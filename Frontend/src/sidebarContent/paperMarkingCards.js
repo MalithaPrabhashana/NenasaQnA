@@ -37,13 +37,7 @@ const PaperMarkingCards = () => {
                             <p>Select youe subject..</p>
                         </div>
                         <hr />
-                        {/* 
-                        <Toolbar>
-                            <Button className="basicScale" variant="contained" onClick={() => { selectedSubjectSet("") }}>
-                                <ArrowBack />Back
-                            </Button>
-                        </Toolbar> */}
-
+                       
                         <Grid style={{ padding: '10px' }} container spacing={2}>
                             {subjects.map((subject, index) => {
                                 return (
@@ -57,7 +51,7 @@ const PaperMarkingCards = () => {
                                                 transition: 'transform 0.4s ease',
                                             }}
                                             className="scaleUp1"
-                                            onClick={() => { selectedSubjectSet(subject) }}
+                                            onClick={() => { selectedSubjectSet(subject.toLowerCase()) }}
                                         >
                                             <Card className="cardHover">
                                                 <CardContent>
@@ -152,7 +146,7 @@ const Teachers = ({ selectedSubject,selectedTeacherSet }) => {
 
 
     useEffect(() => {
-        axios.get('http://localhost:3000/paper-marking/teachers/maths').then(response => {
+        axios.get('http://localhost:3000/paper-marking/teachers/'+selectedSubject).then(response => {
             const responseStatus = response.status;
             if (responseStatus === 200 | responseStatus === 201) {
                 teachersSet(response.data.teachers);

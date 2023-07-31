@@ -90,7 +90,7 @@ function Nenasa() {
             return (
               <>
                 <div ref={slideRef} className="side-bar" onClick={showSlidebar} >
-                  <Sidebar select={{ sideBarNavigation, sideBarNavigationSet, endUserSet }} />
+                  <Sidebar select={{ sideBarNavigation, sideBarNavigationSet, endUserSet,user }} />
                 </div>
 
                 <div className="side-btn side-menu-btn">
@@ -144,7 +144,7 @@ function Nenasa() {
 
 
           } else if (sideBarNavigation === 7) {
-            return (<div className='feed' style={{width:'100%'}}><Friends user={user} /></div>);
+            return (<div className='feed' style={{width:'100%'}}><Friends user={user}  projectId={(localStorage.getItem('role') === '3')?'2a6ad684-5b78-4e11-846b-954ea2943433':'ce9de02d-24a9-446d-8a5e-45d915ff70da'} /></div>);
 
           } else if (sideBarNavigation === 8) {
             return (<div className='feed'><Feed /></div>);

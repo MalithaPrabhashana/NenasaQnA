@@ -6,6 +6,8 @@ import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { Link } from '@material-ui/core';
+import swal from 'sweetalert';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 
 
 const MarkPapersTeacher = ({ selectedTeacherId }) => {
@@ -33,6 +35,17 @@ const MarkPapersTeacher = ({ selectedTeacherId }) => {
 
 
     if (papers) {
+        // console.log(papers.length);
+        // if(papers.length===0){
+
+        //     swal({
+        //         title: "No papers to Mark",
+        //         text: "No students have submited papers",
+        //         icon: "warning",
+        //     });
+        //     return 
+    
+        // }
         var rowCounter = 0;
         return (
             <>
@@ -47,13 +60,19 @@ const MarkPapersTeacher = ({ selectedTeacherId }) => {
                         papers.map((paper, index) => {
                             rowCounter++;
                             return (
-                                (paper.userUpload !== null) ?
+                                (paper.userUpload !== null && paper.marks == null) ?
                                     <div className='row p-2 px-4  wrapperDiv' key={'paper_marking_' + index} >
-                                        <div className="col col-12 col-md-4">{rowCounter}.&nbsp;&nbsp; {paper.paperName}</div>
+                                        <div className="col col-12 col-md-4"><ReceiptLongIcon />.&nbsp;&nbsp; {paper.paperName}</div>
                                         <div className="col col-12 col-md-2">
                                             {(paper.userUpload !== null) ?
                                                 <Link  >
-                                                    <GetAppIcon onClick={() => handleDownload("http://localhost:3000/get-uploads/" + paper.userUpload, paper.paperName + "_answers" + ".pdf")} style={{ cursor: 'pointer', marginLeft: '10px', marginRight: '10px' }} />
+                                                    <GetAppIcon onClick={() => {
+                                                        handleDownload("http://localhost:3000/get-uploads/" + paper.userUpload, paper.paperName + "_answers" + ".pdf");
+                                                        swal({
+                                                            title: "Successfully Downloaded",
+                                                            icon: "success",
+                                                        });
+                                                    }} style={{ cursor: 'pointer', marginLeft: '10px', marginRight: '10px' }} />
                                                 </Link> : null
                                             }
 
@@ -81,10 +100,18 @@ const MarkPapersTeacher = ({ selectedTeacherId }) => {
                                                                 if (responseStatus === 200 | responseStatus === 201) {
                                                                     isChangedSet(!isChanged);
                                                                 }
+                                                                swal({
+                                                                    title: "Marks Saved",
+                                                                    icon: "success",
+                                                                });
                                                             })
                                                         }
 
                                                     }} className='btn btn-sm btn-warning' style={{ maxWidth: '100px', marginLeft: '12px' }}>Save</button>
+
+
+
+
                                                 </label>
                                             </div>
                                         </div>
@@ -98,7 +125,7 @@ const MarkPapersTeacher = ({ selectedTeacherId }) => {
                 </div>
             </>
         );
-    }
+    }  
 
 }
 export default MarkPapersTeacher;

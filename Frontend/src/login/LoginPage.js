@@ -106,8 +106,11 @@ function LoginPage() { // Login and Signup toggle
                     }
 
                     try {
-                        const response = axios.post('/authenticate', { username: createdImg });
-                        console.log(response.data); // This will contain the response data from the backend
+                        if(createdRole==='0' || createdRole==='3'){
+                            const response = axios.post('http://localhost:3000/authenticate', { username: createdName,role:createdRole });
+                            console.log(response.data); // This will contain the response data from the backend
+                        }
+                       
                     } catch (error) {
                         console.error('Error:', error);
                     }

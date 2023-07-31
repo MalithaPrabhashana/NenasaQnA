@@ -6,6 +6,7 @@ import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { Link } from '@material-ui/core';
+import swal from 'sweetalert';
 
 
 const MarkablePapers = ({ selectedSubject, selectedTeacher }) => {
@@ -63,7 +64,14 @@ const MarkablePapers = ({ selectedSubject, selectedTeacher }) => {
 
                                                             accept="pdf/*"
                                                             style={{ width: '70%' }} />
-                                                        <button onClick={() => { HandlePdfUpload(paper._id, isChangedSet) }} className='btn btn-sm btn-warning' style={{ maxWidth: '100px', marginLeft: '12px' }}>Upload</button>
+                                                        <button onClick={() => {
+                                                             HandlePdfUpload(paper._id, isChangedSet);
+                                                             swal({
+                                                                title: "Uploaded Successfully",
+                                                                icon: "success",
+                                                              });
+                                                        
+                                                        }} className='btn btn-sm btn-warning' style={{ maxWidth: '100px', marginLeft: '12px' }}>Upload</button>
                                                     </label>
                                                 </>
                                                 : <button onClick={() => {
@@ -80,7 +88,11 @@ const MarkablePapers = ({ selectedSubject, selectedTeacher }) => {
                                                         if (responseStatus === 200 | responseStatus === 201) {
                                                             isChangedSet(!isChanged);
                                                         }
-                                                    })
+                                                    });
+                                                    swal({
+                                                        title: "Paper Unlocked",
+                                                        icon: "success",
+                                                      });
 
 
                                                 }} className='btn btn-sm btn-success' style={{ maxWidth: '100px', marginLeft: '12px' }}>Buy</button>
@@ -90,7 +102,7 @@ const MarkablePapers = ({ selectedSubject, selectedTeacher }) => {
                                         </div>
                                     </div>
                                     <div className="col col-12 col-md-2"> <label style={{ color: 'green', fontWeight: 'bold', fontSize: '18px' }} >
-                                        {((paper.marks === null) ? "" : "Marks " + paper.marks)}
+                                        {((paper.marks === null || paper.hasOwnProperty('marks')==false) ? "" : "Marks " + paper.marks)}
 
                                     </label></div>
 

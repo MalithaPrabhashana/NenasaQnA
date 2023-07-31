@@ -27,14 +27,15 @@ app.use("/paper-marking", paperMarkingRoute);
 
 
 app.post("/authenticate", async (req, res) => {
-    const { username } = req.body;
+    const { username,role } = req.body;
 
-    // Get or create user on Chat Engine!
+    
+    // 653cd4af-6d7b-4916-88d3-e4ab315af056 ==counselling
     try {
         const r = await axios.put(
             "https://api.chatengine.io/users/",
             { username: username, secret: username, first_name: username },
-            { headers: { "Private-Key": "e5e1eed1-0ee4-4558-a842-b50a35d6fa0e" } }
+            { headers: { "Private-Key": (role==='0')?"e5e1eed1-0ee4-4558-a842-b50a35d6fa0e" :'653cd4af-6d7b-4916-88d3-e4ab315af056' } }
         );
         return res.status(201).json({ message: "user created successfully" });
     } catch (e) {
@@ -58,7 +59,7 @@ app.post("/carete-chat", async (req, res) => {
                 "is_direct_chat": true,
                 "title": username1+"/"+username2,
             },
-            { headers: { "Project-ID": "ce9de02d-24a9-446d-8a5e-45d915ff70da" ,"User-Name":username1,"User-Secret":username1} }
+            { headers: { "Project-ID": "2a6ad684-5b78-4e11-846b-954ea2943433" ,"User-Name":username1,"User-Secret":username1} }
         );
         return res.status(201).json({ message: "chat created successfully",data: r.data});
         console.log(r.data);
