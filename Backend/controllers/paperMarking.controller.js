@@ -69,10 +69,10 @@ function getPapers(req, res) {
                     const pastPaper = await models.PaperMarking.findOne({ paperId: paper._id, userId: userId });
                     if (pastPaper) {
                         const pastPaper1 = pastPaper.toObject();
-                        pastPaper1['link']=paper['link'];
-                        pastPaper1['paperName']=paper['paperName'];
-                        pastPaper1['paperName']=paper['paperName'];
-                        pastPaper1['subject']=paper['subject'];
+                        pastPaper1['link'] = paper['link'];
+                        pastPaper1['paperName'] = paper['paperName'];
+                        pastPaper1['paperName'] = paper['paperName'];
+                        pastPaper1['subject'] = paper['subject'];
                         finalPapers.push(pastPaper1);
                         // console.log(pastPaper1);
                     } else {
@@ -116,17 +116,14 @@ async function makeOpen(req, res) {
 }
 
 
-function markDownloaded(req, res) {
-
-}
 
 
 
 function markUploaded(req, res) {
-    const data=req.body;
+    const data = req.body;
     models.PaperMarking.findOneAndUpdate(
-        { _id: data.paperId}, // Specify the user to update based on the _id
-        { $set: {userUpload:data.link} },
+        { _id: data.paperId }, // Specify the user to update based on the _id
+        { $set: { userUpload: data.link } },
         { new: true }
     )
         .then(updatedQuestion => {
@@ -147,14 +144,82 @@ function markUploaded(req, res) {
 
 
 
+function updateMarks(req, res) {
+    const data = req.body;
+    models.PaperMarking.findOneAndUpdate(
+        { _id: data.paperId }, // Specify the user to update based on the _id
+        { $set: { marks: data.marks } },
+        { new: true }
+    )
+        .then(updatedQuestion => {
+            if (!updatedQuestion) {
+                return res.status(404).json({ message: "Question not found" });
+            }
+            return res.status(200).json({
+                message: "updated successfully",
+            });
+        })
+        .catch(error => {
+            return res.status(500).json({
+                error:error,
+                message: "Something went wrong while updating",
+
+            });
+        });
+}
+
+
+function getMarkables(req, res) {
+    const finalPapers = [];
+    // let papersTemp=[];
+    const { teacherId, subject } = req.body;
+    const userId = req.userData.userId;
+
+    models.PaperMarking.find({ teacherId: req.userData.userId})
+        .then(async (papers) => {
+            if (papers) {
+                // console.log(papers);
+                const promises = papers.map(async (paper) => {
+                    const pastPaper = await models.PaperTeacher.findOne({ _id: paper.paperId.toString()});
+                    if (pastPaper) {
+                        const pastPaper1 = paper.toObject();
+                        pastPaper1['paperName'] = pastPaper['paperName'];
+                        pastPaper1['subject'] = pastPaper['subject'];
+                        finalPapers.push(pastPaper1);
+                        // console.log(pastPaper1);
+                    } else {
+                        finalPapers.push(paper);
+                    }
+                });
+
+                await Promise.all(promises);
+
+                return res.status(200).json({
+                    papers: finalPapers
+                });
+            }
+            return res.status(200).json({
+                papers: finalPapers
+            });
+        })
+
+}
+
+
+
+
+
 module.exports = {
     paperUpload: paperUpload,
 
 
     getTeachers: getTeachers,
     getPapers: getPapers,
-    markDownloaded: markDownloaded,
-    markUploaded:markUploaded,
-    makeOpen:makeOpen,
+
+    markUploaded: markUploaded,
+    makeOpen: makeOpen,
+
+    updateMarks: updateMarks,
+    getMarkables: getMarkables
 
 } 

@@ -20,7 +20,7 @@ import PaperMarkingCards from '../sidebarContent/paperMarkingCards';
 import axios from 'axios'
 import VerifyQuestions from '../ViewmyQuestions/VerifyQuestions';
 import SearchQuestions from '../searchQuestions/SearchQuestions';
-
+import MarkPapersTeacher from '../sidebarContent/MarkPapersTeacher';
 
 function Nenasa() {
 
@@ -60,6 +60,7 @@ function Nenasa() {
         }).then((response) => {
             if (response.status === 200 || response.status === 201) {
               userSet(response.data.user[0]);
+             
             }
         }).catch((error) => {
             console.log(error);
@@ -109,7 +110,13 @@ function Nenasa() {
 
         {(() => {
           if (sideBarNavigation === 1) {
-            return <div className='feed'><PaperMarkingCards/></div>
+            if(localStorage.getItem('role') === '0'){
+              return <div className='feed'><PaperMarkingCards/></div>
+            }else if(localStorage.getItem('role') === '1'){
+              
+              return <div className='feed'><MarkPapersTeacher selectedTeacherId={user._id}/></div>
+            }
+            
 
           } else if (sideBarNavigation === 2) {
             return <div className='feed'><ModelPaperCards/></div>

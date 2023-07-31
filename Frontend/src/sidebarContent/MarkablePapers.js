@@ -58,27 +58,13 @@ const MarkablePapers = ({ selectedSubject, selectedTeacher }) => {
                                         <div className="row d-flex justify-content-start">
                                             {(paper.hasOwnProperty('userUpload')) ?
                                                 <>
-
                                                     <label >
-
-
                                                         <input id="fileInput" type="file"
 
                                                             accept="pdf/*"
                                                             style={{ width: '70%' }} />
-                                                        <button onClick={() => { HandlePdfUpload(paper._id,isChangedSet) }} className='btn btn-sm btn-warning' style={{ maxWidth: '100px', marginLeft: '12px' }}>Upload</button>
-
-                                                        <label style={{ color: 'green', fontWeight: 'bold', fontSize: '18px', marginLeft: '15px' }} >
-                                                            {((paper.userUpload == null) ? "" : "Marks " + paper.marks)}
-
-                                                        </label>
+                                                        <button onClick={() => { HandlePdfUpload(paper._id, isChangedSet) }} className='btn btn-sm btn-warning' style={{ maxWidth: '100px', marginLeft: '12px' }}>Upload</button>
                                                     </label>
-
-
-
-
-
-
                                                 </>
                                                 : <button onClick={() => {
 
@@ -103,7 +89,10 @@ const MarkablePapers = ({ selectedSubject, selectedTeacher }) => {
 
                                         </div>
                                     </div>
-                                    <div className="col col-12 col-md-2"></div>
+                                    <div className="col col-12 col-md-2"> <label style={{ color: 'green', fontWeight: 'bold', fontSize: '18px' }} >
+                                        {((paper.marks === null) ? "" : "Marks " + paper.marks)}
+
+                                    </label></div>
 
                                 </div>
 
@@ -125,7 +114,7 @@ export default MarkablePapers;
 
 
 
-const HandlePdfUpload = (paperId,isChangedSet) => {
+const HandlePdfUpload = (paperId, isChangedSet) => {
 
     // const [createdPdf, setcreatedPdf] = useState('');
 
@@ -150,7 +139,7 @@ const HandlePdfUpload = (paperId,isChangedSet) => {
             ).then(response => {
                 const responseStatus = response.status;
                 if (responseStatus === 200 | responseStatus === 201) {
-                     console.log("ok");
+                    console.log("ok");
                 }
             })
         })
