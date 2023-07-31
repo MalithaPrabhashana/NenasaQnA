@@ -44,6 +44,7 @@
     margin: 5px !important;
   }
 
+
   @media only screen and (max-width: 1240px) {
     .sidebarOptions {
       margin-left: 15px !important;
