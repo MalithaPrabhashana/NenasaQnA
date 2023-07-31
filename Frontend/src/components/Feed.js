@@ -9,7 +9,7 @@ function Feed(props) {
 
 
   useEffect(() => {
-    axios.get('http://localhost:3000/questions')
+    axios.get('http://localhost:3000/questions/all')
       .then(response => {
         const questionsData = response.data.questions;
         setQuestions(questionsData);
