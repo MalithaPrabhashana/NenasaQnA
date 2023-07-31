@@ -14,7 +14,7 @@ const dateTimeFunc = (createdDate) => {
 
 
 
-export default function VerifyQuestions(props) {
+export default function VerifyQuestions({user}) {
   const [verifyQuestionsList, setVerifyQuestionsList] = useState(false);
   const [deleteQuestionsList, setDeleteQuestionsList] = useState(false);
   const [pendingQuestionsList, setPendingQuestionsList] = useState([]);
@@ -59,9 +59,9 @@ const deleteNow = (Idvalue) => {
 
 
   useEffect(() => { // Request for approved questions
-
+    // console.log(localStorage.getItem('role'));
     // Request for pending questions
-    axios.get('http://localhost:3000/questions/all-pending', {
+    axios.get('http://localhost:3000/questions/all-pending/'+user.subjects, {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }

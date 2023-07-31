@@ -139,7 +139,7 @@ function Nenasa() {
             if (localStorage.getItem('role') === '0') {
                 return (<div className='feed'><MyQuestions /> </div>); 
             } else if (localStorage.getItem('role') === '1' || localStorage.getItem('role') === '2') {
-              return (<div className='feed'><VerifyQuestions />  </div>);
+              return (<div className='feed'><VerifyQuestions user={user} />  </div>);
             }
 
 
