@@ -390,7 +390,22 @@ function rejectQuestion(req, res) {
 }
 
 
+function questionCount(req,res){
+    models.approvedQuestion.find({userId:req.params.id})
+        .then(count => {
 
+            return res.status(200).json({
+                count: count.length
+            });
+        })
+        .catch(error => {
+            return res.status(500).json({
+                message: "Something went wrong while getting data",
+
+            });
+        });
+    
+}
 
 module.exports = {
     getAllQuestions: getAllQuestions,
@@ -403,6 +418,7 @@ module.exports = {
     upVote: upVote,
     downVote: downVote,
     filterQuestions: filterQuestions,
+    questionCount:questionCount,
 
     getAllPendingQuestions: getAllPendingQuestions,
     approveQuestion: approveQuestion,

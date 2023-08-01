@@ -7,7 +7,7 @@ const router = express.Router();
 
 
 
-router.get("/:subject", questionController.getAllQuestions);
+
 
 // // by user
 router.get("/pending",checkAuth.checkAuth, questionController.getUserPendingQuestions);
@@ -22,8 +22,9 @@ router.post("/downvote", checkAuth.checkAuth,questionController.downVote);
 
 router.post("/filter", checkAuth.checkAuth,questionController.filterQuestions);
 
+router.get("/question-count/:id",checkAuth.checkAuth,questionController.questionCount);
 
-
+router.get("/:subject", questionController.getAllQuestions);
 // // by admin
 router.get("/all-pending/:subject", checkAuth.checkAuth,checkUser.checkTeacherOrLecturer,questionController.getAllPendingQuestions);
 router.post("/approve",checkAuth.checkAuth, checkUser.checkTeacherOrLecturer,questionController.approveQuestion);
