@@ -74,9 +74,6 @@ function LoginPage() { // Login and Signup toggle
         }
     }
 
-    // useEffect(() => {
-    //     setIsErrorHappen(true);
-    // }, [loginErrorMsg])
 
 
     const handleSignupSubmit = async (event) => {

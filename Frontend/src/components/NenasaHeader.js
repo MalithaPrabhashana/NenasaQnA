@@ -322,12 +322,12 @@ function NenasaHeader(props) {
 
             <Divider />
 
-            <MenuItem onClick={handleClose}>
+            {/* <MenuItem onClick={handleClose}>
               <ListItemIcon className="avatar-list-icon">
                 <Settings fontSize="small" />
               </ListItemIcon>
               Settings
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem onClick={logOutHandle}>
               <ListItemIcon className="avatar-list-icon">
                 <Logout fontSize="small" />

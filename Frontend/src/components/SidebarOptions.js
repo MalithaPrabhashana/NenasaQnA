@@ -51,7 +51,7 @@ function SidebarOptions({select, props}) {
         <div className="sidebarOptions">
             <Card style={
                 {
-                    width: '100%',
+                    width: '90%',
                     textAlign: 'center',
                     backgroundColor: '#1960EA',
                     color: '#fff',
