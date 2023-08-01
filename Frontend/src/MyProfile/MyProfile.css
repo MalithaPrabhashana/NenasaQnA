@@ -1,52 +1,96 @@
 .my-profile {
-    margin-top: 20px;
-  }
-  
-  .profile-card {
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .avatar-image {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    margin: 20px auto;
-    display: block;
-  }
-  
-  .card-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .profile-card-text {
-    margin-bottom: 10px;
-  }
-  
-  .profile-card {
-    height: auto;
-  }
+  height: 84vh;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
 
-  .name {
-    text-align: center;
-  }
+.name {
+  margin: 0; 
+}
 
-  .avatar-name {
-    font-size: 1.5rem !important;
-  }
+.my-profile > h3 {
+  margin-bottom: 10px;
+}
 
-  .profile-card-header {
-    text-align: center;
-    padding: 20px;
-    font-weight: bold;
-  }
+.profile-card {
+  margin-top: 30px;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the content horizontally */
+  justify-content: center;
+}
 
-  .profile-card-text {
-    margin-left: 20px;
-    margin-top: 20px;
-    font-size: 1.2rem;
- 
+.avatar-image {
+  height: 150px;
+  width: 160px;
+  border-radius: 50%;
+  margin-top: 20px;
+}
 
+.avatar-name {
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.update-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #fff;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputBox {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+.inputBox span {
+  text-align: left;
+  margin-top: 15px;
+  font-size: 17px;
+  color: #333;
+}
+
+.box {
+  width: 100%;
+  border-radius: 5px;
+  background-color: #eee;
+  padding: 10px 14px;
+  font-size: 17px;
+  color: #333;
+  margin-top: 10px;
+}
+
+
+@media (max-width: 650px) {
+  .flex {
+    flex-wrap: wrap;
+    gap: 0;
   }
+  .inputBox {
+    width: 100%;
+  }
+}

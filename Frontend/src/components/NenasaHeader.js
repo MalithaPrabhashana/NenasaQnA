@@ -3,7 +3,7 @@ import { useRef } from "react";
 
 import CloseIcon from "@material-ui/icons/Close";
 import MenuIcon from '@material-ui/icons/Menu';
-import { Avatar, Button, Input, Menu, MenuItem } from "@material-ui/core";
+import { Avatar, Button, Menu, MenuItem } from "@material-ui/core";
 import "./css/NenasaHeader.css";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
@@ -13,10 +13,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import axios from 'axios';
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Nav, Form } from "react-bootstrap";
 import { Button as BootstrapButton } from 'react-bootstrap';
 import ReactQuill from 'react-quill';
@@ -36,7 +35,6 @@ function NenasaHeader(props) {
   const [avatarImgLink, setAvatarImgLink] = useState("");
   const Close = <CloseIcon />;
   const logoutNavigate = useNavigate();
-  const homeNavigate = useNavigate();
   const questionInput = useRef('');
   const [activeNavItem, setActiveNavItem] = useState(5);
   const [searchQuestionsList, setSearchQuestionsList] = useState("");
@@ -322,12 +320,6 @@ function NenasaHeader(props) {
 
             <Divider />
 
-            {/* <MenuItem onClick={handleClose}>
-              <ListItemIcon className="avatar-list-icon">
-                <Settings fontSize="small" />
-              </ListItemIcon>
-              Settings
-            </MenuItem> */}
             <MenuItem onClick={logOutHandle}>
               <ListItemIcon className="avatar-list-icon">
                 <Logout fontSize="small" />

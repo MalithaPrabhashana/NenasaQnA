@@ -1,17 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import "./css/SidebarOptions.css"
 import {Card} from 'react-bootstrap';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import axios from 'axios';
 
-// import Img1 from './img/subject-icon.jpg';
 
 function SidebarOptions({select, props}) {
-
 
     const sidebarOptions = ['Online Paper Writing', 'Past Papers Repository', 'Ask for Councelling']
     const sidebarOptionsTea = ['Markable Papers'];
@@ -39,23 +31,18 @@ function SidebarOptions({select, props}) {
         }
     }
 
-    const [Qsubject, setQsubject] = React.useState('');
-
-    const handleChange = (event) => {
-        setQsubject(event.target.value);
-    };
-
-
 
     return (
         <div className="sidebarOptions">
             <Card style={
                 {
-                    width: '90%',
+                    width: '95%',
                     textAlign: 'center',
                     backgroundColor: '#1960EA',
                     color: '#fff',
-                    marginBottom: '10px'
+                    marginBottom: '10px',
+                    marginLeft: 'auto',
+                    marginRight: 'auto'
                 }
             }>
                 <Card.Body>

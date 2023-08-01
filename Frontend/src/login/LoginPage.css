@@ -8,7 +8,6 @@
 .login-mainDiv {
   background: #f6f5f7;
   /* background-image: url('../img/LoginBackground.jpg'); */
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,4 +45,16 @@ Input {
 
 .swal-title {
   font-size: 1.4rem !important;
+}
+
+.e-nanasa {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.login-logo {
+  width: 80px;
+}
+.register-topic {
+  font-size: 2rem;
 }

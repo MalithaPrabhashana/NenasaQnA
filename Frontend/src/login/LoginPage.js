@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import * as Components from './LoginStyles';
 import './LoginPage.css';
 import {useNavigate} from "react-router-dom";
@@ -165,7 +165,7 @@ function LoginPage() { // Login and Signup toggle
                 <Components.SignUpContainer signinIn={signIn}>
                     <Components.Form className="formStyling"
                         onSubmit={handleSignupSubmit}>
-                        <Components.Title>Create an Account</Components.Title>
+                        <Components.Title className="register-topic">Create an Account</Components.Title>
                         <Components.Input type='text' placeholder='Name'
                             onChange={
                                 e => setCreatedName(e.target.value)
@@ -195,7 +195,7 @@ function LoginPage() { // Login and Signup toggle
                             }/>
                         <div>
                             <label>
-                            <input type="file"
+                            <Components.Input type="file"
                                 onChange={handleImageUpload}
                                 accept="image/*"
                                 className="userImageUploading" />
@@ -216,8 +216,10 @@ function LoginPage() { // Login and Signup toggle
                                             e => {setcreatedSubject(e.target.value)}
                                         }>
                                             <option value="maths">Combined Maths</option>
+                                            <option value="biology">Biology</option>
                                             <option value="chemistry">Chemistry</option>
                                             <option value="physics">Physics</option>
+                                            <option value="ict">ICT</option>
                                         </Components.Dropdown>
                                     </>
                                 ) : ""
@@ -265,7 +267,9 @@ function LoginPage() { // Login and Signup toggle
                         </Components.LeftOverlayPanel>
 
                         <Components.RightOverlayPanel signinIn={signIn}>
-                            <Components.Title>Hello, Friend!</Components.Title>
+
+                            <Components.Title>Welcome</Components.Title>
+                            <h4 className="e-nanasa">E-Nenasa <br />Questioning & Answering Platform</h4>
                             <Components.Paragraph>
                                 Enter Your personal details and start journey with us
                             </Components.Paragraph>
