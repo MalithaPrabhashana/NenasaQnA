@@ -26,17 +26,6 @@ export default function PostAnswer(props) {
   const [avatarImgLinkGot, setavatarImgLinkGot] = useState("");
 
 
-// ...
-
-// {
-//   isAnswerDropdownExpanded && 
-//   reversedAnswerData.map((reply, index) => (
-//     <PostAnswer key={index} answerProp={reply['reply']} answerId={reply['_id']} parentId={props.answerId} className="reply" />
-//   ))
-// }
-
-//   const parentId = props.parentId;
-
 
 useEffect(() => {
     // Get Answer user details

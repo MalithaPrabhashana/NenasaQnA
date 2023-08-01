@@ -209,12 +209,6 @@ function Post(props) {
                 }>
                     <div className="modal_question">
                         <h1>Enter your Answer Here</h1>
-                        <p>
-                            asked by
-                            <span className="name">User Name</span>
-                            on
-                            <span className="name">timestamp</span>
-                        </p>
                     </div>
                     
                     <div className="modal_answer">
