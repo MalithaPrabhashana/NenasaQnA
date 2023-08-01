@@ -1,11 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
 
+
 * {
   box-sizing: border-box;
 }
 
 .login-mainDiv {
   background: #f6f5f7;
+  /* background-image: url('../img/LoginBackground.jpg'); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,6 +16,15 @@
   height: 104vh;
   margin: -20px 0 50px;
 }
+
+.login-mainDiv::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); }
 
 Input {
   width: 100px;
@@ -34,4 +45,16 @@ Input {
 
 .swal-title {
   font-size: 1.4rem !important;
+}
+
+.e-nanasa {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.login-logo {
+  width: 80px;
+}
+.register-topic {
+  font-size: 2rem;
 }

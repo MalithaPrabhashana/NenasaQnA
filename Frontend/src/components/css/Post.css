@@ -56,6 +56,19 @@
   width: 100%;
 }
 
+.namewithTopFan {
+  display: flex;
+  align-items: center;
+}
+
+.namewithTopFan > h4 {
+  margin-top: 8px;
+}
+
+.namewithTopFan > .topFan {
+  margin-left: 10px;
+}
+
 .postedDateTime {
   font-size: 0.8rem;
 }
@@ -370,6 +383,11 @@
   padding: 0 !important;
 }
 
+.title-with-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 
 @media only screen and (max-width: 1000px) {
@@ -395,3 +413,13 @@
   }
 }
 
+
+@media only screen and (max-width: 550px) {
+  .namewithTopFan {
+    display: block;
+  }
+
+  .namewithTopFan > .topFan {
+    margin-left: 0;
+  }
+}

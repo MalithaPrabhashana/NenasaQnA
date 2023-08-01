@@ -9,6 +9,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import CloseIcon from "@material-ui/icons/Close";
 import { useNavigate } from 'react-router-dom';
 
+
 import Councelling from '../sidebarContent/Councelling';
 import ChatWindow from '../sidebarContent/ChatWindow';
 import Friends from '../navBarContent/Friends';
@@ -43,6 +44,7 @@ function Nenasa() {
 
   const [sideBarNavigation, sideBarNavigationSet] = useState(5);
   const [gotQuestionsData, gotQuestionsDataSet] = useState([]);
+  const [filterQuestion, setFilterQuestion] = useState([]);
   const [gotSearchedKeyword, gotSearchedKeywordSet] = useState("");
 
 
@@ -75,15 +77,18 @@ function Nenasa() {
     gotSearchedKeywordSet(data);
   }
   
-
+  
   useEffect(() => {
     console.log(gotSearchedKeyword);
   },[gotSearchedKeyword])
+
+
 
   return (
     <div className="nenasa">
       <NenasaHeader select={sideBarNavigationSet} className="nenasa-top-nav" getFilteredQuestionData={questionData} searchedKeyword={keyword} />
       <div className="nenasa_contents">
+      
 
         {(() => {
           if (sideBarNavigation !== 7) {

@@ -2,10 +2,8 @@ import React from 'react'
 import "./css/SidebarOptions.css"
 import {Card} from 'react-bootstrap';
 
-// import Img1 from './img/subject-icon.jpg';
 
-function SidebarOptions({select}) {
-
+function SidebarOptions({select, props}) {
 
     const sidebarOptions = ['Online Paper Writing', 'Past Papers Repository', 'Ask for Councelling']
     const sidebarOptionsTea = ['Markable Papers'];
@@ -14,6 +12,7 @@ function SidebarOptions({select}) {
 
     const sidebar_icons = ['fa fa-edit', 'fa fa-book', 'fa fa-comments']
     const actor = [sidebarOptions, sidebarOptionsTea, sidebarOptionsLec, sidebarOptionsCoun];
+
 
     const role = localStorage.getItem('role');
 
@@ -37,16 +36,22 @@ function SidebarOptions({select}) {
         <div className="sidebarOptions">
             <Card style={
                 {
-                    width: '18rem',
+                    width: '95%',
                     textAlign: 'center',
                     backgroundColor: '#1960EA',
                     color: '#fff',
-                    marginBottom: '10px'
+                    marginBottom: '10px',
+                    marginLeft: 'auto',
+                    marginRight: 'auto'
                 }
             }>
                 <Card.Body>
-                    <Card.Title className='roleIdentificationCard'>{localStorage.getItem('username')}</Card.Title>
-                    <Card.Text className='roleIdentificationCard'> {
+                    <Card.Title className='roleIdentificationCard'>
+                        {
+                        localStorage.getItem('username')
+                    }</Card.Title>
+                    <Card.Text className='roleIdentificationCard'>
+                        {
                         'You are a ' + getRoleName(role)
                     } </Card.Text>
                 </Card.Body>
@@ -82,7 +87,9 @@ function SidebarOptions({select}) {
                 }
 
             })()
-        } </div>
+        }
+
+            </div>
     );
 }
 
