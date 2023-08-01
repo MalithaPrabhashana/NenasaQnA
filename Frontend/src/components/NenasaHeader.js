@@ -228,7 +228,7 @@ function NenasaHeader(props) {
 
 
           <div className={`nHeader_icon ${activeNavItem === 8 ? 'active' : ''}`} onClick={() => showNavbar()}>
-            <Nav.Link>Notifications</Nav.Link>
+            <a href="https://chat.openai.com/" target="_blank" style={{ textDecoration: 'none', color: '#212535' }}>ChatGPT</a>
           </div>
 
           <Button onClick={showNavbar} className="nav-btn nav-close-btn">

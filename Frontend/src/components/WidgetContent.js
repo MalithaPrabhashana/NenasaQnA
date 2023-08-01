@@ -4,6 +4,7 @@ import Physics from '../img/physics.jpg'
 import Chemistry from '../img/chemistry.jpg'
 import Biology from '../img/bio.jpg'
 import IT from '../img/it.jpg'
+import { Link } from 'react-router-dom'
 
 
 function WidgetContent() {
@@ -19,25 +20,30 @@ function WidgetContent() {
             </div>
         </div> */}
 
-        <div className='widget_content'>
-            <img src={Physics} alt='' /> 
-            <div className='widget_contentTitle'>
-                <h5>
-                    Physics Course
-                </h5>
-            <p>The best physics class</p>
+        <Link to="/physicsVideos" className='courseNavigate'>
+            <div className='widget_content'>
+                <img src={Physics} alt='' /> 
+                <div className='widget_contentTitle'>
+                    <h5>
+                        Physics Course
+                    </h5>
+                <p>The best physics class</p>
+                </div>
             </div>
-        </div>
+        </Link>
 
-        <div className='widget_content'>
-            <img src={Chemistry} alt='' /> 
-            <div className='widget_contentTitle'>
-                <h5>
-                    Chemistry Course
-                </h5>
-            <p>The best Chemistry class</p>
+        <Link to="/chemistryVideos" className='courseNavigate'>
+            <div className='widget_content'>
+                <img src={Chemistry} alt='' /> 
+                <div className='widget_contentTitle'>
+                    <h5>
+                        Chemistry Course
+                    </h5>
+                <p>The best Chemistry class</p>
+                </div>
             </div>
-        </div>
+        </Link>
+
 
         <div className='widget_content'>
             <img src={Biology} alt='' /> 

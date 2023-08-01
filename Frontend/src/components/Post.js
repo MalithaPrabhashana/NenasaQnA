@@ -26,6 +26,8 @@ function Post(props) {
     const reversedAnswerData = [...answerData].reverse();
     const levelOneAnswer = useRef();
     const [avatarImgLinkGot, setavatarImgLinkGot] = useState("");
+    const [eachUserQCount, setEachUserQCount] = useState(null);
+
 
 
     const openModal = () => {
@@ -37,6 +39,7 @@ function Post(props) {
     };
 
     useEffect(() => {
+
         const timestamp = props.createdTime;
         const dateTime = new Date(timestamp);
         const date = dateTime.toLocaleDateString(); // Get the date portion
@@ -85,6 +88,24 @@ function Post(props) {
         } else {
             setTotalVotes(props.totalVotes);
         }
+
+
+
+        // Get user question count to give the top user
+        axios.get('http://localhost:3000/questions/question-count/' + props.userId, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            if (response.status === 200 || response.status === 201) {
+                setEachUserQCount(response.data.count);
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+
+
     }, [
         props.createdTime,
         props.questionId,
@@ -181,7 +202,7 @@ function Post(props) {
                 </div>
                 <div className='avatar-details-post'>
                     <div className='namewithTopFan'><h4>{questionPostedUser}</h4>
-                    {/* {totalVotes > 20 ? (<Badge pill bg="dark" className='topFan'>Top Fan</Badge>) : ""} */}
+                    {eachUserQCount > 5 ? (<Badge pill bg="dark" className='topFan'>Top Fan</Badge>) : ""}
                     </div>
                     <p className='postedDateTime'>{dateNTime}</p>
                 </div>

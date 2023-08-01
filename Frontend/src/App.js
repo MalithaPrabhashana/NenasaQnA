@@ -4,7 +4,8 @@ import Nenasa from "./components/Nenasa";
 import LoginPage from "./login/LoginPage";
 import EditProfile from "./editProfile/EditProfilePage";
 import './App.css';
-import MyProfile from "./MyProfile/MyProfile";
+import PhysicsVideos from "../src/coursesToFollow/PhysicsVideos.js"
+import ChemistryVideos from "../src/coursesToFollow/ChemistryVideos.js"
 
 function App() {
   // const storedToken = localStorage.getItem("token");
@@ -17,7 +18,8 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/home" element={<Nenasa />} />
           <Route path="/editProfile" element={<EditProfile />} />
-          <Route path="/myProfile" element={<MyProfile />} />
+          <Route path="/physicsVideos" element={<PhysicsVideos />} />
+          <Route path="/chemistryVideos" element={<ChemistryVideos />} />
         </Routes>
       </BrowserRouter>
     </div>
