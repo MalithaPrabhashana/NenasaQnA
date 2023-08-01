@@ -103,7 +103,7 @@ const deleteNow = (Idvalue) => {
                                   height: "100%",
                                   objectFit: "contain",
                               }}
-                              src={question['imgLink']}
+                              src={"http://localhost:3000/get-uploads/" + question['imgLink']}
                               alt="Question Image"
                               />
                           )}

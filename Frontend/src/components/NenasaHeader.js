@@ -101,7 +101,6 @@ function NenasaHeader(props) {
   };
 
 
-
   // Search questions
   const searchQuestions = (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
@@ -162,6 +161,28 @@ function NenasaHeader(props) {
   }, []);
 
 
+  // Handle Question Image uploading
+  const handleImageUpload = (event) => {
+    const UploadImgfile = event.target.files[0];
+    const uploadedImg = new FormData();
+    uploadedImg.append('image', UploadImgfile);
+  
+    axios
+      .post('http://localhost:3000/uploads/image', uploadedImg, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+      })
+      .then((response) => {
+        if (response.status === 200 | response.status === 201) {
+            setInputUrl(response.data['url']);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }; 
+
 
   return (
     <div className="nHeader">
@@ -193,7 +214,7 @@ function NenasaHeader(props) {
                   <Nav.Link>My Questions</Nav.Link>
                 );
               } else if (localStorage.getItem('role') && localStorage.getItem('role') === '1')  { return (
-                <Nav.Link>Verified Questions</Nav.Link>
+                <Nav.Link>Verify Questions</Nav.Link>
               );
             }else {
               return null;
@@ -379,12 +400,26 @@ function NenasaHeader(props) {
                 }}
                 ref={questionInput}
             />
-          </div>
+          </div>  
         
 
             <div style={{ display: "flex", flexDirection: "column" }} className="imageLinkQuestion">
               
-              <TextField id="outlined-basic" 
+              <div style={{display: 'flex', marginTop: '15px', marginLeft: '5px'}}>
+                  <label> Upload an Image</label>
+                  <input id="outlined-basic"  type="file"
+                      onChange={handleImageUpload}
+                      accept="image/*"
+                      className="userImageUploading" 
+                      style={{
+                        marginTop: "8px",
+                        marginBottom: "5px"
+                      }}
+                      />
+
+              </div>
+
+              {/* <TextField id="outlined-basic" 
                 label="Image Link" 
                 variant="outlined" 
                 type="text"
@@ -396,7 +431,7 @@ function NenasaHeader(props) {
                 }}
                 placeholder="Optional: include a link that gives context"
               />
-              
+               */}
 
               {inputUrl !== "" && (
                 <img
@@ -404,7 +439,7 @@ function NenasaHeader(props) {
                     height: "25vh",
                     objectFit: "contain",
                   }}
-                  src={inputUrl}
+                  src={"http://localhost:3000/get-uploads/" + inputUrl}
                   alt="displayimage"
                 />
               )}

@@ -219,7 +219,7 @@ function Post(props) {
                   height: "25vh",
                   objectFit: "contain",
                 }}
-                src={props.questionImgLink}
+                src={"http://localhost:3000/get-uploads/" + props.questionImgLink}
               />)}
 
 

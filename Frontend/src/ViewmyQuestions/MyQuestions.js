@@ -106,7 +106,7 @@ function MyQuestions(props) {
                                                     height: "100%",
                                                     objectFit: "contain",
                                                 }}
-                                                src={question['imgLink']}
+                                                src={"http://localhost:3000/get-uploads/" + question['imgLink']}
                                                 alt="Question Image"
                                                 />
                                             )}
@@ -157,7 +157,7 @@ function MyQuestions(props) {
                                                     height: "100%",
                                                     objectFit: "contain",
                                                 }}
-                                                src={question['imgLink']}
+                                                src={"http://localhost:3000/get-uploads/" + question['imgLink']}
                                                 alt="Question Image"
                                                 />
                                             )}
