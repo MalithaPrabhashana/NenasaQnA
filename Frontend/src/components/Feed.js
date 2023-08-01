@@ -29,7 +29,7 @@ function Feed() {
     //     .catch(error => {
     //       console.log(error);
     //     });
-    // }, [questions]);
+    // }, []);
 
 
     useEffect(() => {
@@ -81,7 +81,7 @@ function Feed() {
                 console.log(error);
             });
         }
-    }, [Qsubject])
+    }, [Qsubject, questions])
 
 
     return (

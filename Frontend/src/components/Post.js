@@ -11,6 +11,7 @@ import PostAnswer from './PostAnswer';
 import axios from 'axios';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import {Button as BootstrapButton} from 'react-bootstrap';
+import Badge from 'react-bootstrap/Badge';
 
 
 
@@ -179,12 +180,17 @@ function Post(props) {
                     </Avatar>
                 </div>
                 <div className='avatar-details-post'>
-                    <h4>{questionPostedUser}</h4>
+                    <div className='namewithTopFan'><h4>{questionPostedUser}</h4>
+                    {/* {totalVotes > 20 ? (<Badge pill bg="dark" className='topFan'>Top Fan</Badge>) : ""} */}
+                    </div>
                     <p className='postedDateTime'>{dateNTime}</p>
                 </div>
             </div>
             <div className="post_body">
-                {props.questionTitleProp === "" ? "" : (<h5>{props.questionTitleProp}</h5>)}
+                <div className='title-with-badge'>
+                    {props.questionTitleProp === "" ? "" : (<h5>{props.questionTitleProp}</h5>)}
+                    {totalVotes > 20 ? (<Badge pill bg="primary" className='topQuestion'>Top Question</Badge>) : ""}
+                </div>
                 
                 <p dangerouslySetInnerHTML={{ __html: props.questionProp }}></p>
                 {props.questionImgLink === "" ? "" : (<img
